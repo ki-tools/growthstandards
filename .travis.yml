@@ -1,0 +1,38 @@
+# Sample .travis.yml for R projects
+
+language: r
+warnings_are_errors: true
+sudo: required
+cache: packages
+
+repos:
+  CRAN: http://cran.rstudio.com
+  deltarho: http://packages.deltarho.org
+
+# install locally to avoid rev dep
+r_github_packages:
+  - jimhester/covr # code coverage check
+  - jimhester/lintr # code lint
+  - schloerke/travisDrat
+
+after_success:
+  - Rscript -e 'print(packageVersion("brokenstick")); print(packageVersion("face"))'
+  - Rscript -e "packagedocs::deploy_travis()"
+  - rm -r ./tests/testthat/test_cache
+  - Rscript -e 'covr::codecov()'
+  - Rscript -e "travisDrat::deploy_drat()"
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
+
+branches:
+  only:
+    - master
+    - dev
+    - travis
+
+env:
+  global:
+    secure: "dcjds6vfZHdlhya0F3fk+DBIocHpE6JOZJSiyS5to5OU1kx/C1XwJZ89cNZ5HNE/uv755asGjV6NPWFfR/6taojA6VXiBbbSHmUUwIZo02Q08V5+AYyh33+yDFEr7yyYitYVJECZTgsYagEMpy1VBc2xHJ+BxX3Of4/h+Nnq5zEDlqE38CiUxRP6BtqUuJlT4bD4SXhik5d4qJypmoYkbhVL5utB9Sz1niy2oaTMFgxYe4l/jwsOrqQGfZU9Ns00aI7G1uC1pxIK6lVeB5f2hlv5H1QhquhmLDp9unpDNzzgakxjJ9dSl3QM3FfifO624wggHr1JyTghyJXcJ+iyqFsKKb3n2sZysZAbYI8BnW6ZIwJjE7pKbBazGdGDP6NG50wBg7hvT6T0KHTB8VLaGtltaydOcCbelSkvdRaAWiglF9UWi+OsrftuRSwJw+U/43n56x6RBSZQkthxKhtlo14fMxaYvJCQfMpVKnBp3eiUT4yH1p2xz94lkjWbFjxT0ITR7So2zvlpvHoLZA7a4XDo6OSqHLjGNwx1UQJX7c0g+IXrDqaRvewRlm7cai5IGwyfntlEo0SXUorrnz6VFd0uQ4a738lHFcaMVzoqy6oJ90Air1xtLmdmzAzfZXpqKYT9dcIeyMEj3bIfhTLJeUdoVVzJcnF3yWq9j+wlUTk="

@@ -1,0 +1,28 @@
+.DS_Store
+_ignore/
+
+# History files
+.Rhistory
+.Rapp.history
+# Example code in package build process
+*-Ex.R
+# RStudio files
+*.Rproj
+.Rproj.user/
+# produced vignettes
+vignettes/*.html
+vignettes/*.pdf
+hbgd.sublime*
+inst/doc
+sftp-config.json
+docs/assets
+docs/index.html
+docs/rd.Rmd
+docs/rd.html
+.lintr_cache
+revdep/checks\.rds
+tests/testthat/test_cache
+_gh-pages
+
+# user file
+notes/
