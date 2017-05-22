@@ -1,7 +1,4 @@
-# Sample .travis.yml for R projects
-
 language: r
-warnings_are_errors: true
 sudo: required
 cache: packages
 
@@ -16,7 +13,6 @@ r_github_packages:
   - schloerke/travisDrat
 
 after_success:
-  - Rscript -e 'print(packageVersion("brokenstick")); print(packageVersion("face"))'
   - Rscript -e "packagedocs::deploy_travis()"
   - rm -r ./tests/testthat/test_cache
   - Rscript -e 'covr::codecov()'

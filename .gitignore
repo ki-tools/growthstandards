@@ -23,6 +23,5 @@ docs/rd.html
 revdep/checks\.rds
 tests/testthat/test_cache
 _gh-pages
-
 # user file
 notes/
