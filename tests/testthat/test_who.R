@@ -1,3 +1,5 @@
+# nolint start
+
 context("who")
 
 # check against who docs
@@ -63,3 +65,5 @@ test_that("who calculations work with data argument", {
 
   who_centile2value(x, p = 99, y_var = "wtkg", sex = sex, data = dat)
 })
+
+# nolint end

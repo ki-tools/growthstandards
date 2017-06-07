@@ -1,4 +1,5 @@
 # nolint start
+
 context("igbirth")
 
 chkpts <- read.csv(textConnection("var,sex,ga,p3,p5,p10,p50,p90,p95,p97
@@ -15,7 +16,6 @@ hcircm,Male,300,33.33,33.60,34.00,35.38,36.80,37.23,37.51
 hcircm,Female,232,28.03,28.36,28.86,30.55,32.32,32.86,33.22
 hcircm,Female,300,32.67,32.93,33.31,34.60,35.95,36.36,36.63"),
 stringsAsFactors = FALSE)
-# nolint end
 
 test_that("vectorized intergrowth birth standard to centile works", {
   a <- igb_centile2value(chkpts$ga,
@@ -115,3 +115,5 @@ test_that("vectorized intergrowth early birth value to z-score works", {
     var = echkpts$m, sex = echkpts$s)
   expect_true(all(abs(a - 2) < 0.05))
 })
+
+# nolint end

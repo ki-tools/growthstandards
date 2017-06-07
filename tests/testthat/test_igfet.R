@@ -1,3 +1,5 @@
+# nolint start
+
 context("igfet")
 
 checkpoints <- read.csv(textConnection("var, ga, p3, p50, p97
@@ -55,3 +57,5 @@ test_that("intergrowth fetal calculations invert correctly", {
   a <- igfet_value2centile(14 * 7, 3.012, var = "ofdcm")
   expect_equal(3.012, igfet_centile2value(14 * 7, a, var = "ofdcm"))
 })
+
+# nolint end

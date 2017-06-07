@@ -1,3 +1,4 @@
+# nolint start
 
 # https://github.com/jimhester/lintr
 if (requireNamespace("lintr", quietly = TRUE)) {
@@ -6,3 +7,5 @@ if (requireNamespace("lintr", quietly = TRUE)) {
     lintr::expect_lint_free(cache = TRUE)
   })
 }
+
+# nolint end

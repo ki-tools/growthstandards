@@ -1,3 +1,5 @@
+# nolint start
+
 context("plots")
 
 test_that("plots work", {
@@ -80,3 +82,5 @@ test_that("plots work", {
     geom_point()
 
 })
+
+# nolint end

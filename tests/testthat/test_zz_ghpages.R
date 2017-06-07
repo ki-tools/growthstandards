@@ -1,3 +1,4 @@
+# nolint start
 
 context("growth standards")
 
@@ -86,3 +87,5 @@ test_that("size conversion", {
     tolerance = 0.00002
   )
 })
+
+# nolint end

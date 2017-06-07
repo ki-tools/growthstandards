@@ -1,3 +1,4 @@
+# nolint start
 
 context("conversions")
 
@@ -21,3 +22,5 @@ test_that("time conversions are correct", {
   expect_equivalent(months2years(12), 1)
   expect_equivalent(years2months(1), 12)
 })
+
+# nolint end
