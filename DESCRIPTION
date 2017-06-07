@@ -21,6 +21,7 @@ Imports:
     dplyr
 Suggests:
     testthat,
+    lintr,
     packagedocs
 RoxygenNote: 6.0.1
 VignetteBuilder: packagedocs
