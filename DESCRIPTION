@@ -23,5 +23,7 @@ Suggests:
     testthat,
     lintr,
     packagedocs
+Remotes:
+    hafen/rbokeh
 RoxygenNote: 6.0.1
 VignetteBuilder: packagedocs
