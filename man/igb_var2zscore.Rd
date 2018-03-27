@@ -4,9 +4,11 @@
 \alias{igb_lencm2zscore}
 \alias{igb_wtkg2zscore}
 \alias{igb_hcircm2zscore}
+\alias{igb_wlr2zscore}
 \alias{igb_lencm2centile}
 \alias{igb_wtkg2centile}
 \alias{igb_hcircm2centile}
+\alias{igb_wlr2centile}
 \title{Convert birth measurements to INTERGROWTH z-scores/centiles}
 \usage{
 igb_lencm2zscore(gagebrth, lencm, sex = "Female")
@@ -15,11 +17,15 @@ igb_wtkg2zscore(gagebrth, wtkg, sex = "Female")
 
 igb_hcircm2zscore(gagebrth, hcircm, sex = "Female")
 
+igb_wlr2zscore(gagebrth, wlr, sex = "Female")
+
 igb_lencm2centile(gagebrth, lencm, sex = "Female")
 
 igb_wtkg2centile(gagebrth, wtkg, sex = "Female")
 
 igb_hcircm2centile(gagebrth, hcircm, sex = "Female")
+
+igb_wlr2centile(gagebrth, wlr, sex = "Female")
 }
 \arguments{
 \item{gagebrth}{gestational age at birth in days}
@@ -31,6 +37,8 @@ igb_hcircm2centile(gagebrth, hcircm, sex = "Female")
 \item{wtkg}{weight (kg) measurement(s) to convert}
 
 \item{hcircm}{head circumference (cm) measurement(s) to convert}
+
+\item{wlr}{weight-length ratio values(s) to convert}
 }
 \description{
 Convert birth measurements to INTERGROWTH z-scores/centiles

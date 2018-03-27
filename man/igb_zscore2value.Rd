@@ -14,7 +14,7 @@ igb_zscore2value(gagebrth, z = 0, var = "lencm", sex = "Female")
 
 \item{p}{centile(s) to convert (must be between 0 and 100)}
 
-\item{var}{the name of the measurement to convert ("lencm", "wtkg", "hcircm")}
+\item{var}{the name of the measurement to convert ("lencm", "wtkg", "hcircm", "wlr")}
 
 \item{sex}{"Male" or "Female"}
 
@@ -35,6 +35,6 @@ International standards for newborn weight, length, and head circumference by ge
 Villar, José et al.
 The Lancet, Volume 384, Issue 9946, 857-868
 
-INTERGROWTH-21st very preterm size at birth reference charts. Lancet  2016 doi.org/10.1016/S0140-6736(16) 00384-6.
+INTERGROWTH-21st very preterm size at birth reference charts. Lancet 2016 doi.org/10.1016/S0140-6736(16) 00384-6.
 Villar, José et al.
 }

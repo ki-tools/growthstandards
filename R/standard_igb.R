@@ -3,13 +3,13 @@
 #' @param gagebrth gestational age at birth in days
 #' @param z z-score(s) to convert
 #' @param p centile(s) to convert (must be between 0 and 100)
-#' @param var the name of the measurement to convert ("lencm", "wtkg", "hcircm")
+#' @param var the name of the measurement to convert ("lencm", "wtkg", "hcircm", "wlr")
 #' @param sex "Male" or "Female"
 #' @references International standards for newborn weight, length, and head circumference by gestational age and sex: the Newborn Cross-Sectional Study of the INTERGROWTH-21st Project
 #' Villar, José et al.
 #' The Lancet, Volume 384, Issue 9946, 857-868
 #'
-#' INTERGROWTH-21st very preterm size at birth reference charts. Lancet  2016 doi.org/10.1016/S0140-6736(16) 00384-6.
+#' INTERGROWTH-21st very preterm size at birth reference charts. Lancet 2016 doi.org/10.1016/S0140-6736(16) 00384-6.
 #' Villar, José et al.
 #' @examples
 #' # get 99th centile for Male birth weights across some gestational ages
@@ -25,40 +25,66 @@ igb_centile2value <- function(gagebrth, p = 50, var = "lencm", sex = "Female") {
   if (! all(unique(dat$sex) %in% c("Male", "Female")))
     stop("sex must be 'Male' or 'Female'")
 
+  if (! var %in% c("lencm", "wtkg", "hcircm", "wlr")) {
+    stop("'var' must be one of 'lencm', 'wtkg', 'hcircm', 'wlr'")
+  }
+
   # since coefficients are available only by pair/sex
   # we need to call this for each unique combination
   ig_centile2value_single_pars <- function(x, y, var, sex) {
-    coefs <- growthstandards::ig_coefs[[var]][[sex]]
-    # the best we can do is daily resolution
-    x <- as.integer(round(x))
-    idx <- match(x, coefs$ga)
-    na_idx <- is.na(idx)
-    res <- rep(NA, length(idx))
-    res[!na_idx] <- gamlss.dist::qST3(y[!na_idx] / 100,
-      coefs$mu[idx][!na_idx],
-      coefs$sigma[idx][!na_idx],
-      coefs$nu[idx][!na_idx],
-      coefs$tau[idx][!na_idx])
+    if (var == "wlr") {
+      x <- x / 7
+      if (sex == "Male") {
+        res <- -17.84615 + (-3778.768 * ( x ^ (-1))) + (1291.477 * ((x ^ (-1)) * log(x))) +
+          (qnorm(y / 100) * (1.01047 +  (-0.0080948 * x)))
+      } else {
+        res <- -5.542927 + (0.0018926 * (x ^ 3)) + (-0.0004614 * ((x ^ 3) * log(x))) +
+          (qnorm(y / 100) * 0.6806229)
+      }
+    } else {
+      coefs <- growthstandards::ig_coefs[[var]][[sex]]
+      # the best we can do is daily resolution
+      x <- as.integer(round(x))
+      idx <- match(x, coefs$ga)
+      na_idx <- is.na(idx)
+      res <- rep(NA, length(idx))
+      res[!na_idx] <- gamlss.dist::qST3(y[!na_idx] / 100,
+        coefs$mu[idx][!na_idx],
+        coefs$sigma[idx][!na_idx],
+        coefs$nu[idx][!na_idx],
+        coefs$tau[idx][!na_idx])
+    }
 
     res
   }
 
   ig_centile2value_single_pars_e <- function(x, y, var, sex) {
-    coefs <- growthstandards::ig_early_coefs[[var]]
+    if (var == "wlr") {
+      x <- x / 7
+      if (sex == "Male") {
+        res <- (0.1382809 + 3.400617) + (-0.0103163 * x ^ 2) + (0.0003407 * x ^ 3) +
+          (qnorm(y / 100) * sqrt(0.3570057))
+      } else {
+        res <- 3.400617 + (-0.0103163 * x ^ 2) + (0.0003407 * x ^ 3) +
+          (qnorm(y / 100) * sqrt(0.3570057))
+      }
+    } else {
+      coefs <- growthstandards::ig_early_coefs[[var]]
 
-    frm <- matrix(c(
-      rep(1, length(x)),
-      x / 7,
-      rep(as.integer(sex == "Male"), length(x))),
-      ncol = 3)
-    if (var == "wtkg") {
-      frm[, 2] <- sqrt(frm[, 2])
-    }
+      frm <- matrix(c(
+        rep(1, length(x)),
+        x / 7,
+        rep(as.integer(sex == "Male"), length(x))),
+        ncol = 3)
+      if (var == "wtkg") {
+        frm[, 2] <- sqrt(frm[, 2])
+      }
 
-    mu <- as.vector(frm %*% coefs$coefs)
-    res <- qnorm(y / 100, mu, coefs$sigma)
-    if (var == "wtkg") {
-      res <- exp(res)
+      mu <- as.vector(frm %*% coefs$coefs)
+      res <- qnorm(y / 100, mu, coefs$sigma)
+      if (var == "wtkg") {
+        res <- exp(res)
+      }
     }
     res
   }
@@ -78,6 +104,9 @@ igb_centile2value <- function(gagebrth, p = 50, var = "lencm", sex = "Female") {
     dat$res[idx] <- edat$res
   }
 
+  dat$res[dat$x < 24 * 7] <- NA
+  dat$res[dat$x > 42 * 7 + 6] <- NA
+
   dat$res
 }
 
@@ -91,7 +120,7 @@ igb_zscore2value <- function(gagebrth, z = 0, var = "lencm", sex = "Female") {
 #'
 #' @param gagebrth gestational age at birth in days
 #' @param val the value(s) of the anthro measurement to convert
-#' @param var the name of the measurement to convert ("lencm", "wtkg", "hcircm")
+#' @param var the name of the measurement to convert ("lencm", "wtkg", "hcircm", "wlr")
 #' @param sex "Male" or "Female"
 #' @references International standards for newborn weight, length, and head circumference by gestational age and sex: the Newborn Cross-Sectional Study of the INTERGROWTH-21st Project
 #' Villar, José et al.
@@ -118,36 +147,69 @@ igb_value2centile <- function(gagebrth, val, var = "lencm", sex = "Female") {
   # since coefficients are available only by pair/sex
   # we need to call this for each unique combination
   ig_value2centile_single_pars <- function(x, y, var, sex) {
-    coefs <- growthstandards::ig_coefs[[var]][[sex]]
-    # the best we can do is daily resolution
-    x <- as.integer(round(x))
-    idx <- match(x, coefs$ga)
-    na_idx <- is.na(idx)
-    res <- rep(NA, length(idx))
-    res[!na_idx] <- gamlss.dist::pST3(y[!na_idx],
-      coefs$mu[idx][!na_idx],
-      coefs$sigma[idx][!na_idx],
-      coefs$nu[idx][!na_idx],
-      coefs$tau[idx][!na_idx]) * 100
+    if (var == "wlr") {
+      x <- x / 7
+      if (sex == "Male") {
+        nn <- function(x) -17.84615 + (-3778.768 * ( x ^ (-1))) +
+          (1291.477 * ((x ^ (-1)) * log(x)))
+        dd <- function(x) (1.01047 +  (-0.0080948 * x))
+        z <- (y - nn(x)) / dd(x)
+        res <- pnorm(z) * 100
+      } else {
+        nn <- function(x) -5.542927 + (0.0018926 * (x ^ 3)) +
+          (-0.0004614 * ((x ^ 3) * log(x)))
+        dd <- 0.6806229
+        z <- (y - nn(x)) / dd
+        res <- pnorm(z) * 100
+      }
+    } else {
+      coefs <- growthstandards::ig_coefs[[var]][[sex]]
+      # the best we can do is daily resolution
+      x <- as.integer(round(x))
+      idx <- match(x, coefs$ga)
+      na_idx <- is.na(idx)
+      res <- rep(NA, length(idx))
+      res[!na_idx] <- gamlss.dist::pST3(y[!na_idx],
+        coefs$mu[idx][!na_idx],
+        coefs$sigma[idx][!na_idx],
+        coefs$nu[idx][!na_idx],
+        coefs$tau[idx][!na_idx]) * 100
+    }
 
     res
   }
 
   ig_value2centile_single_pars_e <- function(x, y, var, sex) {
-    coefs <- growthstandards::ig_early_coefs[[var]]
+    if (var == "wlr") {
+      x <- x / 7
+      if (sex == "Male") {
+        nn <- function(x) (0.1382809 + 3.400617) + (-0.0103163 * x ^ 2) + (0.0003407 * x ^ 3)
+        dd <- sqrt(0.3570057)
+        z <- (y - nn(x)) / dd
+        res <- pnorm(z) * 100
+      } else {
+        nn <- function(x) 3.400617 + (-0.0103163 * x ^ 2) + (0.0003407 * x ^ 3)
+        dd <- sqrt(0.3570057)
+        z <- (y - nn(x)) / dd
+        res <- pnorm(z) * 100
+      }
+    } else {
+      coefs <- growthstandards::ig_early_coefs[[var]]
 
-    frm <- matrix(c(
-      rep(1, length(x)),
-      x / 7,
-      rep(as.integer(sex == "Male"), length(x))),
-      ncol = 3)
-    if (var == "wtkg") {
-      frm[, 2] <- sqrt(frm[, 2])
-      y <- log(y)
+      frm <- matrix(c(
+        rep(1, length(x)),
+        x / 7,
+        rep(as.integer(sex == "Male"), length(x))),
+        ncol = 3)
+      if (var == "wtkg") {
+        frm[, 2] <- sqrt(frm[, 2])
+        y <- log(y)
+      }
+
+      mu <- as.vector(frm %*% coefs$coefs)
+      res <- pnorm(y, mu, coefs$sigma) * 100
     }
-
-    mu <- as.vector(frm %*% coefs$coefs)
-    pnorm(y, mu, coefs$sigma) * 100
+    res
   }
 
   dat <- dat %>%
@@ -164,6 +226,9 @@ igb_value2centile <- function(gagebrth, val, var = "lencm", sex = "Female") {
 
     dat$res[idx] <- edat$res
   }
+
+  dat$res[dat$x < 24 * 7] <- NA
+  dat$res[dat$x > 42 * 7 + 6] <- NA
 
   dat$res
 }
@@ -184,6 +249,7 @@ igb_value2zscore <- function(gagebrth, val, var = "lencm", sex = "Female") {
 #' @param wtkg weight (kg) measurement(s) to convert
 #' @param lencm length(cm) measurement(s) to convert
 #' @param hcircm head circumference (cm) measurement(s) to convert
+#' @param wlr weight-length ratio values(s) to convert
 #' @param sex "Male" or "Female"
 #' @references International standards for newborn weight, length, and head circumference by gestational age and sex: the Newborn Cross-Sectional Study of the INTERGROWTH-21st Project
 #' Villar, José et al.
@@ -216,6 +282,12 @@ igb_hcircm2zscore <- function(gagebrth, hcircm, sex = "Female") {
   igb_value2zscore(gagebrth, hcircm, var = "hcircm", sex = sex)
 }
 
+#' @rdname igb_var2zscore
+#' @export
+igb_wlr2zscore <- function(gagebrth, wlr, sex = "Female") {
+  igb_value2zscore(gagebrth, wlr, var = "wlr", sex = sex)
+}
+
 ## **2centile
 ##---------------------------------------------------------
 
@@ -235,6 +307,12 @@ igb_wtkg2centile <- function(gagebrth, wtkg, sex = "Female") {
 #' @export
 igb_hcircm2centile <- function(gagebrth, hcircm, sex = "Female") {
   igb_value2centile(gagebrth, hcircm, var = "hcircm", sex = sex)
+}
+
+#' @rdname igb_var2zscore
+#' @export
+igb_wlr2centile <- function(gagebrth, wlr, sex = "Female") {
+  igb_value2centile(gagebrth, wlr, var = "wlr", sex = sex)
 }
 
 ## zscore2**
@@ -279,6 +357,12 @@ igb_zscore2hcircm <- function(gagebrth, z = 0, sex = "Female") {
   igb_zscore2value(gagebrth, z, var = "hcircm", sex = sex)
 }
 
+#' @rdname igb_zscore2var
+#' @export
+igb_zscore2wlr <- function(gagebrth, z = 0, sex = "Female") {
+  igb_zscore2value(gagebrth, z, var = "wlr", sex = sex)
+}
+
 ## centile2**
 ##---------------------------------------------------------
 
@@ -298,4 +382,10 @@ igb_centile2wtkg <- function(gagebrth, p = 50, sex = "Female") {
 #' @export
 igb_centile2hcircm <- function(gagebrth, p = 50, sex = "Female") {
   igb_centile2value(gagebrth, p, var = "hcircm", sex = sex)
+}
+
+#' @rdname igb_zscore2var
+#' @export
+igb_centile2wlr <- function(gagebrth, p = 50, sex = "Female") {
+  igb_centile2value(gagebrth, p, var = "wlr", sex = sex)
 }

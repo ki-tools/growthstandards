@@ -14,7 +14,7 @@ igb_value2zscore(gagebrth, val, var = "lencm", sex = "Female")
 
 \item{val}{the value(s) of the anthro measurement to convert}
 
-\item{var}{the name of the measurement to convert ("lencm", "wtkg", "hcircm")}
+\item{var}{the name of the measurement to convert ("lencm", "wtkg", "hcircm", "wlr")}
 
 \item{sex}{"Male" or "Female"}
 }
