@@ -25,9 +25,8 @@ igb_centile2value <- function(gagebrth, p = 50, var = "lencm", sex = "Female") {
   if (! all(unique(dat$sex) %in% c("Male", "Female")))
     stop("sex must be 'Male' or 'Female'")
 
-  if (! var %in% c("lencm", "wtkg", "hcircm", "wlr")) {
+  if (! all(var %in% c("lencm", "wtkg", "hcircm", "wlr")))
     stop("'var' must be one of 'lencm', 'wtkg', 'hcircm', 'wlr'")
-  }
 
   # since coefficients are available only by pair/sex
   # we need to call this for each unique combination
@@ -143,6 +142,9 @@ igb_value2centile <- function(gagebrth, val, var = "lencm", sex = "Female") {
 
   if (! all(unique(dat$sex) %in% c("Male", "Female")))
     stop("sex must be 'Male' or 'Female'")
+
+  if (! all(var %in% c("lencm", "wtkg", "hcircm", "wlr")))
+    stop("'var' must be one of 'lencm', 'wtkg', 'hcircm', 'wlr'")
 
   # since coefficients are available only by pair/sex
   # we need to call this for each unique combination
