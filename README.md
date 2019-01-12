@@ -26,4 +26,4 @@ devtools::install_github("HBGDki/growthstandards")
 
 ## Usage
 
-See [here](articles/docs.html) for several examples of how to use this package.
+See [here](https://hathawayj.github.io/growthstandards/) for several examples of how to use this package.
