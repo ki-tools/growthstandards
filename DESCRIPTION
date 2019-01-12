@@ -21,9 +21,8 @@ Imports:
     dplyr
 Suggests:
     testthat,
-    lintr,
-    packagedocs
+    lintr
 Remotes:
     hafen/rbokeh
-RoxygenNote: 6.0.1
-VignetteBuilder: packagedocs
+RoxygenNote: 6.1.1
+

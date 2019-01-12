@@ -5,11 +5,11 @@
 \alias{igfet_value2centile}
 \title{Convert fetal ultrasound measurements to INTERGROWTH z-scores/centiles (generic)}
 \usage{
-igfet_value2zscore(gagedays, val, var = c("hccm", "bpdcm", "ofdcm", "accm",
-  "flcm"))
+igfet_value2zscore(gagedays, val, var = c("hccm", "bpdcm", "ofdcm",
+  "accm", "flcm"))
 
-igfet_value2centile(gagedays, val, var = c("hccm", "bpdcm", "ofdcm", "accm",
-  "flcm"))
+igfet_value2centile(gagedays, val, var = c("hccm", "bpdcm", "ofdcm",
+  "accm", "flcm"))
 }
 \arguments{
 \item{gagedays}{gestational age in days}

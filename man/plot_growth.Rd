@@ -13,22 +13,22 @@
 \alias{ly_igfet}
 \title{Utility functions for adding growth standard bands to rbokeh/lattice/ggplot2 plots}
 \usage{
-panel.who(x, x_var = "agedays", y_var = "htcm", sex = "Female", p = c(1,
-  5, 25, 50), color = NULL, alpha = 0.15, center = FALSE, labels = TRUE,
+panel.who(x, x_var = "agedays", y_var = "htcm", sex = "Female",
+  p = c(1, 5, 25, 50), color = NULL, alpha = 0.15, center = FALSE,
+  labels = TRUE, x_trans = identity, y_trans = identity)
+
+panel.igb(gagebrth, var = "lencm", sex = "Female", p = c(1, 5, 25,
+  50), color = NULL, alpha = 0.15, center = FALSE, labels = TRUE,
   x_trans = identity, y_trans = identity)
 
-panel.igb(gagebrth, var = "lencm", sex = "Female", p = c(1, 5, 25, 50),
-  color = NULL, alpha = 0.15, center = FALSE, labels = TRUE,
+panel.igfet(gagedays, var = "hccm", p = c(1, 5, 25, 50),
+  color = "green", alpha = 0.15, center = FALSE, labels = TRUE,
   x_trans = identity, y_trans = identity)
 
-panel.igfet(gagedays, var = "hccm", p = c(1, 5, 25, 50), color = "green",
-  alpha = 0.15, center = FALSE, labels = TRUE, x_trans = identity,
-  y_trans = identity)
-
-geom_growthstandard(mapping = NULL, data = NULL, x_seq, x_var = "agedays",
-  y_var, sex = "Female", p = c(1, 5, 25, 50), shade = NULL,
-  alpha = 0.15, center = FALSE, x_trans = identity, y_trans = identity,
-  standard = "who", inherit.aes = TRUE)
+geom_growthstandard(mapping = NULL, data = NULL, x_seq,
+  x_var = "agedays", y_var, sex = "Female", p = c(1, 5, 25, 50),
+  shade = NULL, alpha = 0.15, center = FALSE, x_trans = identity,
+  y_trans = identity, standard = "who", inherit.aes = TRUE)
 
 geom_who(...)
 
@@ -41,8 +41,8 @@ ly_who(fig, x, x_var = "agedays", y_var = "htcm", sex = "Female",
   labels = TRUE, x_trans = identity, y_trans = identity,
   x_units = c("days", "months", "years"))
 
-ly_igb(fig, gagebrth, var = "lencm", sex = "Female", p = c(1, 5, 25, 50),
-  color = NULL, alpha = 0.15, center = FALSE, labels = TRUE,
+ly_igb(fig, gagebrth, var = "lencm", sex = "Female", p = c(1, 5, 25,
+  50), color = NULL, alpha = 0.15, center = FALSE, labels = TRUE,
   x_trans = identity, y_trans = identity)
 
 ly_igfet(fig, gagedays, var = "hccm", p = c(1, 5, 25, 50),
