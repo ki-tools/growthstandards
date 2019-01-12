@@ -16,7 +16,6 @@ hbgd.sublime*
 inst/doc
 sftp-config.json
 docs/assets
-docs/index.html
 docs/rd.Rmd
 docs/rd.html
 .lintr_cache
