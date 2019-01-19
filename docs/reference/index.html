@@ -75,18 +75,6 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/docs.html">growthstandards</a>
-    </li>
-  </ul>
-</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -122,8 +110,8 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-environments-scoping-packages" class="hasAnchor"><a href="#section-environments-scoping-packages" class="anchor"></a>Environments, Scoping, Packages</h2>
+          <p class="section-desc"><p>Example subject data <code>cpp</code> and coeffficients data.frames for intergrowth (ig) and the world health orginization (who)</p></p>
         </th>
       </tr>
       <tr>
@@ -135,13 +123,45 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="growthstandards-package.html">growthstandards-package</a></code> </p>
+          <p><code><a href="ig_coefs.html">ig_coefs</a></code> </p>
         </td>
-        <td><p>growthstandards: Anthropometric Growth Standard Calculations</p></td>
+        <td><p>List of INTERGROWTH birth standard coefficients</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="ig_early_coefs.html">ig_early_coefs</a></code> </p>
+        </td>
+        <td><p>List of INTERGROWTH very preterm birth standard coefficients</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="who_coefs.html">who_coefs</a></code> </p>
+        </td>
+        <td><p>List of WHO growth standard coefficients</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="growthstandards-package.html">growthstandards-package</a></code> </p>
+        </td>
+        <td><p>growthstandards: Anthropometric Growth Standard Calculations</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-intergrowth" class="hasAnchor"><a href="#section-intergrowth" class="anchor"></a>INTERGROWTH</h2>
+          <p class="section-desc"><p>INTERGROWTH conversion functions</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
           <p><code><a href="igb_value2zscore.html">igb_value2centile()</a></code> <code><a href="igb_value2zscore.html">igb_value2zscore()</a></code> </p>
+        </td>
+        <td><p>Convert birth measurements to INTERGROWTH z-scores/centiles (generic)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="igb_zscore2value.html">igb_centile2value()</a></code> <code><a href="igb_zscore2value.html">igb_zscore2value()</a></code> </p>
         </td>
         <td><p>Convert birth measurements to INTERGROWTH z-scores/centiles (generic)</p></td>
       </tr><tr>
@@ -153,16 +173,18 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="igb_zscore2value.html">igb_centile2value()</a></code> <code><a href="igb_zscore2value.html">igb_zscore2value()</a></code> </p>
-        </td>
-        <td><p>Convert birth measurements to INTERGROWTH z-scores/centiles (generic)</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="igb_zscore2var.html">igb_zscore2lencm()</a></code> <code><a href="igb_zscore2var.html">igb_zscore2wtkg()</a></code> <code><a href="igb_zscore2var.html">igb_zscore2hcircm()</a></code> <code><a href="igb_zscore2var.html">igb_zscore2wlr()</a></code> <code><a href="igb_zscore2var.html">igb_centile2lencm()</a></code> <code><a href="igb_zscore2var.html">igb_centile2wtkg()</a></code> <code><a href="igb_zscore2var.html">igb_centile2hcircm()</a></code> <code><a href="igb_zscore2var.html">igb_centile2wlr()</a></code> </p>
         </td>
         <td><p>Convert INTERGROWTH z-scores/centiles to birth measurements</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-intergrowth-fetal" class="hasAnchor"><a href="#section-intergrowth-fetal" class="anchor"></a>INTERGROWTH Fetal</h2>
+          <p class="section-desc"><p>INTERGROWTH fetal conversion functions</p></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="igfet_value2zscore.html">igfet_value2zscore()</a></code> <code><a href="igfet_value2zscore.html">igfet_value2centile()</a></code> </p>
@@ -186,48 +208,20 @@
           <p><code><a href="igfet_zscore2var.html">igfet_zscore2hccm()</a></code> <code><a href="igfet_zscore2var.html">igfet_zscore2bpdcm()</a></code> <code><a href="igfet_zscore2var.html">igfet_zscore2ofdcm()</a></code> <code><a href="igfet_zscore2var.html">igfet_zscore2accm()</a></code> <code><a href="igfet_zscore2var.html">igfet_zscore2flcm()</a></code> <code><a href="igfet_zscore2var.html">igfet_centile2hccm()</a></code> <code><a href="igfet_zscore2var.html">igfet_centile2bpdcm()</a></code> <code><a href="igfet_zscore2var.html">igfet_centile2ofdcm()</a></code> <code><a href="igfet_zscore2var.html">igfet_centile2accm()</a></code> <code><a href="igfet_zscore2var.html">igfet_centile2flcm()</a></code> </p>
         </td>
         <td><p>Convert INTERGROWTH z-scores/centiles to fetal ultrasound measurements</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ig_coefs.html">ig_coefs</a></code> </p>
-        </td>
-        <td><p>List of INTERGROWTH birth standard coefficients</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ig_early_coefs.html">ig_early_coefs</a></code> </p>
-        </td>
-        <td><p>List of INTERGROWTH very preterm birth standard coefficients</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_growth.html">panel.who()</a></code> <code><a href="plot_growth.html">panel.igb()</a></code> <code><a href="plot_growth.html">panel.igfet()</a></code> <code><a href="plot_growth.html">geom_growthstandard()</a></code> <code><a href="plot_growth.html">geom_who()</a></code> <code><a href="plot_growth.html">geom_igb()</a></code> <code><a href="plot_growth.html">geom_igfet()</a></code> <code><a href="plot_growth.html">ly_who()</a></code> <code><a href="plot_growth.html">ly_igb()</a></code> <code><a href="plot_growth.html">ly_igfet()</a></code> </p>
-        </td>
-        <td><p>Utility functions for adding growth standard bands to rbokeh/lattice/ggplot2 plots</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_zband.html">ly_zband()</a></code> <code><a href="plot_zband.html">panel.zband()</a></code> <code><a href="plot_zband.html">geom_zband()</a></code> </p>
-        </td>
-        <td><p>Utility functions for adding growth standard bands to rbokeh/lattice/ggplot2 plots</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="unit_conversion.html">cm2in()</a></code> <code><a href="unit_conversion.html">in2cm()</a></code> <code><a href="unit_conversion.html">lb2kg()</a></code> <code><a href="unit_conversion.html">kg2lb()</a></code> <code><a href="unit_conversion.html">days2years()</a></code> <code><a href="unit_conversion.html">years2days()</a></code> <code><a href="unit_conversion.html">days2months()</a></code> <code><a href="unit_conversion.html">months2days()</a></code> <code><a href="unit_conversion.html">months2years()</a></code> <code><a href="unit_conversion.html">years2months()</a></code> </p>
-        </td>
-        <td><p>Unit conversion utility functions</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-world-health-orginization-who-" class="hasAnchor"><a href="#section-world-health-orginization-who-" class="anchor"></a>World Health Orginization (WHO)</h2>
+          <p class="section-desc"><p>WHO conversion functions</p></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="who_centile2value.html">who_centile2value()</a></code> <code><a href="who_centile2value.html">who_zscore2value()</a></code> </p>
         </td>
         <td><p>Convert WHO z-scores/centiles to anthro measurements (generic)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="who_coefs.html">who_coefs</a></code> </p>
-        </td>
-        <td><p>List of WHO growth standard coefficients</p></td>
       </tr><tr>
         
         <td>
@@ -247,6 +241,52 @@
         </td>
         <td><p>Convert WHO z-scores/centiles to anthro measurements</p></td>
       </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-plotting-functions-for-use-with-rbokeh-lattice-and-ggplot-" class="hasAnchor"><a href="#section-plotting-functions-for-use-with-rbokeh-lattice-and-ggplot-" class="anchor"></a>Plotting functions for use with rbokeh, lattice, and ggplot2</h2>
+          <p class="section-desc"><p>Add growth standard bands to plots</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="plot_growth.html">panel.who()</a></code> <code><a href="plot_growth.html">panel.igb()</a></code> <code><a href="plot_growth.html">panel.igfet()</a></code> <code><a href="plot_growth.html">geom_growthstandard()</a></code> <code><a href="plot_growth.html">geom_who()</a></code> <code><a href="plot_growth.html">geom_igb()</a></code> <code><a href="plot_growth.html">geom_igfet()</a></code> <code><a href="plot_growth.html">ly_who()</a></code> <code><a href="plot_growth.html">ly_igb()</a></code> <code><a href="plot_growth.html">ly_igfet()</a></code> </p>
+        </td>
+        <td><p>Utility functions for adding growth standard bands to rbokeh/lattice/ggplot2 plots</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot_zband.html">ly_zband()</a></code> <code><a href="plot_zband.html">panel.zband()</a></code> <code><a href="plot_zband.html">geom_zband()</a></code> </p>
+        </td>
+        <td><p>Utility functions for adding growth standard bands to rbokeh/lattice/ggplot2 plots</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-conversion-and-data-functions" class="hasAnchor"><a href="#section-conversion-and-data-functions" class="anchor"></a>Conversion and data functions</h2>
+          <p class="section-desc"><p>Functions to convert between units and to get data</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="unit_conversion.html">cm2in()</a></code> <code><a href="unit_conversion.html">in2cm()</a></code> <code><a href="unit_conversion.html">lb2kg()</a></code> <code><a href="unit_conversion.html">kg2lb()</a></code> <code><a href="unit_conversion.html">days2years()</a></code> <code><a href="unit_conversion.html">years2days()</a></code> <code><a href="unit_conversion.html">days2months()</a></code> <code><a href="unit_conversion.html">months2days()</a></code> <code><a href="unit_conversion.html">months2years()</a></code> <code><a href="unit_conversion.html">years2months()</a></code> </p>
+        </td>
+        <td><p>Unit conversion utility functions</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="subjecttime.html">get_subject_data()</a></code> <code><a href="subjecttime.html">get_time_data()</a></code> </p>
+        </td>
+        <td><p>Get subject-level or time-varying variables and rows of longitudinal data</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_data_attributes.html">get_data_attributes()</a></code> </p>
+        </td>
+        <td><p>Infer and attach attributes to a longitudinal growth study dataset</p></td>
+      </tr>
     </tbody>
     </table>
   </div>
@@ -254,7 +294,12 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-environments-scoping-packages">Environments, Scoping, Packages</a></li>
+      <li><a href="#section-intergrowth">INTERGROWTH</a></li>
+      <li><a href="#section-intergrowth-fetal">INTERGROWTH Fetal</a></li>
+      <li><a href="#section-world-health-orginization-who-">World Health Orginization (WHO)</a></li>
+      <li><a href="#section-plotting-functions-for-use-with-rbokeh-lattice-and-ggplot-">Plotting functions for use with rbokeh, lattice, and ggplot2</a></li>
+      <li><a href="#section-conversion-and-data-functions">Conversion and data functions</a></li>
     </ul>
   </div>
 </div>
