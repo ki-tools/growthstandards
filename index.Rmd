@@ -311,7 +311,7 @@ Look at Male birth lengths superposed on the INTERGROWTH birth standard:
 
 ```{r igb_bokeh, eval=TRUE, echo=TRUE, message=FALSE, lazy=TRUE}
 # first we need just 1 record per subject with subject-level data
-cppsubj <- get_subject_data(cpp)
+cppsubj <- cpp[!duplicated(cpp$subjid),]
 figure(xlab = "Gestational Age at Birth (days)", ylab = "Birth Length (cm)") %>%
   ly_igb(gagebrth = 250:310, var = "lencm", sex = "Male") %>%
   ly_points(jitter(gagebrth), birthlen, data = subset(cppsubj, sex == "Male"),
