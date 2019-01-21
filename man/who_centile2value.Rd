@@ -30,7 +30,7 @@ who_zscore2value(x, z = 0, y_var = "htcm", x_var = "agedays",
 Get values of a specified measurement for a given WHO centile/z-score and growth standard pair (e.g. length vs. age) and sex over a specified grid
 }
 \details{
-for all supported pairings of \code{x_var} and \code{y_var}, type \code{names(who)}
+for all supported pairings of \code{y_var} and \code{x_var} , type \code{names(who_coefs)}
 }
 \examples{
 # median height vs. age for females
