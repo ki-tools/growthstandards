@@ -2,33 +2,19 @@
 title: "growthstandards"
 author: Ryan Hafen
 copyright: Ryan Hafen
-output:
-  packagedocs::package_docs:
-    toc: true
-    toc_collapse: true
-redirect: http://HBGDki.github.io/growthstandards
-vignette: >
-  %\VignetteIndexEntry{growthstandards documentation}
-  %\VignetteEngine{packagedocs::redirect_index}
-navpills: |
-  <li class="active"><a href='index.html'>Docs</a></li>
-  <li><a href='rd.html'>Package Ref</a></li>
-  <li><a href='https://github.com/HBGDki/growthstandards'>Github <i class='fa fa-github'></i></a></li>
 ---
 
 ```{r global_options, include=FALSE}
 # R output pre blocks are styled by default to indicate output
 knitr::opts_chunk$set(comment = NA)
 
-# shorthand for rd_link() - see ?packagedocs::rd_link for more information
-rdl <- function(x) packagedocs::rd_link(deparse(substitute(x), 500L))
 ```
 
 # Intro #
 
 The "growthstandards" R package provides methods for converting anthropometric measurements to or from z-scores and centiles using the WHO and INTERGROWTH growth standards. The WHO standard are used for infants, children, and young adults. INTERGROWTH standards are provided for fetal and newborn (including very preterm) calculations.
 
-This document provides a walk-through of much of the package's functionality, provided through examples and discussion.  The [package reference](rd.html) page has an exhaustive listing of all of the exported functions in the package along with detailed documentation about their parameters and usage.
+This document provides a walk-through of much of the package's functionality, provided through examples and discussion.  The package reference page has an exhaustive listing of all of the exported functions in the package along with detailed documentation about their parameters and usage.
 
 ## Installation ##
 
@@ -84,10 +70,10 @@ Note that the WHO provides recumbent length for 0-2 years of age, after which th
 
 Also note that in almost every case the x variable is `agedays` - the age since birth in days.  When the desired x variable is `agedays`, a simplified set of functions has been created to convert between z-scores or centiles with the following naming convention, for example, when working with `wtkg`:
 
-- `r rdl(who_wtkg2zscore(agedays, wtkg, sex = "Female"))`: for specified `wtkg` values at ages `agedays`, get the corresponding Female z-scores
-- `r rdl(who_wtkg2centile(agedays, wtkg, sex = "Female"))`: for specified `wtkg` values at ages `agedays`, get the corresponding Female centiles
-- `r rdl(who_centile2wtkg(agedays, p = 50, sex = "Female"))`: for given centiles (`p=50`, or median, as default) at ages `agedays`, get the corresponding `wtkg` values
-- `r rdl(who_zscore2wtkg(agedays, z = 0, sex = "Female"))`: for given z-scores (`z=0` as default) at ages `agedays`, get the corresponding `wtkg` values
+- `who_wtkg2zscore(agedays, wtkg, sex = "Female")`: for specified `wtkg` values at ages `agedays`, get the corresponding Female z-scores
+- `who_wtkg2centile(agedays, wtkg, sex = "Female")`: for specified `wtkg` values at ages `agedays`, get the corresponding Female centiles
+- `who_centile2wtkg(agedays, p = 50, sex = "Female")`: for given centiles (`p=50`, or median, as default) at ages `agedays`, get the corresponding `wtkg` values
+- `who_zscore2wtkg(agedays, z = 0, sex = "Female")`: for given z-scores (`z=0` as default) at ages `agedays`, get the corresponding `wtkg` values
 
 If you are working with `htcm` you can swap `wtkg` for `htcm`, etc.
 
@@ -149,7 +135,7 @@ xyplot(kg2lb(p99) ~ days2years(x), groups = sex, data = dat,
   xlab = "age (years)", auto.key = TRUE)
 ```
 
-Here we are using a convenience function, `r rdl(kg2lb())`, provided with the package to plot the weights in pounds.
+Here we are using a convenience function, `kg2lb()`, provided with the package to plot the weights in pounds.
 
 #### Getting z-scores for combinations of parameters
 
@@ -174,10 +160,10 @@ xyplot(computed ~ data | which, data = comp)
 
 To utility functions described so far all for measurements against age.  To deal with the case of height-for-weight WHO calculations, and also to provide a more generic interface to accessing the WHO growth standards, the following functions are also provided:
 
-- `r rdl(who_value2zscore(x, y, x_var = "agedays", y_var = "htcm", sex = "Female"))`
-- `r rdl(who_value2centile(x, y, x_var = "agedays", y_var = "htcm", sex = "Female"))`
-- `r rdl(who_centile2value(x, p = 50, x_var = "agedays", y_var = "htcm", sex = "Female"))`
-- `r rdl(who_zscore2value(x, z = 0, y_var = "htcm", x_var = "agedays", sex = "Female"))`
+- `who_value2zscore(x, y, x_var = "agedays", y_var = "htcm", sex = "Female")`
+- `who_value2centile(x, y, x_var = "agedays", y_var = "htcm", sex = "Female")`
+- `who_centile2value(x, p = 50, x_var = "agedays", y_var = "htcm", sex = "Female")`
+- `who_zscore2value(x, z = 0, y_var = "htcm", x_var = "agedays", sex = "Female")`
 
 Here both the x variable and y variable can be specified.  For example, the following are equivalent:
 
@@ -198,10 +184,10 @@ The [INTERGROWTH newborn standard](https://intergrowth21.tghn.org/articles/inter
 
 Functions for this standard have a similar naming structure as we saw for the WHO standards:
 
-- `r rdl(igb_lencm2zscore(gagebrth, lencm, sex = "Female"))`: for specified `lencm` values at gestational ages at birth `gagebrth`, get the corresponding Female z-scores
-- `r rdl(igb_lencm2centile(gagebrth, lencm, sex = "Female"))`: for specified `lencm` values at gestational ages at birth `gagebrth`, get the corresponding Female centiles
-- `r rdl(igb_centile2lencm(gagebrth, p = 50, sex = "Female"))`: for given centiles (`p=50`, or median, as default) at gestational ages at birth `gagebrth`, get the corresponding `lencm` values
-- `r rdl(igb_zscore2lencm(gagebrth, z = 0, sex = "Female"))`: for given z-scores (`z=0` as default) at gestational ages at birth `gagebrth`, get the corresponding `lencm` values
+- `igb_lencm2zscore(gagebrth, lencm, sex = "Female")`: for specified `lencm` values at gestational ages at birth `gagebrth`, get the corresponding Female z-scores
+- `igb_lencm2centile(gagebrth, lencm, sex = "Female")`: for specified `lencm` values at gestational ages at birth `gagebrth`, get the corresponding Female centiles
+- `igb_centile2lencm(gagebrth, p = 50, sex = "Female")`: for given centiles (`p=50`, or median, as default) at gestational ages at birth `gagebrth`, get the corresponding `lencm` values
+- `igb_zscore2lencm(gagebrth, z = 0, sex = "Female")`: for given z-scores (`z=0` as default) at gestational ages at birth `gagebrth`, get the corresponding `lencm` values
 
 The same functions are available for weight `wtkg` and head circumference `hcircm`.
 
@@ -250,10 +236,10 @@ flcm       | femur length (cm)
 
 As with previous growth standard methods, a similar interface to this growth standard is provided with the following conventions for, for example, `hccm`:
 
-- `r rdl(igfet_flcm2zscore(gagedays, flcm, sex = "Female"))`: for specified `flcm` values at gestational ages `gagedays`, get the corresponding Female z-scores
-- `r rdl(igfet_flcm2centile(gagedays, flcm, sex = "Female"))`: for specified `flcm` values at gestational ages `gagedays`, get the corresponding Female centiles
-- `r rdl(igfet_centile2flcm(gagedays, p = 50, sex = "Female"))`: for given centiles (`p=50`, or median, as default) at gestational ages `gagedays`, get the corresponding `flcm` values
-- `r rdl(igfet_zscore2flcm(gagedays, z = 0, sex = "Female"))`: for given z-scores (`z=0` as default) at gestational ages `gagedays`, get the corresponding `flcm` values
+- `igfet_flcm2zscore(gagedays, flcm, sex = "Female")`: for specified `flcm` values at gestational ages `gagedays`, get the corresponding Female z-scores
+- `igfet_flcm2centile(gagedays, flcm, sex = "Female")`: for specified `flcm` values at gestational ages `gagedays`, get the corresponding Female centiles
+- `igfet_centile2flcm(gagedays, p = 50, sex = "Female")`: for given centiles (`p=50`, or median, as default) at gestational ages `gagedays`, get the corresponding `flcm` values
+- `igfet_zscore2flcm(gagedays, z = 0, sex = "Female")`: for given z-scores (`z=0` as default) at gestational ages `gagedays`, get the corresponding `flcm` values
 
 Usage is similar as the other growth standards.  For example, to get the centile for child at 100 gestational days with an ultrasound head circumference measurement of 11cm:
 
@@ -266,23 +252,23 @@ igfet_hccm2centile(100, 11)
 This package provides a few utility functions for making it easy to add any of the growth standards as an overlay on a plot.  Methods are available for ggplot, lattice, and rbokeh.  These functions have similar parameters to the growth standard lookup functions described above.  The methods available are:
 
 - ggplot2
-  + `r rdl(geom_who())`
-  + `r rdl(geom_igb())`
-  + `r rdl(geom_igfet())`
+  + `geom_who()`
+  + `geom_igb()`
+  + `geom_igfet()`
 - lattice
-  + `r rdl(panel.who())`
-  + `r rdl(panel.igb())`
-  + `r rdl(panel.igfet())`
+  + `panel.who()`
+  + `panel.igb()`
+  + `panel.igfet()`
 - rbokeh
-  + `r rdl(ly_who())`
-  + `r rdl(ly_igb())`
-  + `r rdl(ly_igfet())`
+  + `ly_who()`
+  + `ly_igb()`
+  + `ly_igfet()`
 
 Some examples are below.
 
 #### ggplot
 
-Here is an example of using the utility function, `r rdl(geom_who())`, with a plot of a CPP subject's height vs. age, plotting the default of WHO bands at centiles 1, 5, 25, 50, 75, 95, 99:
+Here is an example of using the utility function, `geom_who()`, with a plot of a CPP subject's height vs. age, plotting the default of WHO bands at centiles 1, 5, 25, 50, 75, 95, 99:
 
 ```{r who_gg, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
 library(ggplot2)
@@ -294,7 +280,7 @@ ggplot(data = subset(cpp, subjid == 8), aes(x = agedays, y = htcm)) +
 
 #### lattice
 
-This example of uses `r rdl(panel.who())` to superpose the WHO growth standard with a plot of a CPP subject's height vs. age, with WHO bands at z-scores -3, -2, -1, 0, 1, 2, 3:
+This example of uses `panel.who()` to superpose the WHO growth standard with a plot of a CPP subject's height vs. age, with WHO bands at z-scores -3, -2, -1, 0, 1, 2, 3:
 
 ```{r who_lattice, eval=TRUE, echo=TRUE, message=FALSE}
 xyplot(wtkg ~ agedays, data = subset(cpp, subjid == 8),
@@ -325,7 +311,7 @@ Look at Male birth lengths superposed on the INTERGROWTH birth standard:
 
 ```{r igb_bokeh, eval=TRUE, echo=TRUE, message=FALSE, lazy=TRUE}
 # first we need just 1 record per subject with subject-level data
-cppsubj <- get_subject_data(cpp)
+cppsubj <- cpp[!duplicated(cpp$subjid),]
 figure(xlab = "Gestational Age at Birth (days)", ylab = "Birth Length (cm)") %>%
   ly_igb(gagebrth = 250:310, var = "lencm", sex = "Male") %>%
   ly_points(jitter(gagebrth), birthlen, data = subset(cppsubj, sex == "Male"),

@@ -19,3 +19,5 @@ _gh-pages
 ^notes$
 ^data_preprocess$
 ^_gh-pages$
+^.*\.Rproj$
+^\.Rproj\.user$

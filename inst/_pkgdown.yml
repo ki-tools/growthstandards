@@ -1,0 +1,41 @@
+reference:
+  - title: "Data and Coeffficients tables"
+    desc: >
+      Example subject data `cpp` and coeffficients data.frames for [intergrowth (`ig_`)](https://intergrowth21.tghn.org/standards-tools/) and
+      the [World Health Orginization (`who_`)](https://www.who.int/childgrowth/standards/en/). 
+    contents:
+      - cpp
+      - ig_coefs
+      - ig_early_coefs
+      - who_coefs
+  - title: INTERGROWTH
+    desc: "INTERGROWTH conversion functions"
+    contents:
+      - igb_value2centile
+      - igb_centile2value
+      - igb_lencm2zscore
+      - igb_zscore2lencm
+  - title: INTERGROWTH Fetal
+    desc: "INTERGROWTH fetal conversion functions"
+    contents:
+      - igfet_value2zscore
+      - igfet_hccm2zscore
+      - igfet_zscore2value
+      - igfet_zscore2hccm
+  - title: World Health Orginization (WHO)
+    desc: "WHO conversion functions"
+    contents:
+      - who_centile2value
+      - who_value2zscore
+      - who_wtkg2zscore
+      - who_zscore2htcm
+  - title: Plotting functions for use with rbokeh, lattice, and ggplot2
+    desc: "Add growth standard bands to plots"
+    contents:
+      - panel.who
+      - ly_zband
+  - title: Conversion functions
+    desc: "Functions to convert between units and to get data"
+    contents:      
+      - cm2in
+

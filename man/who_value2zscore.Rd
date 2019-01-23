@@ -5,11 +5,11 @@
 \alias{who_value2centile}
 \title{Convert anthro measurements to WHO z-scores/centiles (generic)}
 \usage{
-who_value2zscore(x, y, x_var = "agedays", y_var = "htcm", sex = "Female",
-  data = NULL)
+who_value2zscore(x, y, x_var = "agedays", y_var = "htcm",
+  sex = "Female", data = NULL)
 
-who_value2centile(x, y, x_var = "agedays", y_var = "htcm", sex = "Female",
-  data = NULL)
+who_value2centile(x, y, x_var = "agedays", y_var = "htcm",
+  sex = "Female", data = NULL)
 }
 \arguments{
 \item{x}{value or vector of values that correspond to a measure defined by \code{x_var}}
@@ -28,7 +28,7 @@ who_value2centile(x, y, x_var = "agedays", y_var = "htcm", sex = "Female",
 Compute z-scores or centiles with respect to the WHO growth standard for given values of x vs. y (typically x is "agedays" and y is a measure like "htcm").
 }
 \details{
-for all supported pairings of \code{x_var} and \code{y_var}, type \code{names(who)}
+for all supported pairings of \code{y_var} and \code{x_var} , type \code{names(who_coefs)}
 }
 \examples{
 # z-scores

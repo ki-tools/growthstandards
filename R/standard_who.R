@@ -8,7 +8,7 @@
 #' @param x_var x variable name (typically "agedays") - see details
 #' @param sex "Male" or "Female"
 #' @param data optional data frame that supplies any of the other variables provided to the function
-#' @details for all supported pairings of \code{x_var} and \code{y_var}, type \code{names(who)}
+#' @details for all supported pairings of \code{y_var} and \code{x_var} , type \code{names(who_coefs)}
 #' @seealso \code{\link{who_value2centile}}, \code{\link{who_value2zscore}}
 #' @examples
 #' # median height vs. age for females
@@ -107,7 +107,7 @@ who_zscore2value <- function(x, z = 0, y_var = "htcm", x_var = "agedays",
 #' @param y_var y variable name (typically "htcm" or "wtkg") - see details
 #' @param sex "Male" or "Female"
 #' @param data optional data frame that supplies any of the other variables provided to the function
-#' @details for all supported pairings of \code{x_var} and \code{y_var}, type \code{names(who)}
+#' @details for all supported pairings of \code{y_var} and \code{x_var} , type \code{names(who_coefs)}
 #' @seealso \code{\link{who_centile2value}}, \code{\link{who_zscore2value}}
 #' @examples
 #' # z-scores
@@ -437,7 +437,7 @@ check_pair <- function(pair) {
   if (! pair %in% c(
     "wtkg_agedays", "htcm_agedays", "bmi_agedays",
     "hcircm_agedays", "muaccm_agedays", "ssftmm_agedays",
-    "tsftmm_agedays", "wtkg_htcm"
+    "tsftmm_agedays", "wtkg_htcm", "wtkg_lencm"
   ))
     stop("x and y pairings must be one of
 x_var   | y_var
@@ -450,5 +450,6 @@ agedays | muaccm
 agedays | ssftmm
 agedays | tsftmm
 htcm    | wtkg
+lencm   | wtkg
 ")
 }
