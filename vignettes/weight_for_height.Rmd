@@ -1,6 +1,12 @@
 ---
 title: "Weight-for-height"
-output: html_document
+author: "J. Hathaway"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Weight-for-height}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
 
 ```{r setup, include=FALSE}

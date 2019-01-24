@@ -118,11 +118,10 @@ who_zscore2value <- function(x, z = 0, y_var = "htcm", x_var = "agedays",
 #' who_value2centile(1670, lb2kg(48), y_var = "wtkg")
 #'
 #' # add haz derived from WHO data and compare to that provided with data
-#' cpp$haz2 <- who_value2zscore(x = agedays,  y = lencm, sex = sex, data = cpp)
-#' plot(cpp$haz, cpp$haz2)
+#' cpp$haz <- who_value2zscore(x = agedays,  y = lencm, sex = sex, data = cpp)
 #'
 #' # note that you can also do it this way
-#' #' cpp$haz2 <- who_value2zscore(cpp$agedays, cpp$lencm, sex = cpp$sex)
+#' #' cpp$haz <- who_value2zscore(cpp$agedays, cpp$lencm, sex = cpp$sex)
 #' @export
 #' @rdname who_value2zscore
 who_value2zscore <- function(
@@ -222,7 +221,7 @@ who_value2centile <- function(
 #' @export
 #' @rdname who_var2zscore
 #' @examples
-#' haz <- who_htcm2zscore(cpp$agedays, cpp$htcm, cpp$sex)
+#' cpp$haz <- who_value2zscore(x = agedays,  y = lencm, sex = sex, data = cpp)
 who_wtkg2zscore <- function(agedays, wtkg, sex = "Female") {
   who_value2zscore(agedays, wtkg, x_var = "agedays", y_var = "wtkg", sex = sex)
 }
@@ -318,6 +317,7 @@ who_tsftmm2centile <- function(agedays, tsftmm, sex = "Female") {
 #' @param p centile(s) to convert (must be between 0 and 100)
 #' @param sex "Male" or "Female"
 #' @examples
+#' cpp$haz <- who_value2zscore(x = agedays,  y = lencm, sex = sex, data = cpp)
 #' htcm <- who_zscore2htcm(cpp$agedays, cpp$haz, cpp$sex)
 #' @export
 #' @rdname who_zscore2var
