@@ -1,3 +1,5 @@
+^Meta$
+^doc$
 man-roxygen
 \.git
 ^\.travis\.yml$

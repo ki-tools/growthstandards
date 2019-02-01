@@ -2,6 +2,10 @@
 
 context("plots")
 
+# add haz to cpp through functions as it is missing by default now.
+
+cpp$haz <- who_htcm2zscore(cpp$agedays, cpp$htcm, sex = cpp$sex)
+
 test_that("plots work", {
   library(rbokeh)
   figure() %>%

@@ -171,11 +171,10 @@
 <span class='fu'>who_value2zscore</span>(<span class='fl'>1670</span>, <span class='fu'><a href='unit_conversion.html'>in2cm</a></span>(<span class='fl'>44</span>))</div><div class='output co'>#&gt; [1] 1.117365</div><div class='input'><span class='fu'>who_value2zscore</span>(<span class='fl'>1670</span>, <span class='fu'><a href='unit_conversion.html'>lb2kg</a></span>(<span class='fl'>48</span>), <span class='kw'>y_var</span> <span class='kw'>=</span> <span class='st'>"wtkg"</span>)</div><div class='output co'>#&gt; [1] 1.527048</div><div class='input'>
 <span class='fu'>who_value2centile</span>(<span class='fl'>1670</span>, <span class='fu'><a href='unit_conversion.html'>in2cm</a></span>(<span class='fl'>44</span>))</div><div class='output co'>#&gt; [1] 86.80809</div><div class='input'><span class='fu'>who_value2centile</span>(<span class='fl'>1670</span>, <span class='fu'><a href='unit_conversion.html'>lb2kg</a></span>(<span class='fl'>48</span>), <span class='kw'>y_var</span> <span class='kw'>=</span> <span class='st'>"wtkg"</span>)</div><div class='output co'>#&gt; [1] 93.66255</div><div class='input'>
 <span class='co'># add haz derived from WHO data and compare to that provided with data</span>
-<span class='no'>cpp</span>$<span class='no'>haz2</span> <span class='kw'>&lt;-</span> <span class='fu'>who_value2zscore</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>agedays</span>,  <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>lencm</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='no'>sex</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>cpp</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>cpp</span>$<span class='no'>haz</span>, <span class='no'>cpp</span>$<span class='no'>haz2</span>)</div><div class='img'><img src='who_value2zscore-1.png' alt='' width='700' height='433' /></div><div class='input'>
-# note that you can also do it this way
-#' cpp$haz2 <- who_value2zscore(cpp$agedays, cpp$lencm, sex = cpp$sex)
-</div></pre>
+<span class='no'>cpp</span>$<span class='no'>haz</span> <span class='kw'>&lt;-</span> <span class='fu'>who_value2zscore</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>agedays</span>,  <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>lencm</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='no'>sex</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>cpp</span>)
+
+<span class='co'># note that you can also do it this way</span>
+<span class='co'>#' cpp$haz &lt;- who_value2zscore(cpp$agedays, cpp$lencm, sex = cpp$sex)</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

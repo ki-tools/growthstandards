@@ -39,11 +39,10 @@ who_value2centile(1670, in2cm(44))
 who_value2centile(1670, lb2kg(48), y_var = "wtkg")
 
 # add haz derived from WHO data and compare to that provided with data
-cpp$haz2 <- who_value2zscore(x = agedays,  y = lencm, sex = sex, data = cpp)
-plot(cpp$haz, cpp$haz2)
+cpp$haz <- who_value2zscore(x = agedays,  y = lencm, sex = sex, data = cpp)
 
 # note that you can also do it this way
-#' cpp$haz2 <- who_value2zscore(cpp$agedays, cpp$lencm, sex = cpp$sex)
+#' cpp$haz <- who_value2zscore(cpp$agedays, cpp$lencm, sex = cpp$sex)
 }
 \seealso{
 \code{\link{who_centile2value}}, \code{\link{who_zscore2value}}

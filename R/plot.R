@@ -397,6 +397,7 @@ ly_growthstandard <- function(fig, x, x_var = "agedays", y_var = "htcm", sex = "
 #'
 #' \dontrun{
 #' library(rbokeh)
+#' cpp$haz <- who_value2zscore(x = agedays,  y = lencm, sex = sex, data = cpp) 
 #' figure() %>%
 #'   ly_zband(cpp$agedays) %>%
 #'   ly_points(jitter(agedays), haz, data = cpp, color = "black")
