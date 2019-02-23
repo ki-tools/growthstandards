@@ -35,6 +35,7 @@ Utility functions for adding growth standard bands to rbokeh/lattice/ggplot2 plo
 
 \dontrun{
 library(rbokeh)
+cpp$haz <- who_value2zscore(x = agedays,  y = lencm, sex = sex, data = cpp) 
 figure() \%>\%
   ly_zband(cpp$agedays) \%>\%
   ly_points(jitter(agedays), haz, data = cpp, color = "black")
