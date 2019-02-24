@@ -80,7 +80,7 @@
       <h1>Weight-for-height</h1>
                         <h4 class="author">J. Hathaway</h4>
             
-            <h4 class="date">2019-01-24</h4>
+            <h4 class="date">2019-02-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/HBGDki/growthstandards/blob/master/vignettes/weight_for_height.Rmd"><code>vignettes/weight_for_height.Rmd</code></a></small>
       <div class="hidden name"><code>weight_for_height.Rmd</code></div>
@@ -98,11 +98,11 @@
 <div id="dplyr-method" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dplyr-method" class="anchor"></a>dplyr method</h2>
-<p>With <code>dplyr</code> the use of <code>case_when()</code> we can calculate ‘whz’ using ‘agedays’ to create our two cases.</p>
+<p>With <code>dplyr</code> the use of <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> we can calculate ‘whz’ using ‘agedays’ to create our two cases.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)
 cpp <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">whz =</span> 
-           <span class="kw">case_when</span>(agedays <span class="op">&lt;</span><span class="st"> </span><span class="dv">730</span> <span class="op">~</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">whz =</span> 
+           <span class="kw"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(agedays <span class="op">&lt;</span><span class="st"> </span><span class="dv">730</span> <span class="op">~</span><span class="st"> </span>
 <span class="st">                       </span><span class="kw"><a href="../reference/who_value2zscore.html">who_value2zscore</a></span>(<span class="dt">x =</span> htcm, <span class="dt">y =</span> wtkg, <span class="dt">x_var =</span> <span class="st">"lencm"</span>, <span class="dt">y_var =</span> <span class="st">"wtkg"</span>, <span class="dt">sex =</span> sex),
                      agedays <span class="op">&gt;=</span><span class="st"> </span><span class="dv">730</span> <span class="op">~</span><span class="st">  </span>
 <span class="st">                       </span><span class="kw"><a href="../reference/who_value2zscore.html">who_value2zscore</a></span>(<span class="dt">x =</span> htcm, <span class="dt">y =</span> wtkg, <span class="dt">x_var =</span> <span class="st">"htcm"</span>, <span class="dt">y_var =</span> <span class="st">"wtkg"</span>, <span class="dt">sex =</span> sex)))</code></pre></div>

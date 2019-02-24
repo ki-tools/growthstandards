@@ -167,6 +167,7 @@
     <pre class="examples"><div class='input'>
 </div><span class='co'># NOT RUN {</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>rbokeh</span>)
+<span class='no'>cpp</span>$<span class='no'>haz</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='who_value2zscore.html'>who_value2zscore</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>agedays</span>,  <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>lencm</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='no'>sex</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>cpp</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/rbokeh/topics/figure'>figure</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>ly_zband</span>(<span class='no'>cpp</span>$<span class='no'>agedays</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://www.rdocumentation.org/packages/rbokeh/topics/ly_points'>ly_points</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/jitter'>jitter</a></span>(<span class='no'>agedays</span>), <span class='no'>haz</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>cpp</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>)

@@ -27,3 +27,5 @@ Remotes:
     hafen/rbokeh
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
+BugReports: https://github.com/ki-tools/growthstandards/issues
+Roxygen: list(markdown = TRUE)

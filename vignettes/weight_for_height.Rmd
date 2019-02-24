@@ -2,11 +2,13 @@
 title: "Weight-for-height"
 author: "J. Hathaway"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  rmarkdown::html_vignette:
+    toc: true
 vignette: >
   %\VignetteIndexEntry{Weight-for-height}
-  %\VignetteEngine{knitr::knitr}
-  %\usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
@@ -18,12 +20,8 @@ knitr::opts_chunk$set(echo = TRUE)
 Note that weight for height calculations use `x_var` as 'htcm' or 'lencm' and that the current functions do not account for the age category of the coefficients tables by using the age variable in your data.  You are expected to subset your data to the 0-2 age category and the use 'lencm' as your `x_var` to get the appropriate calculations.  Similarly, if you use 'htcm' as the `x_var` then the 2-5 age category will be used for WHZ calculations.
 
 
-```{r, echo=TRUE, eval=FALSE}
+```{r, echo=TRUE, eval=TRUE}
 library(growthstandards)
-```
-
-```{r, echo=FALSE, evale=TRUE, message=FALSE, warning=FALSE}
-devtools::load_all(".")
 ```
 
 ## dplyr method

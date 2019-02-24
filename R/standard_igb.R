@@ -34,10 +34,10 @@ igb_centile2value <- function(gagebrth, p = 50, var = "lencm", sex = "Female") {
     if (var == "wlr") {
       x <- x / 7
       if (sex == "Male") {
-        res <- -17.84615 + (-3778.768 * ( x ^ (-1))) + (1291.477 * ((x ^ (-1)) * log(x))) +
+        res <- -17.84615 + (-3778.768 * ( x ^ (-1))) + (1291.477 * ( (x ^ (-1)) * log(x))) +
           (qnorm(y / 100) * (1.01047 +  (-0.0080948 * x)))
       } else {
-        res <- -5.542927 + (0.0018926 * (x ^ 3)) + (-0.0004614 * ((x ^ 3) * log(x))) +
+        res <- -5.542927 + (0.0018926 * (x ^ 3)) + (-0.0004614 * ( (x ^ 3) * log(x))) +
           (qnorm(y / 100) * 0.6806229)
       }
     } else {
@@ -153,13 +153,13 @@ igb_value2centile <- function(gagebrth, val, var = "lencm", sex = "Female") {
       x <- x / 7
       if (sex == "Male") {
         nn <- function(x) -17.84615 + (-3778.768 * ( x ^ (-1))) +
-          (1291.477 * ((x ^ (-1)) * log(x)))
+          (1291.477 * ( (x ^ (-1)) * log(x)))
         dd <- function(x) (1.01047 +  (-0.0080948 * x))
         z <- (y - nn(x)) / dd(x)
         res <- pnorm(z) * 100
       } else {
         nn <- function(x) -5.542927 + (0.0018926 * (x ^ 3)) +
-          (-0.0004614 * ((x ^ 3) * log(x)))
+          (-0.0004614 * ( (x ^ 3) * log(x)))
         dd <- 0.6806229
         z <- (y - nn(x)) / dd
         res <- pnorm(z) * 100

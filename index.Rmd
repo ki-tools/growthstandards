@@ -146,16 +146,6 @@ haz <- who_htcm2zscore(cpp$agedays, cpp$htcm, sex = cpp$sex)
 waz <- who_wtkg2zscore(cpp$agedays, cpp$wtkg, sex = cpp$sex)
 ```
 
-Since `haz` and `waz` have already provided with the data, we can check that our result from the WHO standard matches that of the provided data:
-
-```{r haz2, eval=TRUE, echo=TRUE, message=FALSE}
-comp = make.groups(
-  haz = data.frame(data = cpp$haz, computed = haz),
-  waz = data.frame(data = cpp$waz, computed = waz)
-)
-xyplot(computed ~ data | which, data = comp)
-```
-
 ### Generic WHO functions ###
 
 To utility functions described so far all for measurements against age.  To deal with the case of height-for-weight WHO calculations, and also to provide a more generic interface to accessing the WHO growth standards, the following functions are also provided:
