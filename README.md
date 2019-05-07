@@ -13,17 +13,10 @@ The growth standard conversion methods have been painstakingly checked for accur
 ## Installation
 
 ```r
-options(repos = c(CRAN = "http://cran.rstudio.com/",
-  deltarho = "http://packages.deltarho.org"))
-install.packages("growthstandards")
-```
-
-Or:
-
-```r
-devtools::install_github("HBGDki/growthstandards")
+# install.packages("remotes") # if "remotes" is not already installed
+remotes::install_github("ki-tools/growthstandards")
 ```
 
 ## Usage
 
-See [here](https://hathawayj.github.io/growthstandards/) for several examples of how to use this package.
+See [here](https://github.com/ki-tools/growthstandards) for several examples of how to use this package.
