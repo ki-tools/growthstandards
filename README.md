@@ -1,4 +1,4 @@
-# growthstandards [![Build Status](https://travis-ci.org/HBGDki/growthstandards.svg?branch=master)](https://travis-ci.org/HBGDki/growthstandards) [![codecov.io](https://codecov.io/gh/HBGDki/growthstandards/coverage.svg?branch=master)](https://codecov.io/gh/HBGDki/growthstandards?branch=master)
+# growthstandards [![Build Status](https://travis-ci.org/ki-tools/growthstandards.svg?branch=master)](https://travis-ci.org/ki-tools/growthstandards) [![codecov.io](https://codecov.io/gh/ki-tools/growthstandards/coverage.svg?branch=master)](https://codecov.io/gh/ki-tools/growthstandards?branch=master)
 
 A collection of utility functions for conveniently converting anthropometric measurements to z-scores or centiles (and converting z-scores / centiles to measurements) for three major growth standards:
 

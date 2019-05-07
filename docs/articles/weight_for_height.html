@@ -78,9 +78,7 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Weight-for-height</h1>
-                        <h4 class="author">J. Hathaway</h4>
             
-            <h4 class="date">2019-02-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/HBGDki/growthstandards/blob/master/vignettes/weight_for_height.Rmd"><code>vignettes/weight_for_height.Rmd</code></a></small>
       <div class="hidden name"><code>weight_for_height.Rmd</code></div>
@@ -93,35 +91,40 @@
 <h2 class="hasAnchor">
 <a href="#background" class="anchor"></a>Background</h2>
 <p>Note that weight for height calculations use <code>x_var</code> as ‘htcm’ or ‘lencm’ and that the current functions do not account for the age category of the coefficients tables by using the age variable in your data. You are expected to subset your data to the 0-2 age category and the use ‘lencm’ as your <code>x_var</code> to get the appropriate calculations. Similarly, if you use ‘htcm’ as the <code>x_var</code> then the 2-5 age category will be used for WHZ calculations.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(growthstandards)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(growthstandards)</a></code></pre></div>
 </div>
 <div id="dplyr-method" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dplyr-method" class="anchor"></a>dplyr method</h2>
 <p>With <code>dplyr</code> the use of <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> we can calculate ‘whz’ using ‘agedays’ to create our two cases.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)
-cpp <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">whz =</span> 
-           <span class="kw"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(agedays <span class="op">&lt;</span><span class="st"> </span><span class="dv">730</span> <span class="op">~</span><span class="st"> </span>
-<span class="st">                       </span><span class="kw"><a href="../reference/who_value2zscore.html">who_value2zscore</a></span>(<span class="dt">x =</span> htcm, <span class="dt">y =</span> wtkg, <span class="dt">x_var =</span> <span class="st">"lencm"</span>, <span class="dt">y_var =</span> <span class="st">"wtkg"</span>, <span class="dt">sex =</span> sex),
-                     agedays <span class="op">&gt;=</span><span class="st"> </span><span class="dv">730</span> <span class="op">~</span><span class="st">  </span>
-<span class="st">                       </span><span class="kw"><a href="../reference/who_value2zscore.html">who_value2zscore</a></span>(<span class="dt">x =</span> htcm, <span class="dt">y =</span> wtkg, <span class="dt">x_var =</span> <span class="st">"htcm"</span>, <span class="dt">y_var =</span> <span class="st">"wtkg"</span>, <span class="dt">sex =</span> sex)))</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
+<a class="sourceLine" id="cb2-2" title="2">cpp <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(</a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="dt">whz =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(</a>
+<a class="sourceLine" id="cb2-5" title="5">      agedays <span class="op">&lt;</span><span class="st"> </span><span class="dv">730</span> <span class="op">~</span><span class="st"> </span><span class="kw"><a href="../reference/who_value2zscore.html">who_value2zscore</a></span>(</a>
+<a class="sourceLine" id="cb2-6" title="6">        <span class="dt">x =</span> htcm, <span class="dt">y =</span> wtkg, <span class="dt">x_var =</span> <span class="st">"lencm"</span>, <span class="dt">y_var =</span> <span class="st">"wtkg"</span>, <span class="dt">sex =</span> sex),</a>
+<a class="sourceLine" id="cb2-7" title="7">      agedays <span class="op">&gt;=</span><span class="st"> </span><span class="dv">730</span> <span class="op">~</span><span class="st"> </span><span class="kw"><a href="../reference/who_value2zscore.html">who_value2zscore</a></span>(</a>
+<a class="sourceLine" id="cb2-8" title="8">        <span class="dt">x =</span> htcm, <span class="dt">y =</span> wtkg, <span class="dt">x_var =</span> <span class="st">"htcm"</span>, <span class="dt">y_var =</span> <span class="st">"wtkg"</span>, <span class="dt">sex =</span> sex)</a>
+<a class="sourceLine" id="cb2-9" title="9">    )</a>
+<a class="sourceLine" id="cb2-10" title="10">  )</a></code></pre></div>
 </div>
 <div id="base-r-method" class="section level2">
 <h2 class="hasAnchor">
 <a href="#base-r-method" class="anchor"></a>Base R method</h2>
 <p>Using the provided <code>cpp</code> data we have created two data sets based on the ‘agedays’ variable.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cpp_lt2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(cpp, agedays <span class="op">&lt;</span><span class="st"> </span><span class="dv">730</span>)
-cpp_gt2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(cpp, agedays <span class="op">&gt;=</span><span class="st"> </span><span class="dv">730</span>)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">cpp_lt2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(cpp, agedays <span class="op">&lt;</span><span class="st"> </span><span class="dv">730</span>)</a>
+<a class="sourceLine" id="cb3-2" title="2">cpp_gt2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(cpp, agedays <span class="op">&gt;=</span><span class="st"> </span><span class="dv">730</span>)</a></code></pre></div>
 <p>Now we can use the specific functions to calculate the appropriate z-scores.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cpp_lt2<span class="op">$</span>whz &lt;-<span class="st"> </span><span class="kw"><a href="../reference/who_value2zscore.html">who_value2zscore</a></span>(<span class="dt">x =</span> cpp_lt2<span class="op">$</span>htcm, <span class="dt">y =</span> cpp_lt2<span class="op">$</span>wtkg, <span class="dt">x_var =</span> <span class="st">"lencm"</span>, <span class="dt">y_var =</span> <span class="st">"wtkg"</span>, 
-                 <span class="dt">sex =</span> cpp_lt2<span class="op">$</span>sex)
-
-cpp_gt2<span class="op">$</span>whz &lt;-<span class="st"> </span><span class="kw"><a href="../reference/who_value2zscore.html">who_value2zscore</a></span>(<span class="dt">x =</span> cpp_gt2<span class="op">$</span>htcm, <span class="dt">y =</span> cpp_gt2<span class="op">$</span>wtkg, <span class="dt">x_var =</span> <span class="st">"htcm"</span>, <span class="dt">y_var =</span> <span class="st">"wtkg"</span>, 
-                 <span class="dt">sex =</span> cpp_gt2<span class="op">$</span>sex)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">cpp_lt2<span class="op">$</span>whz &lt;-<span class="st"> </span><span class="kw"><a href="../reference/who_value2zscore.html">who_value2zscore</a></span>(</a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="dt">x =</span> cpp_lt2<span class="op">$</span>htcm, <span class="dt">y =</span> cpp_lt2<span class="op">$</span>wtkg, <span class="dt">x_var =</span> <span class="st">"lencm"</span>, <span class="dt">y_var =</span> <span class="st">"wtkg"</span>, </a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="dt">sex =</span> cpp_lt2<span class="op">$</span>sex)</a>
+<a class="sourceLine" id="cb4-4" title="4"></a>
+<a class="sourceLine" id="cb4-5" title="5">cpp_gt2<span class="op">$</span>whz &lt;-<span class="st"> </span><span class="kw"><a href="../reference/who_value2zscore.html">who_value2zscore</a></span>(</a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="dt">x =</span> cpp_gt2<span class="op">$</span>htcm, <span class="dt">y =</span> cpp_gt2<span class="op">$</span>wtkg, <span class="dt">x_var =</span> <span class="st">"htcm"</span>, <span class="dt">y_var =</span> <span class="st">"wtkg"</span>, </a>
+<a class="sourceLine" id="cb4-7" title="7">  <span class="dt">sex =</span> cpp_gt2<span class="op">$</span>sex)</a></code></pre></div>
 <p>Finally, we can combine the data back into one data set with the additional ‘whz’ column.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cpp_whz &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cbind">rbind</a></span>(cpp_lt2, cpp_gt2)
-cpp_whz &lt;-<span class="st"> </span>cpp_whz[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/order">order</a></span>(cpp_whz<span class="op">$</span>subjid, cpp_whz<span class="op">$</span>agedays), ]</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">cpp_whz &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cbind">rbind</a></span>(cpp_lt2, cpp_gt2)</a>
+<a class="sourceLine" id="cb5-2" title="2">cpp_whz &lt;-<span class="st"> </span>cpp_whz[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/order">order</a></span>(cpp_whz<span class="op">$</span>subjid, cpp_whz<span class="op">$</span>agedays), ]</a></code></pre></div>
 </div>
   </div>
 

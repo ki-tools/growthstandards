@@ -7,8 +7,9 @@ copyright: Ryan Hafen
 ```{r global_options, include=FALSE}
 # R output pre blocks are styled by default to indicate output
 knitr::opts_chunk$set(comment = NA)
-
 ```
+
+[![Build Status](https://travis-ci.org/ki-tools/growthstandards.svg?branch=master)](https://travis-ci.org/ki-tools/growthstandards) [![codecov.io](https://codecov.io/gh/ki-tools/growthstandards/coverage.svg?branch=master)](https://codecov.io/gh/ki-tools/growthstandards?branch=master)
 
 # Intro #
 
@@ -18,13 +19,11 @@ This document provides a walk-through of much of the package's functionality, pr
 
 ## Installation ##
 
-The growthstandards package is not yet on CRAN but can be installed from a CRAN-like repository with the following:
+The growthstandards package is not yet on CRAN. You can install it from Github with the following:
 
 ```{r instal, eval=FALSE}
-options(repos = c(
-  CRAN = "http://cran.rstudio.com/",
-  deltarho = "http://packages.deltarho.org"))
-install.packages("growthstandards")
+# install.packages("remotes") # if "remotes" is not already installed
+remotes::install_github("ki-tools/growthstandards")
 ```
 
 Once the package is is installed, you simply need to load it:
@@ -287,7 +286,7 @@ xyplot(wtkg ~ agedays, data = subset(cpp, subjid == 8),
 
 Here's an example plotting the same plot as the lattice plot, transforming `agedays` to age in years and taking advantage of several of rbokeh's interactive features, such as hover and zoom/pan.
 
-```{r who_bokeh, eval=TRUE, echo=TRUE, message=FALSE, lazy=TRUE}
+```{r who_bokeh, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, lazy=TRUE}
 library(rbokeh)
 figure(xlab = "Age (years)", ylab = "wtkg") %>%
   ly_who(x = seq(0, 2600, by = 10), y_var = "wtkg",
@@ -299,7 +298,7 @@ figure(xlab = "Age (years)", ylab = "wtkg") %>%
 
 Look at Male birth lengths superposed on the INTERGROWTH birth standard:
 
-```{r igb_bokeh, eval=TRUE, echo=TRUE, message=FALSE, lazy=TRUE}
+```{r igb_bokeh, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, lazy=TRUE}
 # first we need just 1 record per subject with subject-level data
 cppsubj <- cpp[!duplicated(cpp$subjid),]
 figure(xlab = "Gestational Age at Birth (days)", ylab = "Birth Length (cm)") %>%
@@ -310,7 +309,7 @@ figure(xlab = "Gestational Age at Birth (days)", ylab = "Birth Length (cm)") %>%
 
 Plot INTERGROWTH prenatal growth standard bands at z=1,2,3 for prenatal head circumference
 
-```{r igfet_bokeh, eval=TRUE, echo=TRUE, message=FALSE, lazy=TRUE}
+```{r igfet_bokeh, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, lazy=TRUE}
 figure(xlab = "Gestational Age (days)",
   ylab = "Head Circumference (cm)") %>%
     ly_igfet(gagedays = 98:280, var = "hccm", p = pnorm(-3:0) * 100)

@@ -1,7 +1,5 @@
 ---
 title: "Weight-for-height"
-author: "J. Hathaway"
-date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     toc: true
@@ -31,12 +29,14 @@ With `dplyr` the use of `case_when()` we can calculate 'whz' using 'agedays' to 
 ```{r, eval=FALSE}
 library(dplyr)
 cpp %>%
-  mutate(whz = 
-           case_when(agedays < 730 ~ 
-                       who_value2zscore(x = htcm, y = wtkg, x_var = "lencm", y_var = "wtkg", sex = sex),
-                     agedays >= 730 ~  
-                       who_value2zscore(x = htcm, y = wtkg, x_var = "htcm", y_var = "wtkg", sex = sex)))
-
+  mutate(
+    whz = case_when(
+      agedays < 730 ~ who_value2zscore(
+        x = htcm, y = wtkg, x_var = "lencm", y_var = "wtkg", sex = sex),
+      agedays >= 730 ~ who_value2zscore(
+        x = htcm, y = wtkg, x_var = "htcm", y_var = "wtkg", sex = sex)
+    )
+  )
 ```
 
 ## Base R method
@@ -47,18 +47,19 @@ Using the provided `cpp` data we have created two data sets based on the 'ageday
 ```{r}
 cpp_lt2 <- subset(cpp, agedays < 730)
 cpp_gt2 <- subset(cpp, agedays >= 730)
-
 ```
 
 Now we can use the specific functions to calculate the appropriate z-scores.
 
 ```{r}
 
-cpp_lt2$whz <- who_value2zscore(x = cpp_lt2$htcm, y = cpp_lt2$wtkg, x_var = "lencm", y_var = "wtkg", 
-                 sex = cpp_lt2$sex)
+cpp_lt2$whz <- who_value2zscore(
+  x = cpp_lt2$htcm, y = cpp_lt2$wtkg, x_var = "lencm", y_var = "wtkg", 
+  sex = cpp_lt2$sex)
 
-cpp_gt2$whz <- who_value2zscore(x = cpp_gt2$htcm, y = cpp_gt2$wtkg, x_var = "htcm", y_var = "wtkg", 
-                 sex = cpp_gt2$sex)
+cpp_gt2$whz <- who_value2zscore(
+  x = cpp_gt2$htcm, y = cpp_gt2$wtkg, x_var = "htcm", y_var = "wtkg", 
+  sex = cpp_gt2$sex)
 
 ```
 
@@ -67,7 +68,6 @@ Finally, we can combine the data back into one data set with the additional 'whz
 ```{r}
 cpp_whz <- rbind(cpp_lt2, cpp_gt2)
 cpp_whz <- cpp_whz[order(cpp_whz$subjid, cpp_whz$agedays), ]
-
 ```
 
 
