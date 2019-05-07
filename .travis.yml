@@ -7,15 +7,15 @@ repos:
   deltarho: http://packages.deltarho.org
 
 # install locally to avoid rev dep
-r_github_packages:
-  - jimhester/covr # code coverage check
-  - jimhester/lintr # code lint
-  - schloerke/travisDrat
+# r_github_packages:
+#   - jimhester/covr # code coverage check
+#   - jimhester/lintr # code lint
+#   - schloerke/travisDrat
 
 after_success:
   - rm -r ./tests/testthat/test_cache
   - Rscript -e 'covr::codecov()'
-  - Rscript -e "travisDrat::deploy_drat()"
+  # - Rscript -e "travisDrat::deploy_drat()"
 
 notifications:
   email:

@@ -21,6 +21,7 @@ Imports:
     dplyr
 Suggests:
     testthat,
+    covr,
     lintr,
     knitr
 Remotes:
