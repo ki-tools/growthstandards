@@ -236,6 +236,25 @@ Usage is similar as the other growth standards.  For example, to get the centile
 igfet_hccm2centile(100, 11)
 ```
 
+## INTERGROWTH gestational weight gain (GWG) standard ##
+
+Shifting from anthropometry about the child, the [INTERGROWTH gestational weight gain standard](http://www.bmj.com/content/352/bmj.i555) focuses on the mother's weight gain throughout pregnancy.
+
+Note that the standard currently only works for mother's who had a "normal" BMI before pregnancy of 18.5 - 24.99 kg / m^2.
+
+The following functions can be used
+
+- `iggwg_value2zscore(gagedays, val, bmi = NULL)`: for specified gestational ages `gagedays` and mother's weight gain `val` (change in weight, kg), get the corresponding z-scores
+- `iggwg_value2centile(gagedays, val, bmi = NULL)`: for specified gestational ages `gagedays` and mother's weight gain `val` (change in weight, kg), get the corresponding centiles
+- `iggwg_zscore2value(gagedays, z = 0, bmi = NULL)`: for given z-scores (`z=0` as default) at gestational ages `gagedays`, get the corresponding gestational weight gain values
+- `iggwg_centile2value(gagedays, p = 50, bmi = NULL)`: for given centiles (`p=50`, or median, as default) at gestational ages `gagedays`, get the corresponding gestational weight gain values
+
+For example, to see what the weight gain, in pounds, for the 1st, 5th, 50th, 95th, and 99th centiles are for a woman at 40 weeks:
+
+```{r iggwg, eval=TRUE, echo=TRUE}
+kg2lb(iggwg_centile2value(40 * 7, c(1, 5, 50, 95, 99)))
+```
+
 ## Plot utilities ##
 
 This package provides a few utility functions for making it easy to add any of the growth standards as an overlay on a plot.  Methods are available for ggplot, lattice, and rbokeh.  These functions have similar parameters to the growth standard lookup functions described above.  The methods available are:
