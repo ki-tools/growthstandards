@@ -1,7 +1,7 @@
 reference:
-  - title: "Data and Coeffficients tables"
+  - title: "Data and Coefficients tables"
     desc: >
-      Example subject data `cpp` and coeffficients data.frames for [intergrowth (`ig_`)](https://intergrowth21.tghn.org/standards-tools/) and
+      Example subject data `cpp` and coefficients data.frames for [intergrowth (`ig_`)](https://intergrowth21.tghn.org/standards-tools/) and
       the [World Health Orginization (`who_`)](https://www.who.int/childgrowth/standards/en/). 
     contents:
       - cpp
