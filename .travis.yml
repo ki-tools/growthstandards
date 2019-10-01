@@ -4,7 +4,6 @@ cache: packages
 
 repos:
   CRAN: http://cran.rstudio.com
-  deltarho: http://packages.deltarho.org
 
 # install locally to avoid rev dep
 # r_github_packages:
