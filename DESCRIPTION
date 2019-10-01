@@ -1,6 +1,6 @@
 Package: growthstandards
 Title: Anthropometric Growth Standard Calculations
-Version: 0.1.3
+Version: 0.1.4
 Authors@R: person("Ryan", "Hafen", email = "rhafen@gmail.com", role = c("aut", "cre"))
 Description: Convert anthropometric measurements to or from z-scores and centiles
     using the WHO and INTERGROWTH growth standards. The WHO standard are used

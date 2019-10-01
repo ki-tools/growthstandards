@@ -55,6 +55,7 @@ who_centile2value <- function(x, p = 50, x_var = "agedays", y_var = "htcm",
     check_pair(pair)
 
     coefs <- growthstandards::who_coefs[[pair]][[sex]]$data
+    oob <- which(x < min(coefs$x) | x > max(coefs$x))
 
     # subset to neighborhood surrounding input
     idx <- get_coef_idx(x, coefs$x)
@@ -70,7 +71,15 @@ who_centile2value <- function(x, p = 50, x_var = "agedays", y_var = "htcm",
         s = approx(coefs$x, coefs$s, x)$y)
     }
 
-    with(coefs, m * ((1 + qnorm(y / 100) * l * s)^(1 / l))) # nolint
+    res <- with(coefs, m * ((1 + qnorm(y / 100) * l * s)^(1 / l))) # nolint
+    if (length(oob) > 0) {
+      message("Observations with ", x_var, " value of ",
+        paste(x[oob], collapse = ", "),
+        " are outside the range of the standard. Setting to NA.")
+      res[oob] <- NA
+    }
+    res
+
   }
 
   dat <- dat %>%
@@ -156,6 +165,7 @@ who_value2zscore <- function(
     check_pair(pair)
 
     coefs <- growthstandards::who_coefs[[pair]][[sex]]$data
+    oob <- which(x < min(coefs$x) | x > max(coefs$x))
 
     # subset to neighborhood surrounding input
     idx <- get_coef_idx(x, coefs$x)
@@ -173,7 +183,15 @@ who_value2zscore <- function(
       )
     }
 
-    with(coefs, ((y / m)^l - 1) / (s * l)) # nolint
+    res <- with(coefs, ((y / m)^l - 1) / (s * l)) # nolint
+
+    if (length(oob) > 0) {
+      message("Observations with ", x_var, " value of ",
+        paste(x[oob], collapse = ", "),
+        " are outside the range of the standard. Setting to NA.")
+      res[oob] <- NA
+    }
+    res
   }
 
   dat <- dat %>%
