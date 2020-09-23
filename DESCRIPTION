@@ -17,16 +17,13 @@ Imports:
     gamlss.dist,
     ggplot2,
     grid,
-    rbokeh,
     dplyr
 Suggests:
     testthat,
     covr,
     lintr,
     knitr
-Remotes:
-    hafen/rbokeh
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 BugReports: https://github.com/ki-tools/growthstandards/issues
 Roxygen: list(markdown = TRUE)

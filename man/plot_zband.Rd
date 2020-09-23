@@ -6,8 +6,14 @@
 \alias{geom_zband}
 \title{Utility functions for adding growth standard bands to rbokeh/lattice/ggplot2 plots}
 \usage{
-ly_zband(fig, x, z = -3:0, color = "green", alpha = 0.15,
-  x_units = c("days", "months", "years"))
+ly_zband(
+  fig,
+  x,
+  z = -3:0,
+  color = "green",
+  alpha = 0.15,
+  x_units = c("days", "months", "years")
+)
 
 panel.zband(x, z = -3:0, color = "green", alpha = 0.25)
 

@@ -219,6 +219,31 @@ Usage is similar as the other growth standards.  For example, to get the centile
 igfet_hccm2centile(100, 11)
 ```
 
+## INTERGROWTH postnatal growth measurements for preterm infants ##
+
+This package has functions for dealing with the INTERGROWTH international standards for postnatal growth measurements for preterm infants. This data covers postmenstrual ages from 27 to 64 weeks (189 to 448 days), for the following variables:
+
+variable | description
+---------| ------------------------
+wtkg     | weight (kg)
+htcm     | height (cm)
+hcircm   | head circumference (cm)
+
+As with previous growth standard methods, a similar interface to this growth standard is provided with the following conventions for, for example, `wtkg`:
+
+- `igprepost_wtkg2zscore(pmagedays, flcm, sex = "Female")`: for specified `flcm` values at gestational ages `pmagedays`, get the corresponding Female z-scores
+- `igprepost_wtkg2centile(pmagedays, flcm, sex = "Female")`: for specified `flcm` values at gestational ages `pmagedays`, get the corresponding Female centiles
+- `igprepost_centile2wtkg(pmagedays, p = 50, sex = "Female")`: for given centiles (`p=50`, or median, as default) at gestational ages `pmagedays`, get the corresponding `flcm` values
+- `igprepost_centile2wtkg(pmagedays, z = 0, sex = "Female")`: for given z-scores (`z=0` as default) at gestational ages `pmagedays`, get the corresponding `flcm` values
+
+Usage is similar as the other growth standards.  For example, to get the centile for child at 100 gestational days with an weight of x:
+
+```{r igfet1, eval=TRUE, echo=TRUE}
+igprepost_wtkg2centile(100, 11)
+```
+
+
+
 ## INTERGROWTH gestational weight gain (GWG) standard ##
 
 Shifting from anthropometry about the child, the [INTERGROWTH gestational weight gain standard](http://www.bmj.com/content/352/bmj.i555) focuses on the mother's weight gain throughout pregnancy.

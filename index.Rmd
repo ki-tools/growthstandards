@@ -21,7 +21,7 @@ This document provides a walk-through of much of the package's functionality, pr
 
 The growthstandards package is not yet on CRAN. You can install it from Github with the following:
 
-```{r instal, eval=FALSE}
+```{r install, eval=FALSE}
 # install.packages("remotes") # if "remotes" is not already installed
 remotes::install_github("ki-tools/growthstandards")
 ```

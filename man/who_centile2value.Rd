@@ -5,11 +5,23 @@
 \alias{who_zscore2value}
 \title{Convert WHO z-scores/centiles to anthro measurements (generic)}
 \usage{
-who_centile2value(x, p = 50, x_var = "agedays", y_var = "htcm",
-  sex = "Female", data = NULL)
+who_centile2value(
+  x,
+  p = 50,
+  x_var = "agedays",
+  y_var = "htcm",
+  sex = "Female",
+  data = NULL
+)
 
-who_zscore2value(x, z = 0, y_var = "htcm", x_var = "agedays",
-  sex = "Female", data = NULL)
+who_zscore2value(
+  x,
+  z = 0,
+  y_var = "htcm",
+  x_var = "agedays",
+  sex = "Female",
+  data = NULL
+)
 }
 \arguments{
 \item{x}{vector specifying the values of x over which to provide the centiles for y}
