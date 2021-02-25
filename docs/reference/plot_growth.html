@@ -8,21 +8,36 @@
 
 <title>Utility functions for adding growth standard bands to rbokeh/lattice/ggplot2 plots — panel.who • growthstandards</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,12 +45,11 @@
 
 
 
+
 <meta property="og:title" content="Utility functions for adding growth standard bands to rbokeh/lattice/ggplot2 plots — panel.who" />
-
 <meta property="og:description" content="Utility functions for adding growth standard bands to rbokeh/lattice/ggplot2 plots" />
-
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -49,9 +63,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -65,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">growthstandards</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
       </span>
     </div>
 
@@ -73,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -96,9 +111,13 @@
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/ki-tools/growthstandards/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -106,58 +125,126 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Utility functions for adding growth standard bands to rbokeh/lattice/ggplot2 plots</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/ki-tools/growthstandards/blob/master/R/plot.R'><code>R/plot.R</code></a></small>
     <div class="hidden name"><code>plot_growth.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>Utility functions for adding growth standard bands to rbokeh/lattice/ggplot2 plots</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>panel.who</span>(<span class='no'>x</span>, <span class='kw'>x_var</span> <span class='kw'>=</span> <span class='st'>"agedays"</span>, <span class='kw'>y_var</span> <span class='kw'>=</span> <span class='st'>"htcm"</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Female"</span>,
-  <span class='kw'>p</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>25</span>, <span class='fl'>50</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.15</span>, <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>x_trans</span> <span class='kw'>=</span> <span class='no'>identity</span>, <span class='kw'>y_trans</span> <span class='kw'>=</span> <span class='no'>identity</span>)
+    <pre class="usage"><span class='fu'>panel.who</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  x_var <span class='op'>=</span> <span class='st'>"agedays"</span>,
+  y_var <span class='op'>=</span> <span class='st'>"htcm"</span>,
+  sex <span class='op'>=</span> <span class='st'>"Female"</span>,
+  p <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>25</span>, <span class='fl'>50</span><span class='op'>)</span>,
+  color <span class='op'>=</span> <span class='cn'>NULL</span>,
+  alpha <span class='op'>=</span> <span class='fl'>0.15</span>,
+  center <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  labels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  x_trans <span class='op'>=</span> <span class='va'>identity</span>,
+  y_trans <span class='op'>=</span> <span class='va'>identity</span>
+<span class='op'>)</span>
 
-<span class='fu'>panel.igb</span>(<span class='no'>gagebrth</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"lencm"</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Female"</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>25</span>,
-  <span class='fl'>50</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.15</span>, <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>x_trans</span> <span class='kw'>=</span> <span class='no'>identity</span>, <span class='kw'>y_trans</span> <span class='kw'>=</span> <span class='no'>identity</span>)
+<span class='fu'>panel.igb</span><span class='op'>(</span>
+  <span class='va'>gagebrth</span>,
+  var <span class='op'>=</span> <span class='st'>"lencm"</span>,
+  sex <span class='op'>=</span> <span class='st'>"Female"</span>,
+  p <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>25</span>, <span class='fl'>50</span><span class='op'>)</span>,
+  color <span class='op'>=</span> <span class='cn'>NULL</span>,
+  alpha <span class='op'>=</span> <span class='fl'>0.15</span>,
+  center <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  labels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  x_trans <span class='op'>=</span> <span class='va'>identity</span>,
+  y_trans <span class='op'>=</span> <span class='va'>identity</span>
+<span class='op'>)</span>
 
-<span class='fu'>panel.igfet</span>(<span class='no'>gagedays</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"hccm"</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>25</span>, <span class='fl'>50</span>),
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"green"</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.15</span>, <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>x_trans</span> <span class='kw'>=</span> <span class='no'>identity</span>, <span class='kw'>y_trans</span> <span class='kw'>=</span> <span class='no'>identity</span>)
+<span class='fu'>panel.igfet</span><span class='op'>(</span>
+  <span class='va'>gagedays</span>,
+  var <span class='op'>=</span> <span class='st'>"hccm"</span>,
+  p <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>25</span>, <span class='fl'>50</span><span class='op'>)</span>,
+  color <span class='op'>=</span> <span class='st'>"green"</span>,
+  alpha <span class='op'>=</span> <span class='fl'>0.15</span>,
+  center <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  labels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  x_trans <span class='op'>=</span> <span class='va'>identity</span>,
+  y_trans <span class='op'>=</span> <span class='va'>identity</span>
+<span class='op'>)</span>
 
-<span class='fu'>geom_growthstandard</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>x_seq</span>,
-  <span class='kw'>x_var</span> <span class='kw'>=</span> <span class='st'>"agedays"</span>, <span class='no'>y_var</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Female"</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>25</span>, <span class='fl'>50</span>),
-  <span class='kw'>shade</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.15</span>, <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>x_trans</span> <span class='kw'>=</span> <span class='no'>identity</span>,
-  <span class='kw'>y_trans</span> <span class='kw'>=</span> <span class='no'>identity</span>, <span class='kw'>standard</span> <span class='kw'>=</span> <span class='st'>"who"</span>, <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>geom_growthstandard</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>x_seq</span>,
+  x_var <span class='op'>=</span> <span class='st'>"agedays"</span>,
+  <span class='va'>y_var</span>,
+  sex <span class='op'>=</span> <span class='st'>"Female"</span>,
+  p <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>25</span>, <span class='fl'>50</span><span class='op'>)</span>,
+  shade <span class='op'>=</span> <span class='cn'>NULL</span>,
+  alpha <span class='op'>=</span> <span class='fl'>0.15</span>,
+  center <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  x_trans <span class='op'>=</span> <span class='va'>identity</span>,
+  y_trans <span class='op'>=</span> <span class='va'>identity</span>,
+  standard <span class='op'>=</span> <span class='st'>"who"</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
-<span class='fu'>geom_who</span>(<span class='no'>...</span>)
+<span class='fu'>geom_who</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>geom_igb</span>(<span class='no'>...</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"lencm"</span>)
+<span class='fu'>geom_igb</span><span class='op'>(</span><span class='va'>...</span>, var <span class='op'>=</span> <span class='st'>"lencm"</span><span class='op'>)</span>
 
-<span class='fu'>geom_igfet</span>(<span class='no'>...</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"hccm"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"green"</span>)
+<span class='fu'>geom_igfet</span><span class='op'>(</span><span class='va'>...</span>, var <span class='op'>=</span> <span class='st'>"hccm"</span>, color <span class='op'>=</span> <span class='st'>"green"</span><span class='op'>)</span>
 
-<span class='fu'>ly_who</span>(<span class='no'>fig</span>, <span class='no'>x</span>, <span class='kw'>x_var</span> <span class='kw'>=</span> <span class='st'>"agedays"</span>, <span class='kw'>y_var</span> <span class='kw'>=</span> <span class='st'>"htcm"</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Female"</span>,
-  <span class='kw'>p</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>25</span>, <span class='fl'>50</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.15</span>, <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>x_trans</span> <span class='kw'>=</span> <span class='no'>identity</span>, <span class='kw'>y_trans</span> <span class='kw'>=</span> <span class='no'>identity</span>,
-  <span class='kw'>x_units</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"days"</span>, <span class='st'>"months"</span>, <span class='st'>"years"</span>))
+<span class='fu'>ly_who</span><span class='op'>(</span>
+  <span class='va'>fig</span>,
+  <span class='va'>x</span>,
+  x_var <span class='op'>=</span> <span class='st'>"agedays"</span>,
+  y_var <span class='op'>=</span> <span class='st'>"htcm"</span>,
+  sex <span class='op'>=</span> <span class='st'>"Female"</span>,
+  p <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>25</span>, <span class='fl'>50</span><span class='op'>)</span>,
+  color <span class='op'>=</span> <span class='cn'>NULL</span>,
+  alpha <span class='op'>=</span> <span class='fl'>0.15</span>,
+  center <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  labels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  x_trans <span class='op'>=</span> <span class='va'>identity</span>,
+  y_trans <span class='op'>=</span> <span class='va'>identity</span>,
+  x_units <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"days"</span>, <span class='st'>"months"</span>, <span class='st'>"years"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
-<span class='fu'>ly_igb</span>(<span class='no'>fig</span>, <span class='no'>gagebrth</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"lencm"</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Female"</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>25</span>,
-  <span class='fl'>50</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.15</span>, <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>x_trans</span> <span class='kw'>=</span> <span class='no'>identity</span>, <span class='kw'>y_trans</span> <span class='kw'>=</span> <span class='no'>identity</span>)
+<span class='fu'>ly_igb</span><span class='op'>(</span>
+  <span class='va'>fig</span>,
+  <span class='va'>gagebrth</span>,
+  var <span class='op'>=</span> <span class='st'>"lencm"</span>,
+  sex <span class='op'>=</span> <span class='st'>"Female"</span>,
+  p <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>25</span>, <span class='fl'>50</span><span class='op'>)</span>,
+  color <span class='op'>=</span> <span class='cn'>NULL</span>,
+  alpha <span class='op'>=</span> <span class='fl'>0.15</span>,
+  center <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  labels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  x_trans <span class='op'>=</span> <span class='va'>identity</span>,
+  y_trans <span class='op'>=</span> <span class='va'>identity</span>
+<span class='op'>)</span>
 
-<span class='fu'>ly_igfet</span>(<span class='no'>fig</span>, <span class='no'>gagedays</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"hccm"</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>25</span>, <span class='fl'>50</span>),
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"green"</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.15</span>, <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>x_trans</span> <span class='kw'>=</span> <span class='no'>identity</span>, <span class='kw'>y_trans</span> <span class='kw'>=</span> <span class='no'>identity</span>)</pre>
-    
+<span class='fu'>ly_igfet</span><span class='op'>(</span>
+  <span class='va'>fig</span>,
+  <span class='va'>gagedays</span>,
+  var <span class='op'>=</span> <span class='st'>"hccm"</span>,
+  p <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>25</span>, <span class='fl'>50</span><span class='op'>)</span>,
+  color <span class='op'>=</span> <span class='st'>"green"</span>,
+  alpha <span class='op'>=</span> <span class='fl'>0.15</span>,
+  center <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  labels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  x_trans <span class='op'>=</span> <span class='va'>identity</span>,
+  y_trans <span class='op'>=</span> <span class='va'>identity</span>
+<span class='op'>)</span></pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -238,79 +325,80 @@
       <td><p>units of age x-axis (days, months, or years)</p></td>
     </tr>
     </table>
-    
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'>#### rbokeh</span>
 
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>rbokeh</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/rbokeh/topics/figure'>figure</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>ly_who</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(<span class='fl'>0</span>, <span class='fl'>2558</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>30</span>), <span class='kw'>y_var</span> <span class='kw'>=</span> <span class='st'>"wtkg"</span>,
-    <span class='kw'>x_trans</span> <span class='kw'>=</span> <span class='no'>days2years</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Male"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/rbokeh/topics/ly_points'>ly_points</a></span>(<span class='fu'><a href='unit_conversion.html'>days2years</a></span>(<span class='no'>agedays</span>), <span class='no'>wtkg</span>,
-    <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/subset'>subset</a></span>(<span class='no'>cpp</span>, <span class='no'>subjid</span> <span class='kw'>==</span> <span class='fl'>8</span>), <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
-    <span class='kw'>hover</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>agedays</span>, <span class='no'>wtkg</span>, <span class='no'>lencm</span>, <span class='no'>htcm</span>, <span class='no'>bmi</span>, <span class='no'>geniq</span>, <span class='no'>sysbp</span>, <span class='no'>diabp</span>))
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://hafen.github.io/rbokeh'>rbokeh</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://hafen.github.io/rbokeh/reference/figure.html'>figure</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>ly_who</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>2558</span>, by <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span>, y_var <span class='op'>=</span> <span class='st'>"wtkg"</span>,
+    x_trans <span class='op'>=</span> <span class='va'>days2years</span>, sex <span class='op'>=</span> <span class='st'>"Male"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://hafen.github.io/rbokeh/reference/ly_points.html'>ly_points</a></span><span class='op'>(</span><span class='fu'><a href='cm2in.html'>days2years</a></span><span class='op'>(</span><span class='va'>agedays</span><span class='op'>)</span>, <span class='va'>wtkg</span>,
+    data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>cpp</span>, <span class='va'>subjid</span> <span class='op'>==</span> <span class='fl'>8</span><span class='op'>)</span>, col <span class='op'>=</span> <span class='st'>"black"</span>,
+    hover <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>agedays</span>, <span class='va'>wtkg</span>, <span class='va'>lencm</span>, <span class='va'>htcm</span>, <span class='va'>bmi</span>, <span class='va'>geniq</span>, <span class='va'>sysbp</span>, <span class='va'>diabp</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='no'>cpp</span>$<span class='no'>wtkg50</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='who_centile2value.html'>who_centile2value</a></span>(<span class='no'>cpp</span>$<span class='no'>agedays</span>, <span class='kw'>y_var</span> <span class='kw'>=</span> <span class='st'>"wtkg"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/rbokeh/topics/figure'>figure</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>ly_who</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(<span class='fl'>0</span>, <span class='fl'>2558</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>30</span>), <span class='kw'>y_var</span> <span class='kw'>=</span> <span class='st'>"wtkg"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"blue"</span>,
-    <span class='kw'>x_trans</span> <span class='kw'>=</span> <span class='no'>days2years</span>, <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/rbokeh/topics/ly_points'>ly_points</a></span>(<span class='fu'><a href='unit_conversion.html'>days2years</a></span>(<span class='no'>agedays</span>), <span class='no'>wtkg</span> - <span class='no'>wtkg50</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
-    <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/subset'>subset</a></span>(<span class='no'>cpp</span>, <span class='no'>subjid</span> <span class='kw'>==</span> <span class='fl'>8</span>))
+<span class='va'>cpp</span><span class='op'>$</span><span class='va'>wtkg50</span> <span class='op'>&lt;-</span> <span class='fu'><a href='who_centile2value.html'>who_centile2value</a></span><span class='op'>(</span><span class='va'>cpp</span><span class='op'>$</span><span class='va'>agedays</span>, y_var <span class='op'>=</span> <span class='st'>"wtkg"</span><span class='op'>)</span>
+<span class='fu'><a href='https://hafen.github.io/rbokeh/reference/figure.html'>figure</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>ly_who</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>2558</span>, by <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span>, y_var <span class='op'>=</span> <span class='st'>"wtkg"</span>, color <span class='op'>=</span> <span class='st'>"blue"</span>,
+    x_trans <span class='op'>=</span> <span class='va'>days2years</span>, center <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://hafen.github.io/rbokeh/reference/ly_points.html'>ly_points</a></span><span class='op'>(</span><span class='fu'><a href='cm2in.html'>days2years</a></span><span class='op'>(</span><span class='va'>agedays</span><span class='op'>)</span>, <span class='va'>wtkg</span> <span class='op'>-</span> <span class='va'>wtkg50</span>, color <span class='op'>=</span> <span class='st'>"black"</span>,
+    data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>cpp</span>, <span class='va'>subjid</span> <span class='op'>==</span> <span class='fl'>8</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># look at Male birth lengths superposed on INTERGROWTH birth standard</span>
 <span class='co'># first we need just 1 record per subject with subject-level data</span>
-<span class='no'>cppsubj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/subset'>subset</a></span>(<span class='no'>cpp</span>, !<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/duplicated'>duplicated</a></span>(<span class='no'>cpp</span>$<span class='no'>subjid</span>))
-<span class='fu'><a href='https://www.rdocumentation.org/packages/rbokeh/topics/figure'>figure</a></span>(<span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Gestational Age at Birth (days)"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Birth Length (cm)"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>ly_igb</span>(<span class='kw'>gagebrth</span> <span class='kw'>=</span> <span class='fl'>250</span>:<span class='fl'>310</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"lencm"</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Male"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/rbokeh/topics/ly_points'>ly_points</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/jitter'>jitter</a></span>(<span class='no'>gagebrth</span>), <span class='no'>birthlen</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/subset'>subset</a></span>(<span class='no'>cppsubj</span>, <span class='no'>sex</span> <span class='kw'>==</span> <span class='st'>"Male"</span>),
-    <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>)
+<span class='va'>cppsubj</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>cpp</span>, <span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/duplicated.html'>duplicated</a></span><span class='op'>(</span><span class='va'>cpp</span><span class='op'>$</span><span class='va'>subjid</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://hafen.github.io/rbokeh/reference/figure.html'>figure</a></span><span class='op'>(</span>xlab <span class='op'>=</span> <span class='st'>"Gestational Age at Birth (days)"</span>, ylab <span class='op'>=</span> <span class='st'>"Birth Length (cm)"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>ly_igb</span><span class='op'>(</span>gagebrth <span class='op'>=</span> <span class='fl'>250</span><span class='op'>:</span><span class='fl'>310</span>, var <span class='op'>=</span> <span class='st'>"lencm"</span>, sex <span class='op'>=</span> <span class='st'>"Male"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://hafen.github.io/rbokeh/reference/ly_points.html'>ly_points</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/jitter.html'>jitter</a></span><span class='op'>(</span><span class='va'>gagebrth</span><span class='op'>)</span>, <span class='va'>birthlen</span>, data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>cppsubj</span>, <span class='va'>sex</span> <span class='op'>==</span> <span class='st'>"Male"</span><span class='op'>)</span>,
+    color <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span>
 
 <span class='co'># plot growth standard bands at z=1, 2, 3 for fetal head circumference</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/rbokeh/topics/figure'>figure</a></span>(<span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Gestational Age (days)"</span>,
-  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Head Circumference (cm)"</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'>ly_igfet</span>(<span class='kw'>gagedays</span> <span class='kw'>=</span> <span class='fl'>98</span>:<span class='fl'>280</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"hccm"</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>pnorm</a></span>(-<span class='fl'>3</span>:<span class='fl'>0</span>) * <span class='fl'>100</span>)
-<span class='co'># }</span><div class='input'>
+<span class='fu'><a href='https://hafen.github.io/rbokeh/reference/figure.html'>figure</a></span><span class='op'>(</span>xlab <span class='op'>=</span> <span class='st'>"Gestational Age (days)"</span>,
+  ylab <span class='op'>=</span> <span class='st'>"Head Circumference (cm)"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>ly_igfet</span><span class='op'>(</span>gagedays <span class='op'>=</span> <span class='fl'>98</span><span class='op'>:</span><span class='fl'>280</span>, var <span class='op'>=</span> <span class='st'>"hccm"</span>, p <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>pnorm</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span><span class='op'>:</span><span class='fl'>0</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>100</span><span class='op'>)</span>
+<span class='op'>}</span>
+
 <span class='co'>#### lattice</span>
 
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>lattice</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/lattice/topics/xyplot'>xyplot</a></span>(<span class='no'>wtkg</span> ~ <span class='no'>agedays</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/subset'>subset</a></span>(<span class='no'>cpp</span>, <span class='no'>subjid</span> <span class='kw'>==</span> <span class='fl'>8</span>),
-  <span class='kw'>panel</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>) {
-    <span class='fu'>panel.who</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(<span class='fl'>0</span>, <span class='fl'>2558</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>30</span>),
-      <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Male"</span>, <span class='kw'>y_var</span> <span class='kw'>=</span> <span class='st'>"wtkg"</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fl'>100</span> * <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>pnorm</a></span>(-<span class='fl'>3</span>:<span class='fl'>0</span>))
-    <span class='fu'><a href='https://www.rdocumentation.org/packages/lattice/topics/panel.xyplot'>panel.xyplot</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>)
-  },
-  <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"black"</span>
-)</div><div class='img'><img src='plot_growth-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://lattice.r-forge.r-project.org/'>lattice</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/lattice/man/xyplot.html'>xyplot</a></span><span class='op'>(</span><span class='va'>wtkg</span> <span class='op'>~</span> <span class='va'>agedays</span>, data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>cpp</span>, <span class='va'>subjid</span> <span class='op'>==</span> <span class='fl'>8</span><span class='op'>)</span>,
+  panel <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='fu'>panel.who</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>2558</span>, by <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span>,
+      sex <span class='op'>=</span> <span class='st'>"Male"</span>, y_var <span class='op'>=</span> <span class='st'>"wtkg"</span>, p <span class='op'>=</span> <span class='fl'>100</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>pnorm</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span><span class='op'>:</span><span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/lattice/man/panel.xyplot.html'>panel.xyplot</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>...</span><span class='op'>)</span>
+  <span class='op'>}</span>,
+  col <span class='op'>=</span> <span class='st'>"black"</span>
+<span class='op'>)</span>
+</div><div class='img'><img src='plot_growth-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># look at Male birth lengths superposed on INTERGROWTH birth standard</span>
 <span class='co'># first we need just 1 record per subject with subject-level data</span>
-<span class='no'>cppsubj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/subset'>subset</a></span>(<span class='no'>cpp</span>, !<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/duplicated'>duplicated</a></span>(<span class='no'>cpp</span>$<span class='no'>subjid</span>))
-<span class='fu'><a href='https://www.rdocumentation.org/packages/lattice/topics/xyplot'>xyplot</a></span>(<span class='no'>birthlen</span> ~ <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/jitter'>jitter</a></span>(<span class='no'>gagebrth</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/subset'>subset</a></span>(<span class='no'>cppsubj</span>, <span class='no'>sex</span> <span class='kw'>==</span> <span class='st'>"Male"</span>),
-  <span class='kw'>panel</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>) {
-    <span class='fu'>panel.igb</span>(<span class='kw'>gagebrth</span> <span class='kw'>=</span> <span class='fl'>250</span>:<span class='fl'>310</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"lencm"</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Male"</span>)
-    <span class='fu'><a href='https://www.rdocumentation.org/packages/lattice/topics/llines'>panel.points</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>)
-  },
-  <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.75</span>,
-  <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Gestational Age at Birth (days)"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Birth Length (cm)"</span>
-)</div><div class='img'><img src='plot_growth-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='va'>cppsubj</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>cpp</span>, <span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/duplicated.html'>duplicated</a></span><span class='op'>(</span><span class='va'>cpp</span><span class='op'>$</span><span class='va'>subjid</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/lattice/man/xyplot.html'>xyplot</a></span><span class='op'>(</span><span class='va'>birthlen</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/jitter.html'>jitter</a></span><span class='op'>(</span><span class='va'>gagebrth</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>cppsubj</span>, <span class='va'>sex</span> <span class='op'>==</span> <span class='st'>"Male"</span><span class='op'>)</span>,
+  panel <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='fu'>panel.igb</span><span class='op'>(</span>gagebrth <span class='op'>=</span> <span class='fl'>250</span><span class='op'>:</span><span class='fl'>310</span>, var <span class='op'>=</span> <span class='st'>"lencm"</span>, sex <span class='op'>=</span> <span class='st'>"Male"</span><span class='op'>)</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/lattice/man/llines.html'>panel.points</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>...</span><span class='op'>)</span>
+  <span class='op'>}</span>,
+  col <span class='op'>=</span> <span class='st'>"black"</span>, alpha <span class='op'>=</span> <span class='fl'>0.75</span>,
+  xlab <span class='op'>=</span> <span class='st'>"Gestational Age at Birth (days)"</span>, ylab <span class='op'>=</span> <span class='st'>"Birth Length (cm)"</span>
+<span class='op'>)</span>
+</div><div class='img'><img src='plot_growth-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>#### ggplot2</span>
 
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/subset'>subset</a></span>(<span class='no'>cpp</span>, <span class='no'>subjid</span> <span class='kw'>==</span> <span class='fl'>8</span>), <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>agedays</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>htcm</span>)) +
-  <span class='fu'>geom_who</span>(<span class='kw'>x_seq</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(<span class='fl'>0</span>, <span class='fl'>2600</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>10</span>), <span class='kw'>y_var</span> <span class='kw'>=</span> <span class='st'>"htcm"</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()</div></pre>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>cpp</span>, <span class='va'>subjid</span> <span class='op'>==</span> <span class='fl'>8</span><span class='op'>)</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>agedays</span>, y <span class='op'>=</span> <span class='va'>htcm</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_who</span><span class='op'>(</span>x_seq <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>2600</span>, by <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>, y_var <span class='op'>=</span> <span class='st'>"htcm"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span>
+</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-            
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -318,13 +406,16 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

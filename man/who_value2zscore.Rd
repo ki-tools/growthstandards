@@ -9,7 +9,7 @@ who_value2zscore(
   x,
   y,
   x_var = "agedays",
-  y_var = "htcm",
+  y_var = "lenhtcm",
   sex = "Female",
   data = NULL
 )
@@ -18,7 +18,7 @@ who_value2centile(
   x,
   y,
   x_var = "agedays",
-  y_var = "htcm",
+  y_var = "lenhtcm",
   sex = "Female",
   data = NULL
 )
@@ -30,7 +30,7 @@ who_value2centile(
 
 \item{x_var}{x variable name (typically "agedays") - see details}
 
-\item{y_var}{y variable name (typically "htcm" or "wtkg") - see details}
+\item{y_var}{y variable name (typically "htcm", "lencm", or "wtkg") - see details}
 
 \item{sex}{"Male" or "Female"}
 

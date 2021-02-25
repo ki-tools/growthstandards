@@ -6,6 +6,15 @@
 \usage{
 igprepost_zscore2value(pmagedays, z = 0, var = "lencm", sex = "Female")
 }
+\arguments{
+\item{pmagedays}{postmenstrual age in days}
+
+\item{z}{z-score(s) to convert}
+
+\item{var}{the name of the measurement to convert ("lencm", "wtkg", "hcircm")}
+
+\item{sex}{"Male" or "Female"}
+}
 \description{
 Convert z-scores to postnatal growth measurements for preterm infants (generic)
 }

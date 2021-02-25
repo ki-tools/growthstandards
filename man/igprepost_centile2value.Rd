@@ -14,8 +14,6 @@ igprepost_centile2value(pmagedays, p = 50, var = "lencm", sex = "Female")
 \item{var}{the name of the measurement to convert ("lencm", "wtkg", "hcircm")}
 
 \item{sex}{"Male" or "Female"}
-
-\item{z}{z-score(s) to convert}
 }
 \description{
 Convert postnatal growth measurements for preterm infants to INTERGROWTH z-scores/centiles (generic)

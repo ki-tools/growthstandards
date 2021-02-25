@@ -42,15 +42,13 @@ test_that("who z-score calculations are correct", {
   # https://www.who.int/childgrowth/standards/WFH_girls_2_5_zscores.pdf?ua=1
   expect_true(all(round(who_zscore2value(c(65, 85, 99.5, 110), -3, x_var = "htcm", y_var = "wtkg"), 1) ==
   c(5.6, 8.8, 11.6, 14.2)))
-  
-  
 })
 
 test_that("who z-scores invert correctly", {
   # check getting z scores and converting back
   tmp <- who_zscore2value(check_seq, -3)
   expect_true(all.equal(who_value2zscore(check_seq, tmp), rep(-3, 7)))
-  
+
   tmp_lengths <- c(59, 61.5, 64, 84, 94)
   tmp_heights <- c(84, 94, 112, 120)
   # 0-2 years
@@ -59,8 +57,6 @@ test_that("who z-scores invert correctly", {
   # 2-5 years
   tmp_whz <- who_zscore2value(tmp_heights, -3, x_var = "htcm", y_var = "wtkg")
   who_value2zscore(tmp_heights, tmp_whz, x_var = "htcm", y_var = "wtkg")
-  
-  
 })
 
 test_that("who centiles invert correctly", {

@@ -8,21 +8,36 @@
 
 <title>Convert birth measurements to INTERGROWTH z-scores/centiles (generic) — igb_centile2value • growthstandards</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,12 +45,11 @@
 
 
 
+
 <meta property="og:title" content="Convert birth measurements to INTERGROWTH z-scores/centiles (generic) — igb_centile2value" />
-
 <meta property="og:description" content="Convert birth measurements to INTERGROWTH z-scores/centiles (generic)" />
-
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -49,9 +63,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -65,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">growthstandards</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
       </span>
     </div>
 
@@ -73,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -96,9 +111,13 @@
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/ki-tools/growthstandards/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -106,26 +125,25 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Convert birth measurements to INTERGROWTH z-scores/centiles (generic)</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/ki-tools/growthstandards/blob/master/R/standard_igb.R'><code>R/standard_igb.R</code></a></small>
     <div class="hidden name"><code>igb_zscore2value.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>Convert birth measurements to INTERGROWTH z-scores/centiles (generic)</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>igb_centile2value</span>(<span class='no'>gagebrth</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fl'>50</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"lencm"</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Female"</span>)
+    <pre class="usage"><span class='fu'>igb_centile2value</span><span class='op'>(</span><span class='va'>gagebrth</span>, p <span class='op'>=</span> <span class='fl'>50</span>, var <span class='op'>=</span> <span class='st'>"lencm"</span>, sex <span class='op'>=</span> <span class='st'>"Female"</span><span class='op'>)</span>
 
-<span class='fu'>igb_zscore2value</span>(<span class='no'>gagebrth</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"lencm"</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Female"</span>)</pre>
-    
+<span class='fu'>igb_zscore2value</span><span class='op'>(</span><span class='va'>gagebrth</span>, z <span class='op'>=</span> <span class='fl'>0</span>, var <span class='op'>=</span> <span class='st'>"lencm"</span>, sex <span class='op'>=</span> <span class='st'>"Female"</span><span class='op'>)</span></pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -150,11 +168,10 @@
       <td><p>z-score(s) to convert</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>For gestational ages between 24 and 33 weeks, the INTERGROWTH very early preterm standard is used.</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>International standards for newborn weight, length, and head circumference by gestational age and sex: the Newborn Cross-Sectional Study of the INTERGROWTH-21st Project
@@ -162,11 +179,11 @@ Villar, José et al.
 The Lancet, Volume 384, Issue 9946, 857-868</p>
 <p>INTERGROWTH-21st very preterm size at birth reference charts. Lancet 2016 doi.org/10.1016/S0140-6736(16) 00384-6.
 Villar, José et al.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># get 99th centile for Male birth weights across some gestational ages</span>
-<span class='fu'>igb_centile2value</span>(<span class='fl'>232</span>:<span class='fl'>300</span>, <span class='fl'>99</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"wtkg"</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Male"</span>)</div><div class='output co'>#&gt;  [1] 3.095594 3.134276 3.172468 3.210176 3.247402 3.284150 3.320425 3.356229
+<span class='fu'>igb_centile2value</span><span class='op'>(</span><span class='fl'>232</span><span class='op'>:</span><span class='fl'>300</span>, <span class='fl'>99</span>, var <span class='op'>=</span> <span class='st'>"wtkg"</span>, sex <span class='op'>=</span> <span class='st'>"Male"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] 3.095594 3.134276 3.172468 3.210176 3.247402 3.284150 3.320425 3.356229
 #&gt;  [9] 3.391566 3.426440 3.460857 3.494817 3.528324 3.561383 3.593996 3.626168
 #&gt; [17] 3.657900 3.689198 3.720065 3.750502 3.780513 3.810103 3.839274 3.868027
 #&gt; [25] 3.896370 3.924301 3.951826 3.978946 4.005666 4.031988 4.057915 4.083450
@@ -176,20 +193,13 @@ Villar, José et al.</p>
 #&gt; [57] 4.602125 4.618375 4.634299 4.649901 4.665183 4.680145 4.694791 4.709122
 #&gt; [65] 4.723141 4.736849 4.750250 4.763343 4.776132</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#note">Note</a></li>
-
-      <li><a href="#references">References</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -197,13 +207,16 @@ Villar, José et al.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

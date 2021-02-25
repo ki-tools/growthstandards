@@ -25,7 +25,7 @@
 #'   xlab = "age (years)", auto.key = TRUE)
 #' @export
 #' @rdname who_centile2value
-who_centile2value <- function(x, p = 50, x_var = "agedays", y_var = "htcm",
+who_centile2value <- function(x, p = 50, x_var = "agedays", y_var = "lenhtcm",
   sex = "Female", data = NULL) {
 
   if (!is.null(data)) {
@@ -44,6 +44,14 @@ who_centile2value <- function(x, p = 50, x_var = "agedays", y_var = "htcm",
     sex = sex,
     stringsAsFactors = FALSE
   )
+
+  idx <- which(dat$y_var == "lenhtcm")
+  if (length(idx) > 0) {
+    idx2 <- which(dat$y_var == "lenhtcm" & dat$x < 731)
+    dat$y_var[idx2] <- "lencm"
+    idx2 <- which(dat$y_var == "lenhtcm")
+    dat$y_var[idx2] <- "htcm"
+  }
 
   if (! all(unique(dat$sex) %in% c("Male", "Female")))
     stop("sex must be 'Male' or 'Female'")
@@ -72,19 +80,58 @@ who_centile2value <- function(x, p = 50, x_var = "agedays", y_var = "htcm",
     }
 
     res <- with(coefs, m * ((1 + qnorm(y / 100) * l * s)^(1 / l))) # nolint
+
+    if (y_var %in% c("wtkg", "bmi")) {
+      z <- qnorm(y / 100)
+      calc_sd <- function(sd)
+        with(coefs, m * ((1 + l * s * sd) ^ (1 / l))) # nolint
+      sd3_pos <- calc_sd(3)
+      sd3_neg <- calc_sd(-3)
+      sd23_pos <- sd3_pos - calc_sd(2)
+      sd23_neg <- calc_sd(-2) - sd3_neg
+
+      res2 <- rep(NA, length(y))
+      ind <- which(z < 0)
+      res2[ind] <- (z[ind] + 3) * sd23_neg[ind] + sd3_neg[ind]
+      ind <- which(z > 0)
+      res2[ind] <- (z[ind] - 3) * sd23_pos[ind] + sd3_pos[ind]
+
+      coefs2 <- coefs
+      coefs2$y <- res2
+      z2 <- with(coefs2, ((y / m)^l - 1) / (s * l)) # nolint
+
+      ind <- which(z2 < -3 | z2 > 3)
+      res[ind] <- res2[ind]
+    }
+
     if (length(oob) > 0) {
       message("Observations with ", x_var, " value of ",
         paste(x[oob], collapse = ", "),
         " are outside the range of the standard. Setting to NA.")
       res[oob] <- NA
     }
-    res
 
+    idx <- which(is.infinite(res))
+    res[idx] <- NA
+
+    res
   }
+
+  ht_idx <- which(dat$y_var == "htcm" & dat$x <= 730)
+  ln_idx <- which(dat$y_var == "lencm" & dat$x > 730)
+
+  idx <- which(dat$y_var == "lencm")
+  if (length(idx) > 0)
+    dat$y_var[idx] <- "htcm"
 
   dat <- dat %>%
     dplyr::group_by(x_var, y_var, sex) %>%
     dplyr::mutate(res = centile2value_single_pars(x, p, x_var[1], y_var[1], sex[1]))
+
+  if (length(ht_idx) > 0)
+    dat$res[ht_idx] <- dat$res[ht_idx] - 0.7
+  if (length(ln_idx) > 0)
+    dat$res[ln_idx] <- dat$res[ln_idx] + 0.7
 
   dat$res
 }
@@ -92,7 +139,7 @@ who_centile2value <- function(x, p = 50, x_var = "agedays", y_var = "htcm",
 #' @param z z-score or vector of z-scores at which to compute values
 #' @export
 #' @rdname who_centile2value
-who_zscore2value <- function(x, z = 0, y_var = "htcm", x_var = "agedays",
+who_zscore2value <- function(x, z = 0, y_var = "lenhtcm", x_var = "agedays",
   sex = "Female", data = NULL) {
 
   if (!is.null(data)) {
@@ -113,7 +160,7 @@ who_zscore2value <- function(x, z = 0, y_var = "htcm", x_var = "agedays",
 #' @param x value or vector of values that correspond to a measure defined by \code{x_var}
 #' @param y value or vector of values that correspond to a measure defined by \code{y_var}
 #' @param x_var x variable name (typically "agedays") - see details
-#' @param y_var y variable name (typically "htcm" or "wtkg") - see details
+#' @param y_var y variable name (typically "htcm", "lencm", or "wtkg") - see details
 #' @param sex "Male" or "Female"
 #' @param data optional data frame that supplies any of the other variables provided to the function
 #' @details for all supported pairings of \code{y_var} and \code{x_var} , type \code{names(who_coefs)}
@@ -135,11 +182,10 @@ who_zscore2value <- function(x, z = 0, y_var = "htcm", x_var = "agedays",
 #' @rdname who_value2zscore
 who_value2zscore <- function(
   x, y,
-  x_var = "agedays", y_var = "htcm",
+  x_var = "agedays", y_var = "lenhtcm",
   sex = "Female",
   data = NULL
 ) {
-
   if (!is.null(data)) {
     x <- v_eval(substitute(x), try(x, silent = TRUE), data)
     y <- v_eval(substitute(y), try(y, silent = TRUE), data)
@@ -154,6 +200,26 @@ who_value2zscore <- function(
     sex = sex,
     stringsAsFactors = FALSE
   )
+
+  idx <- which(dat$y_var == "lenhtcm")
+  if (length(idx) > 0) {
+    idx2 <- which(dat$y_var == "lenhtcm" & dat$x < 731)
+    dat$y_var[idx2] <- "lencm"
+    idx2 <- which(dat$y_var == "lenhtcm")
+    dat$y_var[idx2] <- "htcm"
+  }
+
+  idx <- which(dat$y_var == "htcm" & dat$x <= 730)
+  if (length(idx) > 0)
+    dat$y[idx] <- dat$y[idx] + 0.7
+
+  idx <- which(dat$y_var == "lencm" & dat$x > 730)
+  if (length(idx) > 0)
+    dat$y[idx] <- dat$y[idx] - 0.7
+
+  idx <- which(dat$y_var == "lencm")
+  if (length(idx) > 0)
+    dat$y_var[idx] <- "htcm"
 
   if (! all(unique(dat$sex) %in% c("Male", "Female")))
     stop("sex must be 'Male' or 'Female'")
@@ -185,6 +251,19 @@ who_value2zscore <- function(
 
     res <- with(coefs, ((y / m)^l - 1) / (s * l)) # nolint
 
+    if (y_var %in% c("wtkg", "bmi")) {
+      calc_sd <- function(sd)
+        with(coefs, m * ((1 + l * s * sd) ^ (1 / l))) # nolint
+      sd3_pos <- calc_sd(3)
+      sd3_neg <- calc_sd(-3)
+      sd23_pos <- sd3_pos - calc_sd(2)
+      sd23_neg <- calc_sd(-2) - sd3_neg
+      idx <- !is.na(res) & res > 3
+      res[idx] <- (3 + ((y - sd3_pos) / sd23_pos))[idx]
+      idx <- !is.na(res) & res < -3
+      res[idx] <- (-3 + ((y - sd3_neg) / sd23_neg))[idx]
+    }
+
     if (length(oob) > 0) {
       message("Observations with ", x_var, " value of ",
         paste(x[oob], collapse = ", "),
@@ -206,7 +285,7 @@ who_value2zscore <- function(
 who_value2centile <- function(
   x, y,
   x_var = "agedays",
-  y_var = "htcm",
+  y_var = "lenhtcm",
   sex = "Female",
   data = NULL
 ) {
@@ -230,6 +309,8 @@ who_value2centile <- function(
 #' @param agedays age in days
 #' @param wtkg weight (kg) measurement(s) to convert
 #' @param htcm height(cm) measurement(s) to convert
+#' @param lencm length(cm) measurement(s) to convert
+#' @param lenhtcm length or height(cm) measurement(s) to convert
 #' @param bmi body-mass index measurement(s) to convert
 #' @param hcircm head circumference (cm) measurement(s) to convert
 #' @param muaccm mid-upper arm circumference (cm) measurement(s) to convert
@@ -248,6 +329,18 @@ who_wtkg2zscore <- function(agedays, wtkg, sex = "Female") {
 #' @rdname who_var2zscore
 who_htcm2zscore <- function(agedays, htcm, sex = "Female") {
   who_value2zscore(agedays, htcm, x_var = "agedays", y_var = "htcm", sex = sex)
+}
+
+#' @export
+#' @rdname who_var2zscore
+who_lenhtcm2zscore <- function(agedays, lenhtcm, sex = "Female") {
+  who_value2zscore(agedays, lenhtcm, x_var = "agedays", y_var = "lenhtcm", sex = sex)
+}
+
+#' @export
+#' @rdname who_var2zscore
+who_lencm2zscore <- function(agedays, lencm, sex = "Female") {
+  who_value2zscore(agedays, lencm, x_var = "agedays", y_var = "lencm", sex = sex)
 }
 
 #' @export
@@ -293,6 +386,18 @@ who_wtkg2centile <- function(agedays, wtkg, sex = "Female") {
 #' @rdname who_var2zscore
 who_htcm2centile <- function(agedays, htcm, sex = "Female") {
   who_value2centile(agedays, htcm, x_var = "agedays", y_var = "htcm", sex = sex)
+}
+
+#' @export
+#' @rdname who_var2zscore
+who_lenhtcm2centile <- function(agedays, lenhtcm, sex = "Female") {
+  who_value2centile(agedays, lenhtcm, x_var = "agedays", y_var = "lenhtcm", sex = sex)
+}
+
+#' @export
+#' @rdname who_var2zscore
+who_lencm2centile <- function(agedays, lencm, sex = "Female") {
+  who_value2centile(agedays, lencm, x_var = "agedays", y_var = "lencm", sex = sex)
 }
 
 #' @export
@@ -345,6 +450,18 @@ who_zscore2htcm <- function(agedays, z = 0, sex = "Female") {
 
 #' @export
 #' @rdname who_zscore2var
+who_zscore2lenhtcm <- function(agedays, z = 0, sex = "Female") {
+  who_zscore2value(agedays, z, x_var = "agedays", y_var = "lenhtcm", sex = sex)
+}
+
+#' @export
+#' @rdname who_zscore2var
+who_zscore2lencm <- function(agedays, z = 0, sex = "Female") {
+  who_zscore2value(agedays, z, x_var = "agedays", y_var = "lencm", sex = sex)
+}
+
+#' @export
+#' @rdname who_zscore2var
 who_zscore2wtkg <- function(agedays, z = 0, sex = "Female") {
   who_zscore2value(agedays, z, x_var = "agedays", y_var = "wtkg", sex = sex)
 }
@@ -386,6 +503,18 @@ who_zscore2tsftmm <- function(agedays, z = 0, sex = "Female") {
 #' @rdname who_zscore2var
 who_centile2htcm <- function(agedays, p = 50, sex = "Female") {
   who_centile2value(agedays, p, x_var = "agedays", y_var = "htcm", sex = sex)
+}
+
+#' @export
+#' @rdname who_zscore2var
+who_centile2lenhtcm <- function(agedays, p = 50, sex = "Female") {
+  who_centile2value(agedays, p, x_var = "agedays", y_var = "lenhtcm", sex = sex)
+}
+
+#' @export
+#' @rdname who_zscore2var
+who_centile2lencm <- function(agedays, p = 50, sex = "Female") {
+  who_centile2value(agedays, p, x_var = "agedays", y_var = "lencm", sex = sex)
 }
 
 #' @export

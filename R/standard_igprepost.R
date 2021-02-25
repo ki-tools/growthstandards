@@ -1,7 +1,6 @@
 #' Convert postnatal growth measurements for preterm infants to INTERGROWTH z-scores/centiles (generic)
 #'
 #' @param pmagedays postmenstrual age in days
-#' @param z z-score(s) to convert
 #' @param p centile(s) to convert (must be between 0 and 100)
 #' @param var the name of the measurement to convert ("lencm", "wtkg", "hcircm")
 #' @param sex "Male" or "Female"
@@ -55,6 +54,10 @@ igprepost_centile2value <- function(pmagedays, p = 50, var = "lencm", sex = "Fem
 
 #' Convert z-scores to postnatal growth measurements for preterm infants (generic)
 #'
+#' @param pmagedays postmenstrual age in days
+#' @param z z-score(s) to convert
+#' @param var the name of the measurement to convert ("lencm", "wtkg", "hcircm")
+#' @param sex "Male" or "Female"
 #' @rdname igprepost_zscore2value
 #' @export
 igprepost_zscore2value <- function(pmagedays, z = 0, var = "lencm", sex = "Female") {
@@ -134,7 +137,6 @@ igprepost_value2zscore <- function(pmagedays, val, var = "lencm", sex = "Female"
 #' @param wtkg weight (kg) measurement(s) to convert
 #' @param lencm length(cm) measurement(s) to convert
 #' @param hcircm head circumference (cm) measurement(s) to convert
-#' @param wlr weight-length ratio values(s) to convert
 #' @param sex "Male" or "Female"
 #' @references Postnatal growth standards for preterm infants: the Preterm Postnatal Follow-up Study of the INTERGROWTH-21st Project.
 #' Villar J, Giuliani F, Bhutta ZA, et al.

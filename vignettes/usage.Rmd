@@ -37,7 +37,9 @@ WHO growth standard conversions are available for the following pairings of vari
 x_var   | y_var                                   | span of x_var
 --------| ----------------------------------------| -------------------------
 agedays | wtkg (weight kg)                        | ~10 years (0 - 3682 days)
-agedays | htcm (height cm)                        | ~19 years (0 - 6970 days)
+agedays | *lencm (height cm)                       | 2 years (0 - 6970 days)
+agedays | *htcm (height cm)                        | ~19 years (0 - 6970 days)
+agedays | *lenhtcm (length or height - cm)         | ~19 years (0 - 6970 days)
 agedays | bmi  (BMI kg/m2)                        | ~19 years (0 - 6970 days)
 agedays | hcircm (head circumference cm)          | ~ 5 years (0 - 1856 days)
 agedays | muaccm (mid upper-arm circumference cm) | ~ 5 years (0 - 1856 days)
@@ -45,8 +47,7 @@ agedays | ss (subscalpular skinfold)              | ~ 5 years (0 - 1856 days)
 agedays | tsftmm (triceps skinfold thickness mm)  | ~ 5 years (0 - 1856 days)
 htcm    | wtkg                                    | 120 cm
 
-
-Note that the WHO provides recumbent length for 0-2 years of age, after which the standing height is provided.  Here we have merged the two into a single variable, `htcm`.
+Note that "lenhtcm" implies that length is implied for ages 0-2 years and height for 2+ years. Explicitly specifying the y variable as "lencm" or "htcm" implies that this method of measurement was used regardless of age, and an adjustment will be made accordingly if the measurement method is not standard for the age (e.g. height measurement used for a 18-month-old child.).
 
 Also note that in almost every case the x variable is `agedays` - the age since birth in days.  When the desired x variable is `agedays`, a simplified set of functions has been created to convert between z-scores or centiles with the following naming convention, for example, when working with `wtkg`:
 
@@ -71,7 +72,7 @@ Here we get the WHO median height vs. age for females weekly for the first year:
 library(growthstandards)
 
 x <- seq(0, 365, by = 7)
-med <- who_centile2htcm(x)
+med <- who_centile2lenhtcm(x)
 plot(x, med, xlab = "age in days", ylab = "median female height (cm)")
 ```
 
@@ -82,7 +83,7 @@ Here the defaults of `sex="Female"` and `p=50` were used, giving us the median h
 To get the WHO 75th centile weight value for age of males at these same time points, we can do the following:
 
 ```{r who2, eval=TRUE, echo=TRUE, message=FALSE}
-q75 <- who_centile2htcm(x, p = 75, sex = "Male")
+q75 <- who_centile2lenhtcm(x, p = 75, sex = "Male")
 ```
 
 #### Get the WHO centile for specific age and height
@@ -90,7 +91,7 @@ q75 <- who_centile2htcm(x, p = 75, sex = "Male")
 Suppose we want to know the WHO centile of a female child at 2 years of age (730.5 days) who is 90 cm tall:
 
 ```{r who3, eval=TRUE, echo=TRUE, message=FALSE}
-who_htcm2centile(agedays = 730.5, htcm = 90)
+who_lenhtcm2centile(agedays = 730.5, lenhtcm = 90)
 ```
 
 This girl's height is at the 89th centile.
@@ -124,7 +125,7 @@ Here we are using a convenience function, `kg2lb()`, provided with the package t
 Suppose we want to compute the height and weight-for-age z-scores (HAZ and WAZ) for each subject in the cpp data:
 
 ```{r haz, eval=TRUE, echo=TRUE, message=FALSE}
-haz <- who_htcm2zscore(cpp$agedays, cpp$htcm, sex = cpp$sex)
+haz <- who_lenhtcm2zscore(cpp$agedays, cpp$htcm, sex = cpp$sex)
 waz <- who_wtkg2zscore(cpp$agedays, cpp$wtkg, sex = cpp$sex)
 ```
 
@@ -140,7 +141,7 @@ To utility functions described so far all for measurements against age.  To deal
 Here both the x variable and y variable can be specified.  For example, the following are equivalent:
 
 ```{r who_generic, eval=TRUE, echo=TRUE, message=FALSE}
-who_htcm2centile(agedays = 730.5, htcm = 90)
+who_lenhtcm2centile(agedays = 730.5, lenhtcm = 90)
 who_value2centile(x = 730.5, y = 90, x_var = "agedays", y_var = "htcm")
 ```
 
@@ -238,10 +239,9 @@ As with previous growth standard methods, a similar interface to this growth sta
 
 Usage is similar as the other growth standards.  For example, to get the centile for child at 100 gestational days with an weight of x:
 
-```{r igfet1, eval=TRUE, echo=TRUE}
+```{r igfet2, eval=TRUE, echo=TRUE}
 igprepost_wtkg2centile(100, 11)
 ```
-
 
 
 ## INTERGROWTH gestational weight gain (GWG) standard ##

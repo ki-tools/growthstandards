@@ -3,6 +3,8 @@
 \name{who_wtkg2zscore}
 \alias{who_wtkg2zscore}
 \alias{who_htcm2zscore}
+\alias{who_lenhtcm2zscore}
+\alias{who_lencm2zscore}
 \alias{who_bmi2zscore}
 \alias{who_hcircm2zscore}
 \alias{who_muaccm2zscore}
@@ -10,6 +12,8 @@
 \alias{who_tsftmm2zscore}
 \alias{who_wtkg2centile}
 \alias{who_htcm2centile}
+\alias{who_lenhtcm2centile}
+\alias{who_lencm2centile}
 \alias{who_bmi2centile}
 \alias{who_hcircm2centile}
 \alias{who_muaccm2centile}
@@ -20,6 +24,10 @@
 who_wtkg2zscore(agedays, wtkg, sex = "Female")
 
 who_htcm2zscore(agedays, htcm, sex = "Female")
+
+who_lenhtcm2zscore(agedays, lenhtcm, sex = "Female")
+
+who_lencm2zscore(agedays, lencm, sex = "Female")
 
 who_bmi2zscore(agedays, bmi, sex = "Female")
 
@@ -34,6 +42,10 @@ who_tsftmm2zscore(agedays, tsftmm, sex = "Female")
 who_wtkg2centile(agedays, wtkg, sex = "Female")
 
 who_htcm2centile(agedays, htcm, sex = "Female")
+
+who_lenhtcm2centile(agedays, lenhtcm, sex = "Female")
+
+who_lencm2centile(agedays, lencm, sex = "Female")
 
 who_bmi2centile(agedays, bmi, sex = "Female")
 
@@ -53,6 +65,10 @@ who_tsftmm2centile(agedays, tsftmm, sex = "Female")
 \item{sex}{"Male" or "Female"}
 
 \item{htcm}{height(cm) measurement(s) to convert}
+
+\item{lenhtcm}{length or height(cm) measurement(s) to convert}
+
+\item{lencm}{length(cm) measurement(s) to convert}
 
 \item{bmi}{body-mass index measurement(s) to convert}
 

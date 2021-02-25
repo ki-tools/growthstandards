@@ -8,21 +8,36 @@
 
 <title>Convert INTERGROWTH z-scores/centiles to birth measurements — igb_zscore2lencm • growthstandards</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,12 +45,11 @@
 
 
 
+
 <meta property="og:title" content="Convert INTERGROWTH z-scores/centiles to birth measurements — igb_zscore2lencm" />
-
 <meta property="og:description" content="Convert INTERGROWTH z-scores/centiles to birth measurements" />
-
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -49,9 +63,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -65,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">growthstandards</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
       </span>
     </div>
 
@@ -73,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -96,9 +111,13 @@
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/ki-tools/growthstandards/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -106,38 +125,37 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Convert INTERGROWTH z-scores/centiles to birth measurements</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/ki-tools/growthstandards/blob/master/R/standard_igb.R'><code>R/standard_igb.R</code></a></small>
     <div class="hidden name"><code>igb_zscore2var.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>Convert INTERGROWTH z-scores/centiles to birth measurements</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>igb_zscore2lencm</span>(<span class='no'>gagebrth</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Female"</span>)
+    <pre class="usage"><span class='fu'>igb_zscore2lencm</span><span class='op'>(</span><span class='va'>gagebrth</span>, z <span class='op'>=</span> <span class='fl'>0</span>, sex <span class='op'>=</span> <span class='st'>"Female"</span><span class='op'>)</span>
 
-<span class='fu'>igb_zscore2wtkg</span>(<span class='no'>gagebrth</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Female"</span>)
+<span class='fu'>igb_zscore2wtkg</span><span class='op'>(</span><span class='va'>gagebrth</span>, z <span class='op'>=</span> <span class='fl'>0</span>, sex <span class='op'>=</span> <span class='st'>"Female"</span><span class='op'>)</span>
 
-<span class='fu'>igb_zscore2hcircm</span>(<span class='no'>gagebrth</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Female"</span>)
+<span class='fu'>igb_zscore2hcircm</span><span class='op'>(</span><span class='va'>gagebrth</span>, z <span class='op'>=</span> <span class='fl'>0</span>, sex <span class='op'>=</span> <span class='st'>"Female"</span><span class='op'>)</span>
 
-<span class='fu'>igb_zscore2wlr</span>(<span class='no'>gagebrth</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Female"</span>)
+<span class='fu'>igb_zscore2wlr</span><span class='op'>(</span><span class='va'>gagebrth</span>, z <span class='op'>=</span> <span class='fl'>0</span>, sex <span class='op'>=</span> <span class='st'>"Female"</span><span class='op'>)</span>
 
-<span class='fu'>igb_centile2lencm</span>(<span class='no'>gagebrth</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fl'>50</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Female"</span>)
+<span class='fu'>igb_centile2lencm</span><span class='op'>(</span><span class='va'>gagebrth</span>, p <span class='op'>=</span> <span class='fl'>50</span>, sex <span class='op'>=</span> <span class='st'>"Female"</span><span class='op'>)</span>
 
-<span class='fu'>igb_centile2wtkg</span>(<span class='no'>gagebrth</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fl'>50</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Female"</span>)
+<span class='fu'>igb_centile2wtkg</span><span class='op'>(</span><span class='va'>gagebrth</span>, p <span class='op'>=</span> <span class='fl'>50</span>, sex <span class='op'>=</span> <span class='st'>"Female"</span><span class='op'>)</span>
 
-<span class='fu'>igb_centile2hcircm</span>(<span class='no'>gagebrth</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fl'>50</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Female"</span>)
+<span class='fu'>igb_centile2hcircm</span><span class='op'>(</span><span class='va'>gagebrth</span>, p <span class='op'>=</span> <span class='fl'>50</span>, sex <span class='op'>=</span> <span class='st'>"Female"</span><span class='op'>)</span>
 
-<span class='fu'>igb_centile2wlr</span>(<span class='no'>gagebrth</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fl'>50</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Female"</span>)</pre>
-    
+<span class='fu'>igb_centile2wlr</span><span class='op'>(</span><span class='va'>gagebrth</span>, p <span class='op'>=</span> <span class='fl'>50</span>, sex <span class='op'>=</span> <span class='st'>"Female"</span><span class='op'>)</span></pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -158,11 +176,10 @@
       <td><p>centile(s) to convert (must be between 0 and 100)</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>For gestational ages between 24 and 33 weeks, the INTERGROWTH very early preterm standard is used.</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>International standards for newborn weight, length, and head circumference by gestational age and sex: the Newborn Cross-Sectional Study of the INTERGROWTH-21st Project
@@ -170,11 +187,11 @@ Villar, José et al.
 The Lancet, Volume 384, Issue 9946, 857-868</p>
 <p>INTERGROWTH-21st very preterm size at birth reference charts. Lancet  2016 doi.org/10.1016/S0140-6736(16) 00384-6.
 Villar, José et al.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># get 99th centile for Male birth weights across some gestational ages</span>
-<span class='fu'>igb_centile2wtkg</span>(<span class='fl'>168</span>:<span class='fl'>300</span>, <span class='fl'>99</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Male"</span>)</div><div class='output co'>#&gt;   [1] 0.9991985 1.0186739 1.0384696 1.0585902 1.0790402 1.0998242 1.1209468
+<span class='fu'>igb_centile2wtkg</span><span class='op'>(</span><span class='fl'>168</span><span class='op'>:</span><span class='fl'>300</span>, <span class='fl'>99</span>, sex <span class='op'>=</span> <span class='st'>"Male"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   [1] 0.9991985 1.0186739 1.0384696 1.0585902 1.0790402 1.0998242 1.1209468
 #&gt;   [8] 1.1424126 1.1642266 1.1863934 1.2089179 1.2318051 1.2550599 1.2786874
 #&gt;  [15] 1.3026927 1.3270809 1.3518573 1.3770272 1.4025958 1.4285686 1.4549511
 #&gt;  [22] 1.4817488 1.5089673 1.5366123 1.5646895 1.5932047 1.6221637 1.6515726
@@ -194,24 +211,18 @@ Villar, José et al.</p>
 #&gt; [120] 4.5855474 4.6021249 4.6183750 4.6342991 4.6499014 4.6651828 4.6801452
 #&gt; [127] 4.6947905 4.7091219 4.7231409 4.7368487 4.7502495 4.7633430 4.7761319</div><div class='input'>
 <span class='co'># recreate figure from preterm paper</span>
-<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/expand.grid'>expand.grid</a></span>(<span class='kw'>centile</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>50</span>, <span class='fl'>97</span>), <span class='kw'>gage</span> <span class='kw'>=</span> <span class='fl'>168</span>:<span class='fl'>300</span>)
-<span class='no'>d</span>$<span class='no'>value</span> <span class='kw'>&lt;-</span> <span class='fu'>igb_centile2lencm</span>(<span class='no'>d</span>$<span class='no'>gage</span>, <span class='no'>d</span>$<span class='no'>centile</span>, <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"Male"</span>)
-<span class='kw pkg'>lattice</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/lattice/topics/xyplot'>xyplot</a></span>(<span class='no'>value</span> ~ <span class='no'>gage</span> / <span class='fl'>7</span>, <span class='kw'>groups</span> <span class='kw'>=</span> <span class='no'>centile</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>d</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"l"</span>)</div><div class='img'><img src='igb_zscore2var-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='va'>d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/expand.grid.html'>expand.grid</a></span><span class='op'>(</span>centile <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>50</span>, <span class='fl'>97</span><span class='op'>)</span>, gage <span class='op'>=</span> <span class='fl'>168</span><span class='op'>:</span><span class='fl'>300</span><span class='op'>)</span>
+<span class='va'>d</span><span class='op'>$</span><span class='va'>value</span> <span class='op'>&lt;-</span> <span class='fu'>igb_centile2lencm</span><span class='op'>(</span><span class='va'>d</span><span class='op'>$</span><span class='va'>gage</span>, <span class='va'>d</span><span class='op'>$</span><span class='va'>centile</span>, sex <span class='op'>=</span> <span class='st'>"Male"</span><span class='op'>)</span>
+<span class='fu'>lattice</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lattice/man/xyplot.html'>xyplot</a></span><span class='op'>(</span><span class='va'>value</span> <span class='op'>~</span> <span class='va'>gage</span> <span class='op'>/</span> <span class='fl'>7</span>, groups <span class='op'>=</span> <span class='va'>centile</span>, data <span class='op'>=</span> <span class='va'>d</span>, type <span class='op'>=</span> <span class='st'>"l"</span><span class='op'>)</span>
+</div><div class='img'><img src='igb_zscore2var-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#note">Note</a></li>
-
-      <li><a href="#references">References</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -219,13 +230,16 @@ Villar, José et al.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

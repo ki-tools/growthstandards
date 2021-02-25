@@ -2,6 +2,8 @@
 % Please edit documentation in R/standard_who.R
 \name{who_zscore2htcm}
 \alias{who_zscore2htcm}
+\alias{who_zscore2lenhtcm}
+\alias{who_zscore2lencm}
 \alias{who_zscore2wtkg}
 \alias{who_zscore2bmi}
 \alias{who_zscore2hcircm}
@@ -9,6 +11,8 @@
 \alias{who_zscore2ssftmm}
 \alias{who_zscore2tsftmm}
 \alias{who_centile2htcm}
+\alias{who_centile2lenhtcm}
+\alias{who_centile2lencm}
 \alias{who_centile2wtkg}
 \alias{who_centile2bmi}
 \alias{who_centile2hcircm}
@@ -18,6 +22,10 @@
 \title{Convert WHO z-scores/centiles to anthro measurements}
 \usage{
 who_zscore2htcm(agedays, z = 0, sex = "Female")
+
+who_zscore2lenhtcm(agedays, z = 0, sex = "Female")
+
+who_zscore2lencm(agedays, z = 0, sex = "Female")
 
 who_zscore2wtkg(agedays, z = 0, sex = "Female")
 
@@ -32,6 +40,10 @@ who_zscore2ssftmm(agedays, z = 0, sex = "Female")
 who_zscore2tsftmm(agedays, z = 0, sex = "Female")
 
 who_centile2htcm(agedays, p = 50, sex = "Female")
+
+who_centile2lenhtcm(agedays, p = 50, sex = "Female")
+
+who_centile2lencm(agedays, p = 50, sex = "Female")
 
 who_centile2wtkg(agedays, p = 50, sex = "Female")
 

@@ -9,7 +9,7 @@ who_centile2value(
   x,
   p = 50,
   x_var = "agedays",
-  y_var = "htcm",
+  y_var = "lenhtcm",
   sex = "Female",
   data = NULL
 )
@@ -17,7 +17,7 @@ who_centile2value(
 who_zscore2value(
   x,
   z = 0,
-  y_var = "htcm",
+  y_var = "lenhtcm",
   x_var = "agedays",
   sex = "Female",
   data = NULL

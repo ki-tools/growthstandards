@@ -31,8 +31,6 @@ igprepost_hcircm2centile(pmagedays, hcircm, sex = "Female")
 \item{wtkg}{weight (kg) measurement(s) to convert}
 
 \item{hcircm}{head circumference (cm) measurement(s) to convert}
-
-\item{wlr}{weight-length ratio values(s) to convert}
 }
 \description{
 Convert postnatal growth measurements for preterm infants to INTERGROWTH z-scores/centiles
