@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,23 +40,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">growthstandards</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.6</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -71,7 +67,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ki-tools/growthstandards/">
+  <a href="https://github.com/ki-tools/growthstandards/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -92,63 +88,60 @@
       <h1 data-toc-skip>Weight-for-height</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/ki-tools/growthstandards/blob/master/vignettes/weight_for_height.Rmd"><code>vignettes/weight_for_height.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ki-tools/growthstandards/blob/HEAD/vignettes/weight_for_height.Rmd" class="external-link"><code>vignettes/weight_for_height.Rmd</code></a></small>
       <div class="hidden name"><code>weight_for_height.Rmd</code></div>
 
     </div>
 
     
     
-<div id="background" class="section level2">
-<h2 class="hasAnchor">
-<a href="#background" class="anchor"></a>Background</h2>
+<div class="section level2">
+<h2 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
+</h2>
 <p>Note that weight for height calculations use <code>x_var</code> as ‘htcm’ or ‘lencm’ and that the current functions do not account for the age category of the coefficients tables by using the age variable in your data. You are expected to subset your data to the 0-2 age category and the use ‘lencm’ as your <code>x_var</code> to get the appropriate calculations. Similarly, if you use ‘htcm’ as the <code>x_var</code> then the 2-5 age category will be used for WHZ calculations.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ki-tools.github.io/growthstandards/">growthstandards</a></span><span class="op">)</span></code></pre></div>
-<pre><code>## Registered S3 method overwritten by 'pryr':
-##   method      from
-##   print.bytes Rcpp</code></pre>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ki-tools.github.io/growthstandards/" class="external-link">growthstandards</a></span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="dplyr-method" class="section level2">
-<h2 class="hasAnchor">
-<a href="#dplyr-method" class="anchor"></a>dplyr method</h2>
-<p>With <code>dplyr</code> the use of <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> we can calculate ‘whz’ using ‘agedays’ to create our two cases.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="va">cpp</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
-    whz <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span>
-      <span class="va">agedays</span> <span class="op">&lt;</span> <span class="fl">730</span> <span class="op">~</span> <span class="fu"><a href="../reference/who_value2zscore.html">who_value2zscore</a></span><span class="op">(</span>
-        x <span class="op">=</span> <span class="va">htcm</span>, y <span class="op">=</span> <span class="va">wtkg</span>, x_var <span class="op">=</span> <span class="st">"lencm"</span>, y_var <span class="op">=</span> <span class="st">"wtkg"</span>, sex <span class="op">=</span> <span class="va">sex</span><span class="op">)</span>,
-      <span class="va">agedays</span> <span class="op">&gt;=</span> <span class="fl">730</span> <span class="op">~</span> <span class="fu"><a href="../reference/who_value2zscore.html">who_value2zscore</a></span><span class="op">(</span>
-        x <span class="op">=</span> <span class="va">htcm</span>, y <span class="op">=</span> <span class="va">wtkg</span>, x_var <span class="op">=</span> <span class="st">"htcm"</span>, y_var <span class="op">=</span> <span class="st">"wtkg"</span>, sex <span class="op">=</span> <span class="va">sex</span><span class="op">)</span>
-    <span class="op">)</span>
-  <span class="op">)</span></code></pre></div>
+<div class="section level2">
+<h2 id="dplyr-method">dplyr method<a class="anchor" aria-label="anchor" href="#dplyr-method"></a>
+</h2>
+<p>With <code>dplyr</code> the use of <code><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when()</a></code> we can calculate ‘whz’ using ‘agedays’ to create our two cases.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="va">cpp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span>    whz <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span></span>
+<span>      <span class="va">agedays</span> <span class="op">&lt;</span> <span class="fl">730</span> <span class="op">~</span> <span class="fu"><a href="../reference/who_value2zscore.html">who_value2zscore</a></span><span class="op">(</span></span>
+<span>        x <span class="op">=</span> <span class="va">htcm</span>, y <span class="op">=</span> <span class="va">wtkg</span>, x_var <span class="op">=</span> <span class="st">"lencm"</span>, y_var <span class="op">=</span> <span class="st">"wtkg"</span>, sex <span class="op">=</span> <span class="va">sex</span><span class="op">)</span>,</span>
+<span>      <span class="va">agedays</span> <span class="op">&gt;=</span> <span class="fl">730</span> <span class="op">~</span> <span class="fu"><a href="../reference/who_value2zscore.html">who_value2zscore</a></span><span class="op">(</span></span>
+<span>        x <span class="op">=</span> <span class="va">htcm</span>, y <span class="op">=</span> <span class="va">wtkg</span>, x_var <span class="op">=</span> <span class="st">"htcm"</span>, y_var <span class="op">=</span> <span class="st">"wtkg"</span>, sex <span class="op">=</span> <span class="va">sex</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 </div>
-<div id="base-r-method" class="section level2">
-<h2 class="hasAnchor">
-<a href="#base-r-method" class="anchor"></a>Base R method</h2>
+<div class="section level2">
+<h2 id="base-r-method">Base R method<a class="anchor" aria-label="anchor" href="#base-r-method"></a>
+</h2>
 <p>Using the provided <code>cpp</code> data we have created two data sets based on the ‘agedays’ variable.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cpp_lt2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">cpp</span>, <span class="va">agedays</span> <span class="op">&lt;</span> <span class="fl">730</span><span class="op">)</span>
-<span class="va">cpp_gt2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">cpp</span>, <span class="va">agedays</span> <span class="op">&gt;=</span> <span class="fl">730</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cpp_lt2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">cpp</span>, <span class="va">agedays</span> <span class="op">&lt;</span> <span class="fl">730</span><span class="op">)</span></span>
+<span><span class="va">cpp_gt2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">cpp</span>, <span class="va">agedays</span> <span class="op">&gt;=</span> <span class="fl">730</span><span class="op">)</span></span></code></pre></div>
 <p>Now we can use the specific functions to calculate the appropriate z-scores.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cpp_lt2</span><span class="op">$</span><span class="va">whz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/who_value2zscore.html">who_value2zscore</a></span><span class="op">(</span>
-  x <span class="op">=</span> <span class="va">cpp_lt2</span><span class="op">$</span><span class="va">htcm</span>, y <span class="op">=</span> <span class="va">cpp_lt2</span><span class="op">$</span><span class="va">wtkg</span>, x_var <span class="op">=</span> <span class="st">"lencm"</span>, y_var <span class="op">=</span> <span class="st">"wtkg"</span>, 
-  sex <span class="op">=</span> <span class="va">cpp_lt2</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></code></pre></div>
-<pre><code>## Observations with lencm value of 31, 35, 42, 43, 43 are outside the range of the standard. Setting to NA.</code></pre>
-<pre><code>## Observations with lencm value of 44 are outside the range of the standard. Setting to NA.</code></pre>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cpp_gt2</span><span class="op">$</span><span class="va">whz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/who_value2zscore.html">who_value2zscore</a></span><span class="op">(</span>
-  x <span class="op">=</span> <span class="va">cpp_gt2</span><span class="op">$</span><span class="va">htcm</span>, y <span class="op">=</span> <span class="va">cpp_gt2</span><span class="op">$</span><span class="va">wtkg</span>, x_var <span class="op">=</span> <span class="st">"htcm"</span>, y_var <span class="op">=</span> <span class="st">"wtkg"</span>, 
-  sex <span class="op">=</span> <span class="va">cpp_gt2</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></code></pre></div>
-<pre><code>## Observations with htcm value of 125, 122, 122, 122, 123, 124, 124, 121, 122, 126, 121, 121, 126, 130, 121, 132, 127, 123, 122, 123, 123, 127, 127, 121, 126, 127, 122, 123, 125, 122, 127, 124, 121, 122, 125, 123, 127, 123, 124, 122, 122, 121, 130, 129, 127, 130, 122, 130, 127, 123, 121, 128, 150, 126, 123, 124, 123, 125, 122, 123, 131, 123, 121, 123, 122, 124, 123, 123, 133, 125, 121, 122, 127, 126, 122, 123, 122, 121, 123, 125, 123, 125, 121, 121, 124, 128, 122, 122, 125, 130, 122, 127, 128, 125, 121, 122, 121, 122, 125, 124, 123, 121, 128, 126 are outside the range of the standard. Setting to NA.</code></pre>
-<pre><code>## Observations with htcm value of 125, 125, 125, 127, 128, 122, 130, 124, 125, 121, 123, 125, 123, 129, 123, 124, 129, 127, 126, 123, 123, 124, 121, 130, 123, 127, 124, 122, 123, 125, 123, 124, 125, 124, 123, 125, 121, 122, 126, 122, 125, 131, 124, 125, 121, 127, 132, 125, 123, 121, 122, 122, 123, 130, 123, 123, 126, 133, 122, 123, 122, 121, 132, 123, 126, 128, 124, 122, 126, 121, 123, 123, 122, 126, 132, 128, 127, 127, 125, 124, 122, 130, 124, 141, 125, 122, 126, 127, 123, 126, 126, 122, 136, 136, 129, 121, 121, 121, 122, 121, 121, 125, 126, 123, 125, 132, 121, 122, 128, 125 are outside the range of the standard. Setting to NA.</code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cpp_lt2</span><span class="op">$</span><span class="va">whz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/who_value2zscore.html">who_value2zscore</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="va">cpp_lt2</span><span class="op">$</span><span class="va">htcm</span>, y <span class="op">=</span> <span class="va">cpp_lt2</span><span class="op">$</span><span class="va">wtkg</span>, x_var <span class="op">=</span> <span class="st">"lencm"</span>, y_var <span class="op">=</span> <span class="st">"wtkg"</span>, </span>
+<span>  sex <span class="op">=</span> <span class="va">cpp_lt2</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Observations with lencm value of 31, 35, 42, 43, 43 are outside the range of the standard. Setting to NA.</span></span></code></pre>
+<pre><code><span><span class="co">## Observations with lencm value of 44 are outside the range of the standard. Setting to NA.</span></span></code></pre>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cpp_gt2</span><span class="op">$</span><span class="va">whz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/who_value2zscore.html">who_value2zscore</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="va">cpp_gt2</span><span class="op">$</span><span class="va">htcm</span>, y <span class="op">=</span> <span class="va">cpp_gt2</span><span class="op">$</span><span class="va">wtkg</span>, x_var <span class="op">=</span> <span class="st">"htcm"</span>, y_var <span class="op">=</span> <span class="st">"wtkg"</span>, </span>
+<span>  sex <span class="op">=</span> <span class="va">cpp_gt2</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Observations with htcm value of 125, 122, 122, 122, 123, 124, 124, 121, 122, 126, 121, 121, 126, 130, 121, 132, 127, 123, 122, 123, 123, 127, 127, 121, 126, 127, 122, 123, 125, 122, 127, 124, 121, 122, 125, 123, 127, 123, 124, 122, 122, 121, 130, 129, 127, 130, 122, 130, 127, 123, 121, 128, 150, 126, 123, 124, 123, 125, 122, 123, 131, 123, 121, 123, 122, 124, 123, 123, 133, 125, 121, 122, 127, 126, 122, 123, 122, 121, 123, 125, 123, 125, 121, 121, 124, 128, 122, 122, 125, 130, 122, 127, 128, 125, 121, 122, 121, 122, 125, 124, 123, 121, 128, 126 are outside the range of the standard. Setting to NA.</span></span></code></pre>
+<pre><code><span><span class="co">## Observations with htcm value of 125, 125, 125, 127, 128, 122, 130, 124, 125, 121, 123, 125, 123, 129, 123, 124, 129, 127, 126, 123, 123, 124, 121, 130, 123, 127, 124, 122, 123, 125, 123, 124, 125, 124, 123, 125, 121, 122, 126, 122, 125, 131, 124, 125, 121, 127, 132, 125, 123, 121, 122, 122, 123, 130, 123, 123, 126, 133, 122, 123, 122, 121, 132, 123, 126, 128, 124, 122, 126, 121, 123, 123, 122, 126, 132, 128, 127, 127, 125, 124, 122, 130, 124, 141, 125, 122, 126, 127, 123, 126, 126, 122, 136, 136, 129, 121, 121, 121, 122, 121, 121, 125, 126, 123, 125, 132, 121, 122, 128, 125 are outside the range of the standard. Setting to NA.</span></span></code></pre>
 <p>Finally, we can combine the data back into one data set with the additional ‘whz’ column.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cpp_whz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">cpp_lt2</span>, <span class="va">cpp_gt2</span><span class="op">)</span>
-<span class="va">cpp_whz</span> <span class="op">&lt;-</span> <span class="va">cpp_whz</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">cpp_whz</span><span class="op">$</span><span class="va">subjid</span>, <span class="va">cpp_whz</span><span class="op">$</span><span class="va">agedays</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cpp_whz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">cpp_lt2</span>, <span class="va">cpp_gt2</span><span class="op">)</span></span>
+<span><span class="va">cpp_whz</span> <span class="op">&lt;-</span> <span class="va">cpp_whz</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">cpp_whz</span><span class="op">$</span><span class="va">subjid</span>, <span class="va">cpp_whz</span><span class="op">$</span><span class="va">agedays</span><span class="op">)</span>, <span class="op">]</span></span></code></pre></div>
 </div>
   </div>
 
@@ -163,11 +156,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Ryan Hafen.</p>
+  <p></p>
+<p>Developed by Ryan Hafen.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -175,6 +170,8 @@
 
   
 
+
+  
 
   </body>
 </html>

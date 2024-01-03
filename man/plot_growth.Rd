@@ -8,10 +8,7 @@
 \alias{geom_who}
 \alias{geom_igb}
 \alias{geom_igfet}
-\alias{ly_who}
-\alias{ly_igb}
-\alias{ly_igfet}
-\title{Utility functions for adding growth standard bands to rbokeh/lattice/ggplot2 plots}
+\title{Utility functions for adding growth standard bands to ggplot2/lattice plots}
 \usage{
 panel.who(
   x,
@@ -74,49 +71,6 @@ geom_who(...)
 geom_igb(..., var = "lencm")
 
 geom_igfet(..., var = "hccm", color = "green")
-
-ly_who(
-  fig,
-  x,
-  x_var = "agedays",
-  y_var = "htcm",
-  sex = "Female",
-  p = c(1, 5, 25, 50),
-  color = NULL,
-  alpha = 0.15,
-  center = FALSE,
-  labels = TRUE,
-  x_trans = identity,
-  y_trans = identity,
-  x_units = c("days", "months", "years")
-)
-
-ly_igb(
-  fig,
-  gagebrth,
-  var = "lencm",
-  sex = "Female",
-  p = c(1, 5, 25, 50),
-  color = NULL,
-  alpha = 0.15,
-  center = FALSE,
-  labels = TRUE,
-  x_trans = identity,
-  y_trans = identity
-)
-
-ly_igfet(
-  fig,
-  gagedays,
-  var = "hccm",
-  p = c(1, 5, 25, 50),
-  color = "green",
-  alpha = 0.15,
-  center = FALSE,
-  labels = TRUE,
-  x_trans = identity,
-  y_trans = identity
-)
 }
 \arguments{
 \item{x, x_seq}{value or vector of values that correspond to a measure defined by \code{x_var}. \code{x_seq} is used with geom_*}
@@ -152,46 +106,18 @@ ly_igfet(
 \item{standard}{standard name to use.  Either \code{"who"}, \code{"igb"}, or \code{"igfet"}}
 
 \item{...}{items supplied direclty to \code{geom_growthstandard}}
-
-\item{fig}{rbokeh figure to add growth standard to}
-
-\item{x_units}{units of age x-axis (days, months, or years)}
 }
 \description{
-Utility functions for adding growth standard bands to rbokeh/lattice/ggplot2 plots
+Utility functions for adding growth standard bands to ggplot2/lattice plots
 }
 \examples{
 \dontrun{
-#### rbokeh
+#### ggplot2
 
-library(rbokeh)
-figure() \%>\%
-  ly_who(x = seq(0, 2558, by = 30), y_var = "wtkg",
-    x_trans = days2years, sex = "Male") \%>\%
-  ly_points(days2years(agedays), wtkg,
-    data = subset(cpp, subjid == 8), col = "black",
-    hover = c(agedays, wtkg, lencm, htcm, bmi, geniq, sysbp, diabp))
-
-cpp$wtkg50 <- who_centile2value(cpp$agedays, y_var = "wtkg")
-figure() \%>\%
-  ly_who(x = seq(0, 2558, by = 30), y_var = "wtkg", color = "blue",
-    x_trans = days2years, center = TRUE) \%>\%
-  ly_points(days2years(agedays), wtkg - wtkg50, color = "black",
-    data = subset(cpp, subjid == 8))
-
-# look at Male birth lengths superposed on INTERGROWTH birth standard
-# first we need just 1 record per subject with subject-level data
-cppsubj <- subset(cpp, !duplicated(cpp$subjid))
-figure(xlab = "Gestational Age at Birth (days)", ylab = "Birth Length (cm)") \%>\%
-  ly_igb(gagebrth = 250:310, var = "lencm", sex = "Male") \%>\%
-  ly_points(jitter(gagebrth), birthlen, data = subset(cppsubj, sex == "Male"),
-    color = "black")
-
-# plot growth standard bands at z=1, 2, 3 for fetal head circumference
-figure(xlab = "Gestational Age (days)",
-  ylab = "Head Circumference (cm)") \%>\%
-    ly_igfet(gagedays = 98:280, var = "hccm", p = pnorm(-3:0) * 100)
-}
+library(ggplot2)
+p <- ggplot(data = subset(cpp, subjid == 8), aes(x = agedays, y = htcm)) +
+  geom_who(x_seq = seq(0, 2600, by = 10), y_var = "htcm") +
+  geom_point()
 
 #### lattice
 
@@ -216,11 +142,5 @@ xyplot(birthlen ~ jitter(gagebrth), data = subset(cppsubj, sex == "Male"),
   col = "black", alpha = 0.75,
   xlab = "Gestational Age at Birth (days)", ylab = "Birth Length (cm)"
 )
-
-#### ggplot2
-
-library(ggplot2)
-p <- ggplot(data = subset(cpp, subjid == 8), aes(x = agedays, y = htcm)) +
-  geom_who(x_seq = seq(0, 2600, by = 10), y_var = "htcm") +
-  geom_point()
+}
 }

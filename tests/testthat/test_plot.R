@@ -7,36 +7,11 @@ context("plots")
 cpp$haz <- who_htcm2zscore(cpp$agedays, cpp$htcm, sex = cpp$sex)
 
 test_that("plots work", {
-  library(rbokeh)
-  figure() %>%
-    ly_who(x = seq(0, 2558, by = 30), y_var = "wtkg",
-      x_trans = days2years, sex = "Male") %>%
-    ly_points(days2years(agedays), wtkg,
-      data = subset(cpp, subjid == 8), col = "black",
-      hover = c(agedays, wtkg, lencm, htcm, bmi, geniq, sysbp, diabp))
-
   cpp$wtkg50 <- who_centile2value(cpp$agedays, y_var = "wtkg")
-  figure() %>%
-    ly_who(x = seq(0, 2558, by = 30), y_var = "wtkg", color = "blue",
-      x_trans = days2years, center = TRUE) %>%
-    ly_points(days2years(agedays), wtkg - wtkg50, color = "black",
-      data = subset(cpp, subjid == 8))
 
   # look at Male birth lengths superposed on INTERGROWTH birth standard
   # first we need just 1 record per subject with subject-level data
   cppsubj <- subset(cpp, !duplicated(cpp$subjid))
-  figure(
-    xlab = "Gestational Age at Birth (days)",
-    ylab = "Birth Length (cm)") %>%
-    ly_igb(gagebrth = 250:310, var = "lencm", sex = "Male") %>%
-    ly_points(jitter(gagebrth), birthlen, data = subset(cppsubj, sex == "Male"),
-      color = "black")
-
-  # plot growth standard bands at z=1, 2, 3 for fetal head circumference
-  figure(xlab = "Gestational Age (days)",
-    ylab = "Head Circumference (cm)") %>%
-      ly_igfet(gagedays = 98:280, var = "hccm", p = pnorm(-3:0) * 100)
-
   #### lattice
 
   library(lattice)
@@ -68,10 +43,6 @@ test_that("plots work", {
     geom_point()
 
   ## zband
-
-  figure() %>%
-    ly_zband(cpp$agedays) %>%
-    ly_points(jitter(agedays), haz, data = cpp, color = "black")
 
   xyplot(haz ~ jitter(agedays), data = cpp,
     panel = function(x, y, ...) {

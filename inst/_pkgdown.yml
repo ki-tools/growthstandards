@@ -1,4 +1,12 @@
 reference:
+  - title: "Growth Standards"
+    desc: >
+      Convert anthropometric measurements to or from z-scores and centiles
+      using the WHO and INTERGROWTH growth standards. The WHO standard are used
+      for infants, children, and young adults. INTERGROWTH standards are
+      provided for fetal and newborn (including very preterm) calculations.
+    contents:
+      - growthstandards-package
   - title: "Data and Coefficients tables"
     desc: >
       Example subject data `cpp` and coefficients data.frames for [intergrowth (`ig_`)](https://intergrowth21.tghn.org/standards-tools/) and
@@ -22,6 +30,19 @@ reference:
       - igfet_hccm2zscore
       - igfet_zscore2value
       - igfet_zscore2hccm
+  - title: INTERGROWTH GWG
+    desc: "INTERGROWTH mother's gestational weight gain"
+    contents:
+      - iggwg_value2zscore
+      - iggwg_zscore2value
+  - title: INTERGROWTH Post/Pre
+    desc: "INTERGROWTH postnatal growth for preterm infants"
+    contents:
+      - igprepost_centile2value
+      - igprepost_value2centile
+      - igprepost_lencm2zscore
+      - igprepost_zscore2value
+      - igprepost_zscore2lencm
   - title: World Health Orginization (WHO)
     desc: "WHO conversion functions"
     contents:
@@ -29,13 +50,17 @@ reference:
       - who_value2zscore
       - who_wtkg2zscore
       - who_zscore2htcm
-  - title: Plotting functions for use with rbokeh, lattice, and ggplot2
+  - title: Plotting functions for use with ggplot2 and lattice
     desc: "Add growth standard bands to plots"
     contents:
+      - geom_growthstandard
+      - geom_who
+      - geom_igb
+      - geom_igfet
+      - geom_zband
       - panel.who
-      - ly_zband
+      - panel.zband
   - title: Conversion functions
     desc: "Functions to convert between units and to get data"
     contents:      
       - cm2in
-

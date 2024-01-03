@@ -1,6 +1,6 @@
 Package: growthstandards
 Title: Anthropometric Growth Standard Calculations
-Version: 0.1.5
+Version: 0.1.6
 Authors@R: person("Ryan", "Hafen", email = "rhafen@gmail.com", role = c("aut", "cre"))
 Description: Convert anthropometric measurements to or from z-scores and centiles
     using the WHO and INTERGROWTH growth standards. The WHO standard are used
@@ -17,14 +17,13 @@ Imports:
     gamlss.dist,
     ggplot2,
     grid,
-    dplyr,
-    rbokeh
+    dplyr
 Suggests:
     testthat,
     covr,
     lintr,
     knitr
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 VignetteBuilder: knitr
 BugReports: https://github.com/ki-tools/growthstandards/issues
 Roxygen: list(markdown = TRUE)

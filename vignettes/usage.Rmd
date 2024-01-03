@@ -308,37 +308,3 @@ xyplot(wtkg ~ agedays, data = subset(cpp, subjid == 8),
   ylim = c(0, 39),
   col = "black")
 ```
-
-#### rbokeh
-
-Here's an example plotting the same plot as the lattice plot, transforming `agedays` to age in years and taking advantage of several of rbokeh's interactive features, such as hover and zoom/pan.
-
-```{r who_bokeh, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, lazy=TRUE}
-library(rbokeh)
-figure(xlab = "Age (years)", ylab = "wtkg") %>%
-  ly_who(x = seq(0, 2600, by = 10), y_var = "wtkg",
-    sex = "Male", x_trans = days2years) %>%
-  ly_points(days2years(agedays), wtkg,
-    data = subset(cpp, subjid == 8), col = "black",
-    hover = c(agedays, wtkg, lencm, htcm, bmi, geniq, sysbp, diabp))
-```
-
-Look at Male birth lengths superposed on the INTERGROWTH birth standard:
-
-```{r igb_bokeh, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, lazy=TRUE}
-# first we need just 1 record per subject with subject-level data
-cppsubj <- cpp[!duplicated(cpp$subjid),]
-figure(xlab = "Gestational Age at Birth (days)", ylab = "Birth Length (cm)") %>%
-  ly_igb(gagebrth = 250:310, var = "lencm", sex = "Male") %>%
-  ly_points(jitter(gagebrth), birthlen, data = subset(cppsubj, sex == "Male"),
-    color = "black")
-```
-
-Plot INTERGROWTH prenatal growth standard bands at z=1,2,3 for prenatal head circumference
-
-```{r igfet_bokeh, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, lazy=TRUE}
-figure(xlab = "Gestational Age (days)",
-  ylab = "Head Circumference (cm)") %>%
-    ly_igfet(gagedays = 98:280, var = "hccm", p = pnorm(-3:0) * 100)
-```
-

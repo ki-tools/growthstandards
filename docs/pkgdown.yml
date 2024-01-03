@@ -1,8 +1,8 @@
-pandoc: 2.2.3.2
-pkgdown: 1.6.1
+pandoc: 2.16.2
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   usage: usage.html
   weight_for_height: weight_for_height.html
-last_built: 2021-02-25T08:08Z
+last_built: 2024-01-03T00:15Z
 
