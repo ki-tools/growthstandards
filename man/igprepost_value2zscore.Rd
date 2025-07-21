@@ -3,7 +3,8 @@
 \name{igprepost_value2centile}
 \alias{igprepost_value2centile}
 \alias{igprepost_value2zscore}
-\title{Convert postnatal growth measurements for preterm infants to INTERGROWTH z-scores/centiles (generic)}
+\title{Convert postnatal growth measurements for preterm infants to INTERGROWTH
+z-scores/centiles (generic)}
 \usage{
 igprepost_value2centile(pmagedays, val, var = "lencm", sex = "Female")
 
@@ -19,15 +20,22 @@ igprepost_value2zscore(pmagedays, val, var = "lencm", sex = "Female")
 \item{sex}{"Male" or "Female"}
 }
 \description{
-Convert postnatal growth measurements for preterm infants to INTERGROWTH z-scores/centiles (generic)
+Convert postnatal growth measurements for preterm infants to INTERGROWTH
+z-scores/centiles (generic)
 }
 \examples{
-# get centile of 0.99kg 27 week postmenstrual age Male and 0.91kg 27 week postmenstrual age Female
-igprepost_value2centile(27 * 7, c(0.99, 0.91), var = "wtkg",
-  sex = c("Male", "Female"))
+# get centile of 0.99kg 27 week postmenstrual age Male and 0.91kg 27 week
+# postmenstrual age Female
+igprepost_value2centile(
+  27 * 7,
+  c(0.99, 0.91),
+  var = "wtkg",
+  sex = c("Male", "Female")
+)
 }
 \references{
-Postnatal growth standards for preterm infants: the Preterm Postnatal Follow-up Study of the INTERGROWTH-21st Project.
+Postnatal growth standards for preterm infants: the Preterm
+Postnatal Follow-up Study of the INTERGROWTH-21st Project.
 Villar J, Giuliani F, Bhutta ZA, et al.
 Lancet Glob Health 2015; 3: e681–91.
 }

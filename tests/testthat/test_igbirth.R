@@ -2,7 +2,8 @@
 
 context("igbirth")
 
-chkpts <- read.csv(textConnection("var,sex,ga,p3,p5,p10,p50,p90,p95,p97
+chkpts <- read.csv(
+  textConnection("var,sex,ga,p3,p5,p10,p50,p90,p95,p97
 lencm,Male,232,39.89,40.45,41.28,43.98,46.70,47.54,48.11
 lencm,Male,300,48.49,48.89,49.49,51.44,53.40,54.01,54.42
 lencm,Female,232,39.98,40.46,41.19,43.57,45.87,46.55,47.01
@@ -23,30 +24,46 @@ wlr,Male,231,3.0864,3.2611,3.5324,4.4839,5.4354,5.7067,5.8814
 wlr,Male,300,5.9766,6.1325,6.3747,7.2241,8.0734,8.3156,8.4715
 wlr,Female,231,3.2151,3.3751,3.6235,4.4947,5.3659,5.6143,5.7743
 wlr,Female,300,5.6713,5.8313,6.0797,6.9509,7.8221,8.0705,8.2305"),
-stringsAsFactors = FALSE)
+  stringsAsFactors = FALSE
+)
 
 test_that("vectorized intergrowth birth standard to centile works", {
-  a <- igb_centile2value(chkpts$ga,
-    var = chkpts$var, sex = chkpts$sex)
+  a <- igb_centile2value(
+    chkpts$ga,
+    var = chkpts$var,
+    sex = chkpts$sex
+  )
   expect_true(all(abs(a - chkpts$p50) < 0.015))
 
-  a <- igb_zscore2value(chkpts$ga,
-    var = chkpts$var, sex = chkpts$sex)
+  a <- igb_zscore2value(
+    chkpts$ga,
+    var = chkpts$var,
+    sex = chkpts$sex
+  )
   expect_true(all(abs(a - chkpts$p50) < 0.015))
 })
 
 test_that("vectorized intergrowth birth standard centile to value works", {
-  a <- igb_value2centile(chkpts$ga, chkpts$p50,
-    var = chkpts$var, sex = chkpts$sex) / 100
+  a <- igb_value2centile(
+    chkpts$ga,
+    chkpts$p50,
+    var = chkpts$var,
+    sex = chkpts$sex
+  ) / 100
   expect_true(all(abs(a - 0.5) < 0.015))
 
-  a <- igb_value2zscore(chkpts$ga, chkpts$p50,
-    var = chkpts$var, sex = chkpts$sex)
+  a <- igb_value2zscore(
+    chkpts$ga,
+    chkpts$p50,
+    var = chkpts$var,
+    sex = chkpts$sex
+  )
   expect_true(all(abs(a - 0) < 0.03))
 })
 
 # test the very early preterm standard as well
-echkpts <- read.csv(textConnection("zz_m2,zz_p2,s,m,ga
+echkpts <- read.csv(
+  textConnection("zz_m2,zz_p2,s,m,ga
 27.02,37.41,Male,lencm,168
 28.29,38.68,Male,lencm,175
 29.56,39.95,Male,lencm,182
@@ -102,25 +119,42 @@ echkpts <- read.csv(textConnection("zz_m2,zz_p2,s,m,ga
 25.18,31.42,Female,hcircm,217
 26.07,32.31,Female,hcircm,224
 "),
-stringsAsFactors = FALSE)
+  stringsAsFactors = FALSE
+)
 
 test_that("vectorized intergrowth early birth z-score to value works", {
-  a <- igb_zscore2value(echkpts$ga, 2,
-    var = echkpts$m, sex = echkpts$s)
+  a <- igb_zscore2value(
+    echkpts$ga,
+    2,
+    var = echkpts$m,
+    sex = echkpts$s
+  )
   expect_true(all(abs(a - echkpts$zz_p2) < 0.015))
 
-  a <- igb_zscore2value(echkpts$ga, -2,
-    var = echkpts$m, sex = echkpts$s)
+  a <- igb_zscore2value(
+    echkpts$ga,
+    -2,
+    var = echkpts$m,
+    sex = echkpts$s
+  )
   expect_true(all(abs(a - echkpts$zz_m2) < 0.015))
 })
 
 test_that("vectorized intergrowth early birth value to z-score works", {
-  a <- igb_value2zscore(echkpts$ga, echkpts$zz_m2,
-    var = echkpts$m, sex = echkpts$s)
+  a <- igb_value2zscore(
+    echkpts$ga,
+    echkpts$zz_m2,
+    var = echkpts$m,
+    sex = echkpts$s
+  )
   expect_true(all(abs(a + 2) < 0.05))
 
-  a <- igb_value2zscore(echkpts$ga, echkpts$zz_p2,
-    var = echkpts$m, sex = echkpts$s)
+  a <- igb_value2zscore(
+    echkpts$ga,
+    echkpts$zz_p2,
+    var = echkpts$m,
+    sex = echkpts$s
+  )
   expect_true(all(abs(a - 2) < 0.05))
 })
 

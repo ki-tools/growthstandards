@@ -37,10 +37,13 @@ who_value2centile(
 \item{data}{optional data frame that supplies any of the other variables provided to the function}
 }
 \description{
-Compute z-scores or centiles with respect to the WHO growth standard for given values of x vs. y (typically x is "agedays" and y is a measure like "htcm").
+Compute z-scores or centiles with respect to the WHO growth standard for
+given values of x vs. y (typically x is "agedays" and y is a measure like
+"htcm").
 }
 \details{
-for all supported pairings of \code{y_var} and \code{x_var} , type \code{names(who_coefs)}
+for all supported pairings of \code{y_var} and \code{x_var}, type
+\code{names(who_coefs)}
 }
 \examples{
 # z-scores
@@ -51,7 +54,7 @@ who_value2centile(1670, in2cm(44))
 who_value2centile(1670, lb2kg(48), y_var = "wtkg")
 
 # add haz derived from WHO data and compare to that provided with data
-cpp$haz <- who_value2zscore(x = agedays,  y = lencm, sex = sex, data = cpp)
+cpp$haz <- who_value2zscore(x = agedays, y = lencm, sex = sex, data = cpp)
 
 # note that you can also do it this way
 #' cpp$haz <- who_value2zscore(cpp$agedays, cpp$lencm, sex = cpp$sex)

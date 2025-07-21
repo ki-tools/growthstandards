@@ -15,7 +15,6 @@ ofd, 14,  30.12,  33.76,  37.40
 ofd, 40, 104.12, 115.77, 127.42"), stringsAsFactors = FALSE)
 
 test_that("intergrowth fetal quantile calculations are correct", {
-
   # nolint start
   # https://intergrowth21.tghn.org/site_media/media/articles/INTERGROWTH21st_Fetal_charts_Abdominal_Circumfrance_11062015.pdf
   # https://intergrowth21.tghn.org/site_media/media/articles/INTERGROWTH21st_Fetal_charts_Bi-Parietal_Diameter_11062015.pdf
@@ -27,18 +26,29 @@ test_that("intergrowth fetal quantile calculations are correct", {
   for (i in seq_len(nrow(checkpoints))) {
     cp <- checkpoints[i, ]
     expect_true(igfet_value2centile(
-      cp$ga * 7, cp$p3 / 10, var = cp$var) / 100 - 0.03 < 0.001)
+      cp$ga * 7,
+      cp$p3 / 10,
+      var = cp$var
+    ) / 100 - 0.03 < 0.001)
     expect_true(igfet_value2centile(
-      cp$ga * 7, cp$p50 / 10, var = cp$var) / 100 - 0.5 < 0.001)
+      cp$ga * 7,
+      cp$p50 / 10,
+      var = cp$var
+    ) / 100 - 0.5 < 0.001)
     expect_true(igfet_value2centile(
-      cp$ga * 7, cp$p97 / 10, var = cp$var) / 100 - 0.97 < 0.001)
+      cp$ga * 7,
+      cp$p97 / 10,
+      var = cp$var
+    ) / 100 - 0.97 < 0.001)
   }
 })
 
 test_that("vectorized igfet transformations work", {
   cp2 <- subset(checkpoints, var == "bpd")
   expect_true(all(igfet_bpdcm2centile(
-    cp2$ga * 7, cp2$p3 / 10) / 100 - 0.03 < 0.001))
+    cp2$ga * 7,
+    cp2$p3 / 10
+  ) / 100 - 0.03 < 0.001))
 })
 
 test_that("intergrowth fetal calculations invert correctly", {

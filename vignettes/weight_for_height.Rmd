@@ -32,9 +32,19 @@ cpp %>%
   mutate(
     whz = case_when(
       agedays < 730 ~ who_value2zscore(
-        x = htcm, y = wtkg, x_var = "lencm", y_var = "wtkg", sex = sex),
+        x = htcm,
+        y = wtkg,
+        x_var = "lencm",
+        y_var = "wtkg",
+        sex = sex
+      ),
       agedays >= 730 ~ who_value2zscore(
-        x = htcm, y = wtkg, x_var = "htcm", y_var = "wtkg", sex = sex)
+        x = htcm,
+        y = wtkg,
+        x_var = "htcm",
+        y_var = "wtkg",
+        sex = sex
+      )
     )
   )
 ```
@@ -52,15 +62,21 @@ cpp_gt2 <- subset(cpp, agedays >= 730)
 Now we can use the specific functions to calculate the appropriate z-scores.
 
 ```{r}
-
 cpp_lt2$whz <- who_value2zscore(
-  x = cpp_lt2$htcm, y = cpp_lt2$wtkg, x_var = "lencm", y_var = "wtkg", 
-  sex = cpp_lt2$sex)
+  x = cpp_lt2$htcm,
+  y = cpp_lt2$wtkg,
+  x_var = "lencm",
+  y_var = "wtkg",
+  sex = cpp_lt2$sex
+)
 
 cpp_gt2$whz <- who_value2zscore(
-  x = cpp_gt2$htcm, y = cpp_gt2$wtkg, x_var = "htcm", y_var = "wtkg", 
-  sex = cpp_gt2$sex)
-
+  x = cpp_gt2$htcm,
+  y = cpp_gt2$wtkg,
+  x_var = "htcm",
+  y_var = "wtkg",
+  sex = cpp_gt2$sex
+)
 ```
 
 Finally, we can combine the data back into one data set with the additional 'whz' column.

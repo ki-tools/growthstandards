@@ -107,15 +107,21 @@ For example, suppose we want to plot the WHO 99th centile of weight for age of b
 ```{r q99, eval=TRUE, echo=TRUE, message=FALSE}
 dat <- data.frame(
   x   = rep(seq(0, 1461, length = 100), 2),
-  sex = rep(c("Male", "Female"), each = 100))
+  sex = rep(c("Male", "Female"), each = 100)
+)
 
 dat$p99 <- who_centile2wtkg(dat$x, p = 99, sex = dat$sex)
 
 library(lattice)
 
-xyplot(kg2lb(p99) ~ days2years(x), groups = sex, data = dat,
+xyplot(
+  kg2lb(p99) ~ days2years(x),
+  groups = sex,
+  data = dat,
   ylab = "99th percentile weight (pounds) for males",
-  xlab = "age (years)", auto.key = TRUE)
+  xlab = "age (years)",
+  auto.key = TRUE
+)
 ```
 
 Here we are using a convenience function, `kg2lb()`, provided with the package to plot the weights in pounds.
@@ -178,20 +184,29 @@ Also, we can make a quick and crude recreation of the boys charts seen [here](ht
 
 ```{r igb2, eval=TRUE, echo=TRUE, fig.height=7}
 chartdat <- do.call(rbind, lapply(c(3, 10, 50, 90, 97), function(p) {
-  data.frame(p = p, gagebrth = 232:300,
-  make.groups(
-    wtkg = igb_centile2wtkg(232:300, p, sex = "Male"),
-    lencm = igb_centile2lencm(232:300, p, sex = "Male"),
-    hcircm = igb_centile2hcircm(232:300, p, sex = "Male")
-  ))
+  data.frame(
+    p = p,
+    gagebrth = 232:300,
+    make.groups(
+      wtkg = igb_centile2wtkg(232:300, p, sex = "Male"),
+      lencm = igb_centile2lencm(232:300, p, sex = "Male"),
+      hcircm = igb_centile2hcircm(232:300, p, sex = "Male")
+    )
+  )
 }))
 
-xyplot(data ~ gagebrth / 7 | which, groups = p, data = chartdat,
+xyplot(
+  data ~ gagebrth / 7 | which,
+  groups = p,
+  data = chartdat,
   type = c("l", "g"),
-  strip = FALSE, strip.left = TRUE,
+  strip = FALSE,
+  strip.left = TRUE,
   scales = list(y = list(relation = "free")),
-  layout = c(1, 3), as.table = TRUE,
-  xlab = "Gestational Age at Birth (weeks)", ylab = ""
+  layout = c(1, 3),
+  as.table = TRUE,
+  xlab = "Gestational Age at Birth (weeks)",
+  ylab = ""
 )
 ```
 
@@ -299,12 +314,19 @@ ggplot(data = subset(cpp, subjid == 8), aes(x = agedays, y = htcm)) +
 This example of uses `panel.who()` to superpose the WHO growth standard with a plot of a CPP subject's height vs. age, with WHO bands at z-scores -3, -2, -1, 0, 1, 2, 3:
 
 ```{r who_lattice, eval=TRUE, echo=TRUE, message=FALSE}
-xyplot(wtkg ~ agedays, data = subset(cpp, subjid == 8),
+xyplot(
+  wtkg ~ agedays,
+  data = subset(cpp, subjid == 8),
   panel = function(x, y, ...) {
-    panel.who(x = seq(0, 2600, by = 10),
-      sex = "Male", y_var = "wtkg", p = pnorm(-3:0) * 100)
+    panel.who(
+      x = seq(0, 2600, by = 10),
+      sex = "Male",
+      y_var = "wtkg",
+      p = pnorm(-3:0) * 100
+    )
     panel.xyplot(x, y, ...)
   },
   ylim = c(0, 39),
-  col = "black")
+  col = "black"
+)
 ```

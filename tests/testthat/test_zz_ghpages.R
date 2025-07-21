@@ -12,14 +12,12 @@ expect_zscore_centile_fn <- function(
   name,
   standard_name
 ) {
-
   # print(str_c(standard_name, "_", type))
   expect_true(!is.null(time)) # nolint
 
   if (standard_name == "igfet") {
     time <- time_male
     for (random_centile in runif(5, min = 0.1, max = 0.9)) {
-
       maybe_random_centile <- fn_to_centile(time, centile_to_fn(time, random_centile))
       expect_equal(
         random_centile,
@@ -42,7 +40,6 @@ expect_zscore_centile_fn <- function(
   for (sex in c("Female", "Male")) {
     time <- ifelse(sex == "Male", time_male, time_female)
     for (random_centile in runif(5, min = 0.1, max = 0.9)) {
-
       maybe_random_centile <- fn_to_centile(
         time,
         centile_to_fn(time, random_centile, sex = sex),
@@ -69,7 +66,6 @@ expect_zscore_centile_fn <- function(
       )
     }
   }
-
 }
 
 context("Misc")

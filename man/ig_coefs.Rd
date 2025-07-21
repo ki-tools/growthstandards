@@ -14,11 +14,14 @@ A list of coefficients from the INTERGROWTH birth standard.
 head(ig_coefs$hcircm$Female)
 }
 \references{
-International standards for newborn weight, length, and head circumference by gestational age and sex: the Newborn Cross-Sectional Study of the INTERGROWTH-21st Project
+International standards for newborn weight, length, and head
+circumference by gestational age and sex: the Newborn Cross-Sectional Study
+of the INTERGROWTH-21st Project
 Villar, José et al.
 The Lancet, Volume 384, Issue 9946, 857-868
 }
 \seealso{
-\code{\link{igb_centile2value}}, \code{\link{igb_value2centile}}, \code{\link{igb_zscore2value}}, \code{\link{igb_value2zscore}}
+\code{\link{igb_centile2value}}, \code{\link{igb_value2centile}},
+\code{\link{igb_zscore2value}}, \code{\link{igb_value2zscore}}
 }
 \keyword{data}

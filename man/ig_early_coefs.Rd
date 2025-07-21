@@ -14,10 +14,12 @@ A list of coefficients from the INTERGROWTH very preterm birth standard.
 ig_early_coefs$hcircm$Female
 }
 \references{
-INTERGROWTH-21st very preterm size at birth reference charts. Lancet  2016 doi.org/10.1016/S0140-6736(16) 00384-6.
+INTERGROWTH-21st very preterm size at birth reference charts.
+Lancet 2016 doi.org/10.1016/S0140-6736(16) 00384-6.
 Villar, José et al.
 }
 \seealso{
-\code{\link{igb_centile2value}}, \code{\link{igb_value2centile}}, \code{\link{igb_zscore2value}}, \code{\link{igb_value2zscore}}
+\code{\link{igb_centile2value}}, \code{\link{igb_value2centile}},
+\code{\link{igb_zscore2value}}, \code{\link{igb_value2zscore}}
 }
 \keyword{data}

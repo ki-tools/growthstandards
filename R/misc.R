@@ -1,6 +1,7 @@
 v_eval <- function(x, tryres, data) {
-  if (!inherits(tryres, "try-error") && !inherits(x, "name"))
+  if (!inherits(tryres, "try-error") && !inherits(x, "name")) {
     return(x)
+  }
 
   res <- try(eval(x, data), silent = TRUE)
 

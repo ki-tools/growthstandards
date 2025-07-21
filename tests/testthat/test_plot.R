@@ -15,24 +15,35 @@ test_that("plots work", {
   #### lattice
 
   library(lattice)
-  xyplot(wtkg ~ agedays, data = subset(cpp, subjid == 8),
+  xyplot(
+    wtkg ~ agedays,
+    data = subset(cpp, subjid == 8),
     panel = function(x, y, ...) {
-      panel.who(x = seq(0, 2558, by = 30),
-        sex = "Male", y_var = "wtkg", p = 100 * pnorm(-3:0))
+      panel.who(
+        x = seq(0, 2558, by = 30),
+        sex = "Male",
+        y_var = "wtkg",
+        p = 100 * pnorm(-3:0)
+      )
       panel.xyplot(x, y, ...)
     },
-    col = "black")
+    col = "black"
+  )
 
   # look at Male birth lengths superposed on INTERGROWTH birth standard
   # first we need just 1 record per subject with subject-level data
   cppsubj <- subset(cpp, !duplicated(cpp$subjid))
-  xyplot(birthlen ~ jitter(gagebrth), data = subset(cppsubj, sex == "Male"),
+  xyplot(
+    birthlen ~ jitter(gagebrth),
+    data = subset(cppsubj, sex == "Male"),
     panel = function(x, y, ...) {
       panel.igb(gagebrth = 250:310, var = "lencm", sex = "Male")
       panel.points(x, y, ...)
     },
-    col = "black", alpha = 0.75,
-    xlab = "Gestational Age at Birth (days)", ylab = "Birth Length (cm)"
+    col = "black",
+    alpha = 0.75,
+    xlab = "Gestational Age at Birth (days)",
+    ylab = "Birth Length (cm)"
   )
 
   #### ggplot2
@@ -44,18 +55,20 @@ test_that("plots work", {
 
   ## zband
 
-  xyplot(haz ~ jitter(agedays), data = cpp,
+  xyplot(
+    haz ~ jitter(agedays),
+    data = cpp,
     panel = function(x, y, ...) {
       panel.zband(x)
       panel.xyplot(x, y, ...)
     },
-    col = "black", alpha = 0.5
+    col = "black",
+    alpha = 0.5
   )
 
   p <- ggplot(data = cpp, aes(x = jitter(agedays), y = haz))
   geom_zband(p, x = seq(0, 2600, by = 10)) +
     geom_point()
-
 })
 
 # nolint end

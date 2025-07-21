@@ -10,12 +10,18 @@
 5-15 years: \url{http://www.who.int/growthref/tools/en/}
 }
 \description{
-A list of coefficients from the WHO for various pairs of growth standards that are used to compute quantiles and z-scores.  The format is a list, where each element is a pairing of variables, e.g. "wtkg_agedays", "htcm_agedays", "bmi_agedays", "hcircm_agedays", "muaccm_agedays", "ss_agedays", "tsftmm_agedays", "wtkg_lencm""wtkg_htcm".  Within each of these elements is a list for sex with names "Female" and "Male".
+A list of coefficients from the WHO for various pairs of growth standards
+that are used to compute quantiles and z-scores.  The format is a list, where
+each element is a pairing of variables, e.g. "wtkg_agedays", "htcm_agedays",
+"bmi_agedays", "hcircm_agedays", "muaccm_agedays", "ss_agedays",
+"tsftmm_agedays", "wtkg_lencm""wtkg_htcm".  Within each of these elements is
+a list for sex with names "Female" and "Male".
 }
 \examples{
 head(who_coefs$htcm_age$Female$data)
 }
 \seealso{
-\code{\link{who_centile2value}}, \code{\link{who_value2centile}}, \code{\link{who_zscore2value}}, \code{\link{who_value2zscore}}
+\code{\link{who_centile2value}}, \code{\link{who_value2centile}},
+\code{\link{who_zscore2value}}, \code{\link{who_value2zscore}}
 }
 \keyword{data}

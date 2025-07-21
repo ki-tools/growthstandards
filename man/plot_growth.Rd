@@ -73,7 +73,8 @@ geom_igb(..., var = "lencm")
 geom_igfet(..., var = "hccm", color = "green")
 }
 \arguments{
-\item{x, x_seq}{value or vector of values that correspond to a measure defined by \code{x_var}. \code{x_seq} is used with geom_*}
+\item{x, x_seq}{value or vector of values that correspond to a measure defined
+by \code{x_var}. \code{x_seq} is used with geom_*}
 
 \item{x_var}{x variable name (typically "agedays")}
 
@@ -81,9 +82,11 @@ geom_igfet(..., var = "hccm", color = "green")
 
 \item{sex}{"Male" or "Female"}
 
-\item{p}{centiles at which to draw the growth standard band polygons (only need to specify on one side of the median)}
+\item{p}{centiles at which to draw the growth standard band polygons (only
+need to specify on one side of the median)}
 
-\item{color, shade}{optional color to use for bands (will use \code{sex} to determine if not specified). \code{shade} is used with geom_*}
+\item{color, shade}{optional color to use for bands (will use \code{sex} to
+determine if not specified). \code{shade} is used with geom_*}
 
 \item{alpha}{transparency of the bands}
 
@@ -97,7 +100,8 @@ geom_igfet(..., var = "hccm", color = "green")
 
 \item{gagebrth}{gestational age at birth in days (for igb plots)}
 
-\item{var}{variable name for y axis for igb or igfet plots ("lencm", "wtkg", or "hcircm" for igb; "accm", "bpdcm", "flcm", "hccm", or "ofdcm" for igfet)}
+\item{var}{variable name for y axis for igb or igfet plots ("lencm", "wtkg",
+or "hcircm" for igb; "accm", "bpdcm", "flcm", "hccm", or "ofdcm" for igfet)}
 
 \item{gagedays}{gestational age in days (for igfet plots)}
 
@@ -122,10 +126,16 @@ p <- ggplot(data = subset(cpp, subjid == 8), aes(x = agedays, y = htcm)) +
 #### lattice
 
 library(lattice)
-xyplot(wtkg ~ agedays, data = subset(cpp, subjid == 8),
+xyplot(
+  wtkg ~ agedays,
+  data = subset(cpp, subjid == 8),
   panel = function(x, y, ...) {
-    panel.who(x = seq(0, 2558, by = 30),
-      sex = "Male", y_var = "wtkg", p = 100 * pnorm(-3:0))
+    panel.who(
+      x = seq(0, 2558, by = 30),
+      sex = "Male",
+      y_var = "wtkg",
+      p = 100 * pnorm(-3:0)
+    )
     panel.xyplot(x, y, ...)
   },
   col = "black"
@@ -134,13 +144,17 @@ xyplot(wtkg ~ agedays, data = subset(cpp, subjid == 8),
 # look at Male birth lengths superposed on INTERGROWTH birth standard
 # first we need just 1 record per subject with subject-level data
 cppsubj <- subset(cpp, !duplicated(cpp$subjid))
-xyplot(birthlen ~ jitter(gagebrth), data = subset(cppsubj, sex == "Male"),
+xyplot(
+  birthlen ~ jitter(gagebrth),
+  data = subset(cppsubj, sex == "Male"),
   panel = function(x, y, ...) {
     panel.igb(gagebrth = 250:310, var = "lencm", sex = "Male")
     panel.points(x, y, ...)
   },
-  col = "black", alpha = 0.75,
-  xlab = "Gestational Age at Birth (days)", ylab = "Birth Length (cm)"
+  col = "black",
+  alpha = 0.75,
+  xlab = "Gestational Age at Birth (days)",
+  ylab = "Birth Length (cm)"
 )
 }
 }

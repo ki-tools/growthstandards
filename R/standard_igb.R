@@ -5,28 +5,39 @@
 #' @param p centile(s) to convert (must be between 0 and 100)
 #' @param var the name of the measurement to convert ("lencm", "wtkg", "hcircm", "wlr")
 #' @param sex "Male" or "Female"
-#' @references International standards for newborn weight, length, and head circumference by gestational age and sex: the Newborn Cross-Sectional Study of the INTERGROWTH-21st Project
+#' @references International standards for newborn weight, length, and head
+#' circumference by gestational age and sex: the Newborn Cross-Sectional Study
+#' of the INTERGROWTH-21st Project.
 #' Villar, José et al.
 #' The Lancet, Volume 384, Issue 9946, 857-868
 #'
-#' INTERGROWTH-21st very preterm size at birth reference charts. Lancet 2016 doi.org/10.1016/S0140-6736(16) 00384-6.
+#' INTERGROWTH-21st very preterm size at birth reference charts. Lancet 2016
+#' doi.org/10.1016/S0140-6736(16) 00384-6.
 #' Villar, José et al.
 #' @examples
 #' # get 99th centile for Male birth weights across some gestational ages
 #' igb_centile2value(232:300, 99, var = "wtkg", sex = "Male")
 #' @importFrom gamlss.dist qST3 pST3
 #' @rdname igb_zscore2value
-#' @note For gestational ages between 24 and 33 weeks, the INTERGROWTH very early preterm standard is used.
+#' @note For gestational ages between 24 and 33 weeks, the INTERGROWTH very
+#' early preterm standard is used.
 #' @export
 igb_centile2value <- function(gagebrth, p = 50, var = "lencm", sex = "Female") {
-  dat <- data.frame(x = gagebrth, p = p, var = var, sex = sex,
-    stringsAsFactors = FALSE)
+  dat <- data.frame(
+    x = gagebrth,
+    p = p,
+    var = var,
+    sex = sex,
+    stringsAsFactors = FALSE
+  )
 
-  if (! all(unique(dat$sex[!is.na(dat$sex)]) %in% c("Male", "Female")))
+  if (!all(unique(dat$sex[!is.na(dat$sex)]) %in% c("Male", "Female"))) {
     stop("sex must be 'Male' or 'Female'")
+  }
 
-  if (! all(var %in% c("lencm", "wtkg", "hcircm", "wlr")))
+  if (!all(var %in% c("lencm", "wtkg", "hcircm", "wlr"))) {
     stop("'var' must be one of 'lencm', 'wtkg', 'hcircm', 'wlr'")
+  }
 
   # since coefficients are available only by pair/sex
   # we need to call this for each unique combination
@@ -34,10 +45,10 @@ igb_centile2value <- function(gagebrth, p = 50, var = "lencm", sex = "Female") {
     if (var == "wlr") {
       x <- x / 7
       if (sex == "Male") {
-        res <- -17.84615 + (-3778.768 * ( x ^ (-1))) + (1291.477 * ( (x ^ (-1)) * log(x))) +
-          (qnorm(y / 100) * (1.01047 +  (-0.0080948 * x)))
+        res <- -17.84615 + (-3778.768 * (x^(-1))) + (1291.477 * ((x^(-1)) * log(x))) +
+          (qnorm(y / 100) * (1.01047 + (-0.0080948 * x)))
       } else {
-        res <- -5.542927 + (0.0018926 * (x ^ 3)) + (-0.0004614 * ( (x ^ 3) * log(x))) +
+        res <- -5.542927 + (0.0018926 * (x^3)) + (-0.0004614 * ((x^3) * log(x))) +
           (qnorm(y / 100) * 0.6806229)
       }
     } else {
@@ -47,11 +58,13 @@ igb_centile2value <- function(gagebrth, p = 50, var = "lencm", sex = "Female") {
       idx <- match(x, coefs$ga)
       na_idx <- is.na(idx)
       res <- rep(NA, length(idx))
-      res[!na_idx] <- gamlss.dist::qST3(y[!na_idx] / 100,
+      res[!na_idx] <- gamlss.dist::qST3(
+        y[!na_idx] / 100,
         coefs$mu[idx][!na_idx],
         coefs$sigma[idx][!na_idx],
         coefs$nu[idx][!na_idx],
-        coefs$tau[idx][!na_idx])
+        coefs$tau[idx][!na_idx]
+      )
     }
 
     res
@@ -61,20 +74,23 @@ igb_centile2value <- function(gagebrth, p = 50, var = "lencm", sex = "Female") {
     if (var == "wlr") {
       x <- x / 7
       if (sex == "Male") {
-        res <- (0.1382809 + 3.400617) + (-0.0103163 * x ^ 2) + (0.0003407 * x ^ 3) +
+        res <- (0.1382809 + 3.400617) + (-0.0103163 * x^2) + (0.0003407 * x^3) +
           (qnorm(y / 100) * sqrt(0.3570057))
       } else {
-        res <- 3.400617 + (-0.0103163 * x ^ 2) + (0.0003407 * x ^ 3) +
+        res <- 3.400617 + (-0.0103163 * x^2) + (0.0003407 * x^3) +
           (qnorm(y / 100) * sqrt(0.3570057))
       }
     } else {
       coefs <- growthstandards::ig_early_coefs[[var]]
 
-      frm <- matrix(c(
-        rep(1, length(x)),
-        x / 7,
-        rep(as.integer(sex == "Male"), length(x))),
-        ncol = 3)
+      frm <- matrix(
+        c(
+          rep(1, length(x)),
+          x / 7,
+          rep(as.integer(sex == "Male"), length(x))
+        ),
+        ncol = 3
+      )
       if (var == "wtkg") {
         frm[, 2] <- sqrt(frm[, 2])
       }
@@ -88,9 +104,11 @@ igb_centile2value <- function(gagebrth, p = 50, var = "lencm", sex = "Female") {
     res
   }
 
-  dat <- data.frame(dat %>%
-    dplyr::group_by(var, sex) %>%
-    dplyr::mutate(res = ig_centile2value_single_pars(x, p, var[1], sex[1])))
+  dat <- data.frame(
+    dat %>%
+      dplyr::group_by(var, sex) %>%
+      dplyr::mutate(res = ig_centile2value_single_pars(x, p, var[1], sex[1]))
+  )
 
   # if born earlier than 33 weeks, use early preterm standard
   idx <- which(dat$x < 33 * 7 & dat$x >= 24 * 7)
@@ -121,11 +139,14 @@ igb_zscore2value <- function(gagebrth, z = 0, var = "lencm", sex = "Female") {
 #' @param val the value(s) of the anthro measurement to convert
 #' @param var the name of the measurement to convert ("lencm", "wtkg", "hcircm", "wlr")
 #' @param sex "Male" or "Female"
-#' @references International standards for newborn weight, length, and head circumference by gestational age and sex: the Newborn Cross-Sectional Study of the INTERGROWTH-21st Project
+#' @references International standards for newborn weight, length, and head
+#' circumference by gestational age and sex: the Newborn Cross-Sectional Study
+#' of the INTERGROWTH-21st Project.
 #' Villar, José et al.
 #' The Lancet, Volume 384, Issue 9946, 857-868
 #'
-#' INTERGROWTH-21st very preterm size at birth reference charts. Lancet  2016 doi.org/10.1016/S0140-6736(16) 00384-6.
+#' INTERGROWTH-21st very preterm size at birth reference charts. Lancet 2016
+#' doi.org/10.1016/S0140-6736(16) 00384-6.
 #' Villar, José et al.
 #' @examples
 #' # get Male birth length z-scores
@@ -134,17 +155,19 @@ igb_zscore2value <- function(gagebrth, z = 0, var = "lencm", sex = "Female") {
 #' cppsubj <- subset(cppsubj, sex == "Male")
 #' igb_value2zscore(cpp$gagebrth, cpp$birthlen, var = "lencm", sex = "Male")
 #' @rdname igb_value2zscore
-#' @note For gestational ages between 24 and 33 weeks, the INTERGROWTH very early preterm standard is used.
+#' @note For gestational ages between 24 and 33 weeks, the INTERGROWTH very
+#' early preterm standard is used.
 #' @export
 igb_value2centile <- function(gagebrth, val, var = "lencm", sex = "Female") {
-
   dat <- data.frame(x = gagebrth, y = val, var = var, sex = sex, stringsAsFactors = FALSE)
 
-  if (! all(unique(dat$sex) %in% c("Male", "Female")))
+  if (!all(unique(dat$sex) %in% c("Male", "Female"))) {
     stop("sex must be 'Male' or 'Female'")
+  }
 
-  if (! all(var %in% c("lencm", "wtkg", "hcircm", "wlr")))
+  if (!all(var %in% c("lencm", "wtkg", "hcircm", "wlr"))) {
     stop("'var' must be one of 'lencm', 'wtkg', 'hcircm', 'wlr'")
+  }
 
   # since coefficients are available only by pair/sex
   # we need to call this for each unique combination
@@ -152,14 +175,18 @@ igb_value2centile <- function(gagebrth, val, var = "lencm", sex = "Female") {
     if (var == "wlr") {
       x <- x / 7
       if (sex == "Male") {
-        nn <- function(x) -17.84615 + (-3778.768 * ( x ^ (-1))) +
-          (1291.477 * ( (x ^ (-1)) * log(x)))
-        dd <- function(x) (1.01047 +  (-0.0080948 * x))
+        nn <- function(x) {
+          -17.84615 + (-3778.768 * (x^(-1))) +
+            (1291.477 * ((x^(-1)) * log(x)))
+        }
+        dd <- function(x) (1.01047 + (-0.0080948 * x))
         z <- (y - nn(x)) / dd(x)
         res <- pnorm(z) * 100
       } else {
-        nn <- function(x) -5.542927 + (0.0018926 * (x ^ 3)) +
-          (-0.0004614 * ( (x ^ 3) * log(x)))
+        nn <- function(x) {
+          -5.542927 + (0.0018926 * (x^3)) +
+            (-0.0004614 * ((x^3) * log(x)))
+        }
         dd <- 0.6806229
         z <- (y - nn(x)) / dd
         res <- pnorm(z) * 100
@@ -171,11 +198,13 @@ igb_value2centile <- function(gagebrth, val, var = "lencm", sex = "Female") {
       idx <- match(x, coefs$ga)
       na_idx <- is.na(idx)
       res <- rep(NA, length(idx))
-      res[!na_idx] <- gamlss.dist::pST3(y[!na_idx],
+      res[!na_idx] <- gamlss.dist::pST3(
+        y[!na_idx],
         coefs$mu[idx][!na_idx],
         coefs$sigma[idx][!na_idx],
         coefs$nu[idx][!na_idx],
-        coefs$tau[idx][!na_idx]) * 100
+        coefs$tau[idx][!na_idx]
+      ) * 100
     }
 
     res
@@ -185,12 +214,12 @@ igb_value2centile <- function(gagebrth, val, var = "lencm", sex = "Female") {
     if (var == "wlr") {
       x <- x / 7
       if (sex == "Male") {
-        nn <- function(x) (0.1382809 + 3.400617) + (-0.0103163 * x ^ 2) + (0.0003407 * x ^ 3)
+        nn <- function(x) (0.1382809 + 3.400617) + (-0.0103163 * x^2) + (0.0003407 * x^3)
         dd <- sqrt(0.3570057)
         z <- (y - nn(x)) / dd
         res <- pnorm(z) * 100
       } else {
-        nn <- function(x) 3.400617 + (-0.0103163 * x ^ 2) + (0.0003407 * x ^ 3)
+        nn <- function(x) 3.400617 + (-0.0103163 * x^2) + (0.0003407 * x^3)
         dd <- sqrt(0.3570057)
         z <- (y - nn(x)) / dd
         res <- pnorm(z) * 100
@@ -198,11 +227,14 @@ igb_value2centile <- function(gagebrth, val, var = "lencm", sex = "Female") {
     } else {
       coefs <- growthstandards::ig_early_coefs[[var]]
 
-      frm <- matrix(c(
-        rep(1, length(x)),
-        x / 7,
-        rep(as.integer(sex == "Male"), length(x))),
-        ncol = 3)
+      frm <- matrix(
+        c(
+          rep(1, length(x)),
+          x / 7,
+          rep(as.integer(sex == "Male"), length(x))
+        ),
+        ncol = 3
+      )
       if (var == "wtkg") {
         frm[, 2] <- sqrt(frm[, 2])
         y <- log(y)
@@ -243,7 +275,7 @@ igb_value2zscore <- function(gagebrth, val, var = "lencm", sex = "Female") {
 
 
 ## **2zscore
-##---------------------------------------------------------
+## ---------------------------------------------------------
 
 #' Convert birth measurements to INTERGROWTH z-scores/centiles
 #'
@@ -253,11 +285,14 @@ igb_value2zscore <- function(gagebrth, val, var = "lencm", sex = "Female") {
 #' @param hcircm head circumference (cm) measurement(s) to convert
 #' @param wlr weight-length ratio values(s) to convert
 #' @param sex "Male" or "Female"
-#' @references International standards for newborn weight, length, and head circumference by gestational age and sex: the Newborn Cross-Sectional Study of the INTERGROWTH-21st Project
+#' @references International standards for newborn weight, length, and head
+#' circumference by gestational age and sex: the Newborn Cross-Sectional Study
+#' of the INTERGROWTH-21st Project.
 #' Villar, José et al.
 #' The Lancet, Volume 384, Issue 9946, 857-868
 #'
-#' INTERGROWTH-21st very preterm size at birth reference charts. Lancet  2016 doi.org/10.1016/S0140-6736(16) 00384-6.
+#' INTERGROWTH-21st very preterm size at birth reference charts. Lancet 2016
+#' doi.org/10.1016/S0140-6736(16) 00384-6.
 #' Villar, José et al.
 #' @examples
 #' # get Male birth length z-scores
@@ -266,7 +301,8 @@ igb_value2zscore <- function(gagebrth, val, var = "lencm", sex = "Female") {
 #' cppsubj <- subset(cppsubj, sex == "Male")
 #' igb_lencm2zscore(cpp$gagebrth, cpp$birthlen, sex = "Male")
 #' @rdname igb_var2zscore
-#' @note For gestational ages between 24 and 33 weeks, the INTERGROWTH very early preterm standard is used.
+#' @note For gestational ages between 24 and 33 weeks, the INTERGROWTH very
+#' early preterm standard is used.
 #' @export
 igb_lencm2zscore <- function(gagebrth, lencm, sex = "Female") {
   igb_value2zscore(gagebrth, lencm, var = "lencm", sex = sex)
@@ -291,7 +327,7 @@ igb_wlr2zscore <- function(gagebrth, wlr, sex = "Female") {
 }
 
 ## **2centile
-##---------------------------------------------------------
+## ---------------------------------------------------------
 
 #' @rdname igb_var2zscore
 #' @export
@@ -318,7 +354,7 @@ igb_wlr2centile <- function(gagebrth, wlr, sex = "Female") {
 }
 
 ## zscore2**
-##---------------------------------------------------------
+## ---------------------------------------------------------
 
 #' Convert INTERGROWTH z-scores/centiles to birth measurements
 #'
@@ -326,11 +362,14 @@ igb_wlr2centile <- function(gagebrth, wlr, sex = "Female") {
 #' @param z z-score(s) to convert
 #' @param p centile(s) to convert (must be between 0 and 100)
 #' @param sex "Male" or "Female"
-#' @references International standards for newborn weight, length, and head circumference by gestational age and sex: the Newborn Cross-Sectional Study of the INTERGROWTH-21st Project
+#' @references International standards for newborn weight, length, and head
+#' circumference by gestational age and sex: the Newborn Cross-Sectional Study
+#' of the INTERGROWTH-21st Project.
 #' Villar, José et al.
 #' The Lancet, Volume 384, Issue 9946, 857-868
 #'
-#' INTERGROWTH-21st very preterm size at birth reference charts. Lancet  2016 doi.org/10.1016/S0140-6736(16) 00384-6.
+#' INTERGROWTH-21st very preterm size at birth reference charts. Lancet 2016
+#' doi.org/10.1016/S0140-6736(16) 00384-6.
 #' Villar, José et al.
 #' @examples
 #' # get 99th centile for Male birth weights across some gestational ages
@@ -341,7 +380,8 @@ igb_wlr2centile <- function(gagebrth, wlr, sex = "Female") {
 #' d$value <- igb_centile2lencm(d$gage, d$centile, sex = "Male")
 #' lattice::xyplot(value ~ gage / 7, groups = centile, data = d, type = "l")
 #' @rdname igb_zscore2var
-#' @note For gestational ages between 24 and 33 weeks, the INTERGROWTH very early preterm standard is used.
+#' @note For gestational ages between 24 and 33 weeks, the INTERGROWTH very
+#' early preterm standard is used.
 #' @export
 igb_zscore2lencm <- function(gagebrth, z = 0, sex = "Female") {
   igb_zscore2value(gagebrth, z, var = "lencm", sex = sex)
@@ -366,7 +406,7 @@ igb_zscore2wlr <- function(gagebrth, z = 0, sex = "Female") {
 }
 
 ## centile2**
-##---------------------------------------------------------
+## ---------------------------------------------------------
 
 #' @rdname igb_zscore2var
 #' @export

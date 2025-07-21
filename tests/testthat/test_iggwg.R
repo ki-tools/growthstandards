@@ -24,11 +24,17 @@ test_that("intergrowth gestational weight gain calculations are correct", {
     for (i in seq_len(nrow(checkpoints))) {
       cp <- checkpoints[i, ]
       expect_true(abs(iggwg_value2centile(
-        cp$ga * 7, cp$p3) / 100 - 0.03) < 0.01)
+        cp$ga * 7,
+        cp$p3
+      ) / 100 - 0.03) < 0.01)
       expect_true(abs(iggwg_value2centile(
-        cp$ga * 7, cp$p50) / 100 - 0.5) < 0.01)
+        cp$ga * 7,
+        cp$p50
+      ) / 100 - 0.5) < 0.01)
       expect_true(abs(iggwg_value2centile(
-        cp$ga * 7, cp$p97) / 100 - 0.97) < 0.01)
+        cp$ga * 7,
+        cp$p97
+      ) / 100 - 0.97) < 0.01)
     }
   })
 })
@@ -36,7 +42,9 @@ test_that("intergrowth gestational weight gain calculations are correct", {
 test_that("vectorized iggwg transformations work", {
   cp2 <- checkpoints
   expect_true(all(abs(iggwg_value2centile(
-    cp2$ga * 7, cp2$p3) / 100 - 0.03) < 0.01))
+    cp2$ga * 7,
+    cp2$p3
+  ) / 100 - 0.03) < 0.01))
 })
 
 test_that("intergrowth fetal calculations invert correctly", {

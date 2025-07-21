@@ -24,7 +24,6 @@ geom_zband(obj, x, z = -3:0, color = "green", alpha = 0.25)
 Utility functions for adding growth standard bands to ggplot2/lattice plots
 }
 \examples{
-
 \dontrun{
 library(ggplot2)
 p <- ggplot(data = cpp, aes(x = jitter(agedays), y = haz))
@@ -32,12 +31,15 @@ geom_zband(p, x = seq(0, 2600, by = 10)) +
   geom_point()
 
 library(lattice)
-xyplot(haz ~ jitter(agedays), data = cpp,
+xyplot(
+  haz ~ jitter(agedays),
+  data = cpp,
   panel = function(x, y, ...) {
     panel.zband(x)
     panel.xyplot(x, y, ...)
   },
-  col = "black", alpha = 0.5
+  col = "black",
+  alpha = 0.5
 )
 }
 }

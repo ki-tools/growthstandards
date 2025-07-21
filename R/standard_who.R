@@ -1,14 +1,19 @@
 #' Convert WHO z-scores/centiles to anthro measurements (generic)
 #'
-#' Get values of a specified measurement for a given WHO centile/z-score and growth standard pair (e.g. length vs. age) and sex over a specified grid
+#' Get values of a specified measurement for a given WHO centile/z-score and
+#' growth standard pair (e.g. length vs. age) and sex over a specified grid
 #'
 #' @param x vector specifying the values of x over which to provide the centiles for y
-#' @param p centile or vector of centiles at which to compute values (a number between 0 and 100 - 50 is median)
-#' @param y_var y variable name (typically "htcm" or "wtkg") that specifies which variable of values should be returned for the specified value of q - see details
+#' @param p centile or vector of centiles at which to compute values (a number
+#' between 0 and 100 - 50 is median)
+#' @param y_var y variable name (typically "htcm" or "wtkg") that specifies
+#' which variable of values should be returned for the specified value of q -
+#' see details
 #' @param x_var x variable name (typically "agedays") - see details
 #' @param sex "Male" or "Female"
 #' @param data optional data frame that supplies any of the other variables provided to the function
-#' @details for all supported pairings of \code{y_var} and \code{x_var} , type \code{names(who_coefs)}
+#' @details for all supported pairings of \code{y_var} and \code{x_var} , type
+#' \code{names(who_coefs)}
 #' @seealso \code{\link{who_value2centile}}, \code{\link{who_value2zscore}}
 #' @examples
 #' # median height vs. age for females
@@ -17,17 +22,29 @@
 #' plot(x, med, xlab = "age in days", ylab = "median female height (cm)")
 #'
 #' # 99th percentile of weight vs. age for males from age 0 to 1461 days
-#' dat <- data.frame(x = rep(seq(0, 1461, length = 100), 2),
-#'   sex = rep(c("Male", "Female"), each = 100))
+#' dat <- data.frame(
+#'   x = rep(seq(0, 1461, length = 100), 2),
+#'   sex = rep(c("Male", "Female"), each = 100)
+#' )
 #' dat$p99 <- who_centile2value(x, p = 99, y_var = "wtkg", sex = sex, data = dat)
-#' lattice::xyplot(kg2lb(p99) ~ days2years(x), groups = sex, data = dat,
+#' lattice::xyplot(
+#'   kg2lb(p99) ~ days2years(x),
+#'   groups = sex,
+#'   data = dat,
 #'   ylab = "99th percentile weight (pounds) for males",
-#'   xlab = "age (years)", auto.key = TRUE)
+#'   xlab = "age (years)",
+#'   auto.key = TRUE
+#' )
 #' @export
 #' @rdname who_centile2value
-who_centile2value <- function(x, p = 50, x_var = "agedays", y_var = "lenhtcm",
-  sex = "Female", data = NULL) {
-
+who_centile2value <- function(
+  x,
+  p = 50,
+  x_var = "agedays",
+  y_var = "lenhtcm",
+  sex = "Female",
+  data = NULL
+) {
   if (!is.null(data)) {
     x <- v_eval(substitute(x), try(x, silent = TRUE), data)
     p <- v_eval(substitute(p), try(p, silent = TRUE), data)
@@ -53,8 +70,9 @@ who_centile2value <- function(x, p = 50, x_var = "agedays", y_var = "lenhtcm",
     dat$y_var[idx2] <- "htcm"
   }
 
-  if (! all(unique(dat$sex) %in% c("Male", "Female")))
+  if (!all(unique(dat$sex) %in% c("Male", "Female"))) {
     stop("sex must be 'Male' or 'Female'")
+  }
 
   # since coefficients are available only by pair/sex
   # we need to call this for each unique combination
@@ -76,15 +94,17 @@ who_centile2value <- function(x, p = 50, x_var = "agedays", y_var = "lenhtcm",
         y = y,
         l = approx(coefs$x, coefs$l, x)$y,
         m = approx(coefs$x, coefs$m, x)$y,
-        s = approx(coefs$x, coefs$s, x)$y)
+        s = approx(coefs$x, coefs$s, x)$y
+      )
     }
 
     res <- with(coefs, m * ((1 + qnorm(y / 100) * l * s)^(1 / l))) # nolint
 
     if (y_var %in% c("wtkg", "bmi")) {
       z <- qnorm(y / 100)
-      calc_sd <- function(sd)
-        with(coefs, m * ((1 + l * s * sd) ^ (1 / l))) # nolint
+      calc_sd <- function(sd) {
+        with(coefs, m * ((1 + l * s * sd)^(1 / l)))
+      } # nolint
       sd3_pos <- calc_sd(3)
       sd3_neg <- calc_sd(-3)
       sd23_pos <- sd3_pos - calc_sd(2)
@@ -105,9 +125,13 @@ who_centile2value <- function(x, p = 50, x_var = "agedays", y_var = "lenhtcm",
     }
 
     if (length(oob) > 0) {
-      message("Observations with ", x_var, " value of ",
+      message(
+        "Observations with ",
+        x_var,
+        " value of ",
         paste(x[oob], collapse = ", "),
-        " are outside the range of the standard. Setting to NA.")
+        " are outside the range of the standard. Setting to NA."
+      )
       res[oob] <- NA
     }
 
@@ -121,17 +145,20 @@ who_centile2value <- function(x, p = 50, x_var = "agedays", y_var = "lenhtcm",
   ln_idx <- which(dat$y_var == "lencm" & dat$x > 730)
 
   idx <- which(dat$y_var == "lencm")
-  if (length(idx) > 0)
+  if (length(idx) > 0) {
     dat$y_var[idx] <- "htcm"
+  }
 
   dat <- dat %>%
     dplyr::group_by(x_var, y_var, sex) %>%
     dplyr::mutate(res = centile2value_single_pars(x, p, x_var[1], y_var[1], sex[1]))
 
-  if (length(ht_idx) > 0)
+  if (length(ht_idx) > 0) {
     dat$res[ht_idx] <- dat$res[ht_idx] - 0.7
-  if (length(ln_idx) > 0)
+  }
+  if (length(ln_idx) > 0) {
     dat$res[ln_idx] <- dat$res[ln_idx] + 0.7
+  }
 
   dat$res
 }
@@ -139,9 +166,14 @@ who_centile2value <- function(x, p = 50, x_var = "agedays", y_var = "lenhtcm",
 #' @param z z-score or vector of z-scores at which to compute values
 #' @export
 #' @rdname who_centile2value
-who_zscore2value <- function(x, z = 0, y_var = "lenhtcm", x_var = "agedays",
-  sex = "Female", data = NULL) {
-
+who_zscore2value <- function(
+  x,
+  z = 0,
+  y_var = "lenhtcm",
+  x_var = "agedays",
+  sex = "Female",
+  data = NULL
+) {
   if (!is.null(data)) {
     x <- v_eval(substitute(x), try(x, silent = TRUE), data)
     z <- v_eval(substitute(z), try(z, silent = TRUE), data)
@@ -155,7 +187,9 @@ who_zscore2value <- function(x, z = 0, y_var = "lenhtcm", x_var = "agedays",
 
 #' Convert anthro measurements to WHO z-scores/centiles (generic)
 #'
-#' Compute z-scores or centiles with respect to the WHO growth standard for given values of x vs. y (typically x is "agedays" and y is a measure like "htcm").
+#' Compute z-scores or centiles with respect to the WHO growth standard for
+#' given values of x vs. y (typically x is "agedays" and y is a measure like
+#' "htcm").
 #'
 #' @param x value or vector of values that correspond to a measure defined by \code{x_var}
 #' @param y value or vector of values that correspond to a measure defined by \code{y_var}
@@ -163,7 +197,8 @@ who_zscore2value <- function(x, z = 0, y_var = "lenhtcm", x_var = "agedays",
 #' @param y_var y variable name (typically "htcm", "lencm", or "wtkg") - see details
 #' @param sex "Male" or "Female"
 #' @param data optional data frame that supplies any of the other variables provided to the function
-#' @details for all supported pairings of \code{y_var} and \code{x_var} , type \code{names(who_coefs)}
+#' @details for all supported pairings of \code{y_var} and \code{x_var}, type
+#' \code{names(who_coefs)}
 #' @seealso \code{\link{who_centile2value}}, \code{\link{who_zscore2value}}
 #' @examples
 #' # z-scores
@@ -174,15 +209,17 @@ who_zscore2value <- function(x, z = 0, y_var = "lenhtcm", x_var = "agedays",
 #' who_value2centile(1670, lb2kg(48), y_var = "wtkg")
 #'
 #' # add haz derived from WHO data and compare to that provided with data
-#' cpp$haz <- who_value2zscore(x = agedays,  y = lencm, sex = sex, data = cpp)
+#' cpp$haz <- who_value2zscore(x = agedays, y = lencm, sex = sex, data = cpp)
 #'
 #' # note that you can also do it this way
 #' #' cpp$haz <- who_value2zscore(cpp$agedays, cpp$lencm, sex = cpp$sex)
 #' @export
 #' @rdname who_value2zscore
 who_value2zscore <- function(
-  x, y,
-  x_var = "agedays", y_var = "lenhtcm",
+  x,
+  y,
+  x_var = "agedays",
+  y_var = "lenhtcm",
   sex = "Female",
   data = NULL
 ) {
@@ -195,8 +232,10 @@ who_value2zscore <- function(
   }
 
   dat <- data.frame(
-    x = x, y = y,
-    x_var = x_var, y_var = y_var,
+    x = x,
+    y = y,
+    x_var = x_var,
+    y_var = y_var,
     sex = sex,
     stringsAsFactors = FALSE
   )
@@ -210,19 +249,23 @@ who_value2zscore <- function(
   }
 
   idx <- which(dat$y_var == "htcm" & dat$x <= 730)
-  if (length(idx) > 0)
+  if (length(idx) > 0) {
     dat$y[idx] <- dat$y[idx] + 0.7
+  }
 
   idx <- which(dat$y_var == "lencm" & dat$x > 730)
-  if (length(idx) > 0)
+  if (length(idx) > 0) {
     dat$y[idx] <- dat$y[idx] - 0.7
+  }
 
   idx <- which(dat$y_var == "lencm")
-  if (length(idx) > 0)
+  if (length(idx) > 0) {
     dat$y_var[idx] <- "htcm"
+  }
 
-  if (! all(unique(dat$sex) %in% c("Male", "Female")))
+  if (!all(unique(dat$sex) %in% c("Male", "Female"))) {
     stop("sex must be 'Male' or 'Female'")
+  }
 
   # since coefficients are available only by pair/sex
   # we need to call this for each unique combination
@@ -252,8 +295,9 @@ who_value2zscore <- function(
     res <- with(coefs, ((y / m)^l - 1) / (s * l)) # nolint
 
     if (y_var %in% c("wtkg", "bmi")) {
-      calc_sd <- function(sd)
-        with(coefs, m * ((1 + l * s * sd) ^ (1 / l))) # nolint
+      calc_sd <- function(sd) {
+        with(coefs, m * ((1 + l * s * sd)^(1 / l)))
+      } # nolint
       sd3_pos <- calc_sd(3)
       sd3_neg <- calc_sd(-3)
       sd23_pos <- sd3_pos - calc_sd(2)
@@ -265,9 +309,13 @@ who_value2zscore <- function(
     }
 
     if (length(oob) > 0) {
-      message("Observations with ", x_var, " value of ",
+      message(
+        "Observations with ",
+        x_var,
+        " value of ",
         paste(x[oob], collapse = ", "),
-        " are outside the range of the standard. Setting to NA.")
+        " are outside the range of the standard. Setting to NA."
+      )
       res[oob] <- NA
     }
     res
@@ -283,13 +331,13 @@ who_value2zscore <- function(
 #' @export
 #' @rdname who_value2zscore
 who_value2centile <- function(
-  x, y,
+  x,
+  y,
   x_var = "agedays",
   y_var = "lenhtcm",
   sex = "Female",
   data = NULL
 ) {
-
   if (!is.null(data)) {
     x <- v_eval(substitute(x), try(x, silent = TRUE), data)
     y <- v_eval(substitute(y), try(y, silent = TRUE), data)
@@ -302,7 +350,7 @@ who_value2centile <- function(
 }
 
 ## **2zscore
-##---------------------------------------------------------
+## ---------------------------------------------------------
 
 #' Convert anthro measurements to WHO z-scores/centiles
 #'
@@ -320,7 +368,7 @@ who_value2centile <- function(
 #' @export
 #' @rdname who_var2zscore
 #' @examples
-#' cpp$haz <- who_value2zscore(x = agedays,  y = lencm, sex = sex, data = cpp)
+#' cpp$haz <- who_value2zscore(x = agedays, y = lencm, sex = sex, data = cpp)
 who_wtkg2zscore <- function(agedays, wtkg, sex = "Female") {
   who_value2zscore(agedays, wtkg, x_var = "agedays", y_var = "wtkg", sex = sex)
 }
@@ -374,7 +422,7 @@ who_tsftmm2zscore <- function(agedays, tsftmm, sex = "Female") {
 }
 
 ## **2centile
-##---------------------------------------------------------
+## ---------------------------------------------------------
 
 #' @export
 #' @rdname who_var2zscore
@@ -431,7 +479,7 @@ who_tsftmm2centile <- function(agedays, tsftmm, sex = "Female") {
 }
 
 ## zscore2**
-##---------------------------------------------------------
+## ---------------------------------------------------------
 
 #' Convert WHO z-scores/centiles to anthro measurements
 #'
@@ -440,7 +488,7 @@ who_tsftmm2centile <- function(agedays, tsftmm, sex = "Female") {
 #' @param p centile(s) to convert (must be between 0 and 100)
 #' @param sex "Male" or "Female"
 #' @examples
-#' cpp$haz <- who_value2zscore(x = agedays,  y = lencm, sex = sex, data = cpp)
+#' cpp$haz <- who_value2zscore(x = agedays, y = lencm, sex = sex, data = cpp)
 #' htcm <- who_zscore2htcm(cpp$agedays, cpp$haz, cpp$sex)
 #' @export
 #' @rdname who_zscore2var
@@ -497,7 +545,7 @@ who_zscore2tsftmm <- function(agedays, z = 0, sex = "Female") {
 }
 
 ## centile2**
-##---------------------------------------------------------
+## ---------------------------------------------------------
 
 #' @export
 #' @rdname who_zscore2var
@@ -581,11 +629,17 @@ get_coef_idx <- function(x, coefx) {
 # }
 
 check_pair <- function(pair) {
-  if (! pair %in% c(
-    "wtkg_agedays", "htcm_agedays", "bmi_agedays",
-    "hcircm_agedays", "muaccm_agedays", "ssftmm_agedays",
-    "tsftmm_agedays", "wtkg_htcm", "wtkg_lencm"
-  ))
+  if (!pair %in% c(
+    "wtkg_agedays",
+    "htcm_agedays",
+    "bmi_agedays",
+    "hcircm_agedays",
+    "muaccm_agedays",
+    "ssftmm_agedays",
+    "tsftmm_agedays",
+    "wtkg_htcm",
+    "wtkg_lencm"
+  )) {
     stop("x and y pairings must be one of
 x_var   | y_var
 --------|--------
@@ -599,4 +653,5 @@ agedays | tsftmm
 htcm    | wtkg
 lencm   | wtkg
 ")
+  }
 }

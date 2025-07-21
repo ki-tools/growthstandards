@@ -34,7 +34,8 @@ igprepost_centile2hcircm(pmagedays, p = 50, sex = "Female")
 Convert INTERGROWTH z-scores/centiles to postnatal growth measurements for preterm infants
 }
 \note{
-For gestational ages between 24 and 33 weeks, the INTERGROWTH very early preterm standard is used.
+For gestational ages between 24 and 33 weeks, the INTERGROWTH very
+early preterm standard is used.
 }
 \examples{
 igprepost_zscore2lencm(64 * 7, 0, sex = "Female")
@@ -44,7 +45,8 @@ d$value <- igprepost_centile2lencm(d$pmage, d$centile, sex = "Male")
 lattice::xyplot(value ~ pmage / 7, groups = centile, data = d, type = "l")
 }
 \references{
-Postnatal growth standards for preterm infants: the Preterm Postnatal Follow-up Study of the INTERGROWTH-21st Project.
+Postnatal growth standards for preterm infants: the Preterm
+Postnatal Follow-up Study of the INTERGROWTH-21st Project.
 Villar J, Giuliani F, Bhutta ZA, et al.
 Lancet Glob Health 2015; 3: e681–91.
 }

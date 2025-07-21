@@ -25,3 +25,4 @@ _gh-pages
 ^\.Rproj\.user$
 index.Rmd
 ^pkgdown$
+^LICENSE\.md$

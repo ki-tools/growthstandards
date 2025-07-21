@@ -1,14 +1,18 @@
 #' Utility functions for adding growth standard bands to ggplot2/lattice plots
 #'
-#' @param x,x_seq value or vector of values that correspond to a measure defined by \code{x_var}. \code{x_seq} is used with geom_*
+#' @param x,x_seq value or vector of values that correspond to a measure defined
+#' by \code{x_var}. \code{x_seq} is used with geom_*
 #' @param x_var x variable name (typically "agedays")
 #' @param y_var y variable name (typically "htcm" or "wtkg")
-#' @param var variable name for y axis for igb or igfet plots ("lencm", "wtkg", or "hcircm" for igb; "accm", "bpdcm", "flcm", "hccm", or "ofdcm" for igfet)
+#' @param var variable name for y axis for igb or igfet plots ("lencm", "wtkg",
+#' or "hcircm" for igb; "accm", "bpdcm", "flcm", "hccm", or "ofdcm" for igfet)
 #' @param gagebrth gestational age at birth in days (for igb plots)
 #' @param gagedays gestational age in days (for igfet plots)
 #' @param sex "Male" or "Female"
-#' @param p centiles at which to draw the growth standard band polygons (only need to specify on one side of the median)
-#' @param color,shade optional color to use for bands (will use \code{sex} to determine if not specified). \code{shade} is used with geom_*
+#' @param p centiles at which to draw the growth standard band polygons (only
+#' need to specify on one side of the median)
+#' @param color,shade optional color to use for bands (will use \code{sex} to
+#' determine if not specified). \code{shade} is used with geom_*
 #' @param alpha transparency of the bands
 #' @param center should the bands be centered around the median?
 #' @param labels should the centiles be labeled? (not implemented)
@@ -30,10 +34,16 @@
 #' #### lattice
 #'
 #' library(lattice)
-#' xyplot(wtkg ~ agedays, data = subset(cpp, subjid == 8),
+#' xyplot(
+#'   wtkg ~ agedays,
+#'   data = subset(cpp, subjid == 8),
 #'   panel = function(x, y, ...) {
-#'     panel.who(x = seq(0, 2558, by = 30),
-#'       sex = "Male", y_var = "wtkg", p = 100 * pnorm(-3:0))
+#'     panel.who(
+#'       x = seq(0, 2558, by = 30),
+#'       sex = "Male",
+#'       y_var = "wtkg",
+#'       p = 100 * pnorm(-3:0)
+#'     )
 #'     panel.xyplot(x, y, ...)
 #'   },
 #'   col = "black"
@@ -42,68 +52,146 @@
 #' # look at Male birth lengths superposed on INTERGROWTH birth standard
 #' # first we need just 1 record per subject with subject-level data
 #' cppsubj <- subset(cpp, !duplicated(cpp$subjid))
-#' xyplot(birthlen ~ jitter(gagebrth), data = subset(cppsubj, sex == "Male"),
+#' xyplot(
+#'   birthlen ~ jitter(gagebrth),
+#'   data = subset(cppsubj, sex == "Male"),
 #'   panel = function(x, y, ...) {
 #'     panel.igb(gagebrth = 250:310, var = "lencm", sex = "Male")
 #'     panel.points(x, y, ...)
 #'   },
-#'   col = "black", alpha = 0.75,
-#'   xlab = "Gestational Age at Birth (days)", ylab = "Birth Length (cm)"
+#'   col = "black",
+#'   alpha = 0.75,
+#'   xlab = "Gestational Age at Birth (days)",
+#'   ylab = "Birth Length (cm)"
 #' )
 #' }
 #' @rdname plot_growth
 #' @export
 panel.who <- function(
   x,
-  x_var = "agedays", y_var = "htcm",
+  x_var = "agedays",
+  y_var = "htcm",
   sex = "Female",
   p = c(1, 5, 25, 50),
-  color = NULL, alpha = 0.15,
-  center = FALSE, labels = TRUE,
-  x_trans = identity, y_trans = identity) {
-
-  panel_growthstandard(x = x, x_var = x_var, y_var = y_var, sex = sex,
-    p = p, color = color, alpha = alpha, center = center, labels = labels,
-    x_trans = x_trans, y_trans = y_trans, standard = "who")
+  color = NULL,
+  alpha = 0.15,
+  center = FALSE,
+  labels = TRUE,
+  x_trans = identity,
+  y_trans = identity
+) {
+  panel_growthstandard(
+    x = x,
+    x_var = x_var,
+    y_var = y_var,
+    sex = sex,
+    p = p,
+    color = color,
+    alpha = alpha,
+    center = center,
+    labels = labels,
+    x_trans = x_trans,
+    y_trans = y_trans,
+    standard = "who"
+  )
 }
 
 #' @rdname plot_growth
 #' @export
-panel.igb <- function(gagebrth, var = "lencm", sex = "Female",
-  p = c(1, 5, 25, 50), color = NULL, alpha = 0.15, center = FALSE, labels = TRUE,
-  x_trans = identity, y_trans = identity) {
-
-  panel_growthstandard(x = gagebrth, x_var = "gagebrth", y_var = var,
-    sex = sex, p = p, color = color, alpha = alpha, center = center,
-    labels = labels, x_trans = x_trans, y_trans = y_trans, standard = "igb")
+panel.igb <- function(
+  gagebrth,
+  var = "lencm",
+  sex = "Female",
+  p = c(1, 5, 25, 50),
+  color = NULL,
+  alpha = 0.15,
+  center = FALSE,
+  labels = TRUE,
+  x_trans = identity,
+  y_trans = identity
+) {
+  panel_growthstandard(
+    x = gagebrth,
+    x_var = "gagebrth",
+    y_var = var,
+    sex = sex,
+    p = p,
+    color = color,
+    alpha = alpha,
+    center = center,
+    labels = labels,
+    x_trans = x_trans,
+    y_trans = y_trans,
+    standard = "igb"
+  )
 }
 
 #' @rdname plot_growth
 #' @export
-panel.igfet <- function(gagedays, var = "hccm",
-  p = c(1, 5, 25, 50), color = "green", alpha = 0.15, center = FALSE, labels = TRUE,
-  x_trans = identity, y_trans = identity) {
-
-  panel_growthstandard(x = gagedays, x_var = "gagedays", y_var = var,
-    sex = "Female", p = p, color = color, alpha = alpha, center = center,
-    labels = labels, x_trans = x_trans, y_trans = y_trans, standard = "igfet")
+panel.igfet <- function(
+  gagedays,
+  var = "hccm",
+  p = c(1, 5, 25, 50),
+  color = "green",
+  alpha = 0.15,
+  center = FALSE,
+  labels = TRUE,
+  x_trans = identity,
+  y_trans = identity
+) {
+  panel_growthstandard(
+    x = gagedays,
+    x_var = "gagedays",
+    y_var = var,
+    sex = "Female",
+    p = p,
+    color = color,
+    alpha = alpha,
+    center = center,
+    labels = labels,
+    x_trans = x_trans,
+    y_trans = y_trans,
+    standard = "igfet"
+  )
 }
 
-panel_growthstandard <- function(x, x_var = "agedays", y_var = "htcm", sex = "Female",
-  p = c(1, 5, 25, 50), color = NULL, alpha = 0.15, center = FALSE, labels = TRUE,
-  x_trans = identity, y_trans = identity, standard = "who") {
-
-  if (is.null(color))
+panel_growthstandard <- function(
+  x,
+  x_var = "agedays",
+  y_var = "htcm",
+  sex = "Female",
+  p = c(1, 5, 25, 50),
+  color = NULL,
+  alpha = 0.15,
+  center = FALSE,
+  labels = TRUE,
+  x_trans = identity,
+  y_trans = identity,
+  standard = "who"
+) {
+  if (is.null(color)) {
     color <- ifelse(sex == "Male", "blue", "red")
+  }
 
-  dat <- get_growth_band_data(x = x, x_var = x_var, y_var = y_var, sex = sex, p = p,
-    center = center, x_trans = x_trans, y_trans = y_trans, standard = standard)
+  dat <- get_growth_band_data(
+    x = x,
+    x_var = x_var,
+    y_var = y_var,
+    sex = sex,
+    p = p,
+    center = center,
+    x_trans = x_trans,
+    y_trans = y_trans,
+    standard = standard
+  )
 
-  for (dd in dat$p)
+  for (dd in dat$p) {
     lattice::panel.polygon(dd$x, dd$y, col = color, alpha = alpha, border = color)
+  }
 
-  if (!is.null(dat$med))
+  if (!is.null(dat$med)) {
     lattice::panel.lines(dat$med$x, dat$med$y, col = color, alpha = alpha)
+  }
 }
 
 #' @rdname plot_growth
@@ -126,7 +214,6 @@ geom_growthstandard <- function(
   standard = "who",
   inherit.aes = TRUE
 ) {
-
   if (!is.null(mapping$x)) {
     x_var <- deparse(mapping$x)
   }
@@ -160,21 +247,36 @@ geom_growthstandard <- function(
   )
 }
 
+d_aes <- function(x) {
+  if (inherits(x, "quosure")) {
+    NULL
+  } else {
+    x
+  }
+}
+
 GeomGrowthStandard <- ggplot2::ggproto(
-  "GeomGrowthStandard", ggplot2::Geom,
+  "GeomGrowthStandard",
+  ggplot2::Geom,
   required_aes = c("x", "y"),
   # default_aes = aes(color = NULL),
   draw_key = ggplot2::draw_key_point,
   draw_panel = function(
-    data, panel_scales, coord,
+    data,
+    panel_scales,
+    coord,
     shade,
-    x_var, y_var,
-    x_seq, sex, p,
-    alpha, center,
-    x_trans, y_trans,
+    x_var,
+    y_var,
+    x_seq,
+    sex,
+    p,
+    alpha,
+    center,
+    x_trans,
+    y_trans,
     standard
   ) {
-
     if (is.null(shade)) {
       color <- ifelse(identical(sex, "Male"), "blue", "red")
     } else {
@@ -182,8 +284,15 @@ GeomGrowthStandard <- ggplot2::ggproto(
     }
 
     dat <- get_growth_band_data(
-      x = x_seq, x_var = x_var, y_var = y_var, sex = sex, p = p,
-      center = center, x_trans = x_trans, y_trans = y_trans, standard = standard
+      x = x_seq,
+      x_var = x_var,
+      y_var = y_var,
+      sex = sex,
+      p = p,
+      center = center,
+      x_trans = x_trans,
+      y_trans = y_trans,
+      standard = standard
     )
 
     ret <- list()
@@ -195,13 +304,11 @@ GeomGrowthStandard <- ggplot2::ggproto(
       poly_dt$colour <- color
       poly_dt$alpha <- alpha
       path_dt <- poly_dt
-
-      poly_dt$linetype <- ggplot2::GeomPolygon$default_aes$linetype
+      poly_dt$linetype <- d_aes(ggplot2::GeomPolygon$default_aes$linetype)
       poly_dt$linewidth <- 0
       poly_dt$fill <- color
-
-      path_dt$linetype <- ggplot2::GeomPath$default_aes$linetype
-      path_dt$linewidth <- ggplot2::GeomPath$default_aes$linewidth
+      path_dt$linetype <- d_aes(ggplot2::GeomPath$default_aes$linetype)
+      path_dt$linewidth <- d_aes(ggplot2::GeomPath$default_aes$linewidth)
 
       ret[[length(ret) + 1]] <- ggplot2::GeomPolygon$draw_panel(data = poly_dt, panel_scales, coord)
       ret[[length(ret) + 1]] <- ggplot2::GeomPath$draw_panel(data = path_dt, panel_scales, coord)
@@ -221,8 +328,8 @@ GeomGrowthStandard <- ggplot2::ggproto(
       path_dt$group <- 1
       path_dt$colour <- color
       path_dt$alpha <- alpha
-      path_dt$linetype <- ggplot2::GeomPath$default_aes$linetype
-      path_dt$linewidth <- ggplot2::GeomPath$default_aes$linewidth
+      path_dt$linetype <- d_aes(ggplot2::GeomPath$default_aes$linetype)
+      path_dt$linewidth <- d_aes(ggplot2::GeomPath$default_aes$linewidth)
 
       ret[[length(ret) + 1]] <- ggplot2::GeomPath$draw_panel(data = path_dt, panel_scales, coord)
     }
@@ -241,14 +348,12 @@ geom_who <- function(...) {
 #' @rdname plot_growth
 #' @export
 geom_igb <- function(..., var = "lencm") {
-
   geom_growthstandard(..., x_var = "gagebrth", y_var = var, standard = "igb")
 }
 
 #' @rdname plot_growth
 #' @export
 geom_igfet <- function(..., var = "hccm", color = "green") {
-
   geom_growthstandard(..., x_var = "gagedays", y_var = var, sex = "Female", standard = "igfet")
 }
 
@@ -288,7 +393,6 @@ geom_igfet <- function(..., var = "hccm", color = "green") {
 #' @rdname plot_zband
 #' @export
 #' @examples
-#'
 #' \dontrun{
 #' library(ggplot2)
 #' p <- ggplot(data = cpp, aes(x = jitter(agedays), y = haz))
@@ -296,22 +400,27 @@ geom_igfet <- function(..., var = "hccm", color = "green") {
 #'   geom_point()
 #'
 #' library(lattice)
-#' xyplot(haz ~ jitter(agedays), data = cpp,
+#' xyplot(
+#'   haz ~ jitter(agedays),
+#'   data = cpp,
 #'   panel = function(x, y, ...) {
 #'     panel.zband(x)
 #'     panel.xyplot(x, y, ...)
 #'   },
-#'   col = "black", alpha = 0.5
+#'   col = "black",
+#'   alpha = 0.5
 #' )
 #' }
 panel.zband <- function(x, z = -3:0, color = "green", alpha = 0.25) {
   dat <- get_z_band_data(x = x, z = z)
 
-  for (dd in dat$z)
+  for (dd in dat$z) {
     panel.polygon(dd$x, dd$y, col = color, alpha = alpha)
+  }
 
-  if (!is.null(dat$med))
+  if (!is.null(dat$med)) {
     panel.lines(dat$med$x, dat$med$y, col = color, alpha = alpha)
+  }
 }
 
 #' @rdname plot_zband
@@ -319,34 +428,58 @@ panel.zband <- function(x, z = -3:0, color = "green", alpha = 0.25) {
 geom_zband <- function(obj, x, z = -3:0, color = "green", alpha = 0.25) {
   dat <- get_z_band_data(x = x, z = z)
 
-  for (dd in dat$z)
+  for (dd in dat$z) {
     obj <- obj +
-      ggplot2::geom_polygon(data = dd, ggplot2::aes(x = x, y = y),
-        color = color, fill = color, alpha = alpha, linewidth = 10) +
-      ggplot2::geom_path(data = dd, ggplot2::aes(x = x, y = y),
-        color = color, alpha = alpha)
+      ggplot2::geom_polygon(
+        data = dd,
+        ggplot2::aes(x = x, y = y),
+        color = color,
+        fill = color,
+        alpha = alpha,
+        linewidth = 10
+      ) +
+      ggplot2::geom_path(
+        data = dd,
+        ggplot2::aes(x = x, y = y),
+        color = color,
+        alpha = alpha
+      )
+  }
 
-  if (!is.null(dat$med))
+  if (!is.null(dat$med)) {
     obj <- obj +
-      ggplot2::geom_path(data = dat$med, ggplot2::aes(x = x, y = y),
-        color = color, alpha = alpha)
+      ggplot2::geom_path(
+        data = dat$med,
+        ggplot2::aes(x = x, y = y),
+        color = color,
+        alpha = alpha
+      )
+  }
 
   obj
 }
 
 # generic function to get growth standard data for lattice, ggplot
-get_growth_band_data <- function(x, x_var = "agedays", y_var = "htcm",
-  sex = "Female", p = c(1, 5, 25, 50), center = FALSE,
-  x_trans = identity, y_trans = identity, standard = "who") {
-
+get_growth_band_data <- function(
+  x,
+  x_var = "agedays",
+  y_var = "htcm",
+  sex = "Female",
+  p = c(1, 5, 25, 50),
+  center = FALSE,
+  x_trans = identity,
+  y_trans = identity,
+  standard = "who"
+) {
   if (any(p > 50)) {
     warning("ignoring 'p' values that are greater than 50")
     p <- p[p <= 50]
   }
 
   has_median <- 50 %in% p
-  if (has_median)
+  if (has_median) {
     p <- setdiff(p, 50)
+  }
 
   p <- sort(p)
 
@@ -363,11 +496,12 @@ get_growth_band_data <- function(x, x_var = "agedays", y_var = "htcm",
     stop("growth standard ", standard, " is not valid", call. = FALSE)
   }
 
-  if (has_median || center)
+  if (has_median || center) {
     med <- do.call(centile_method, c(pars, list(p = 50)))
+  }
 
   res <- list()
-  res$p <- lapply(p, function (pp) {
+  res$p <- lapply(p, function(pp) {
     val1 <- do.call(centile_method, c(pars, list(p = pp)))
     val2 <- do.call(centile_method, c(pars, list(p = 100 - pp)))
     if (center) {
@@ -379,8 +513,9 @@ get_growth_band_data <- function(x, x_var = "agedays", y_var = "htcm",
   })
 
   if (has_median) {
-    if (center)
+    if (center) {
       med <- med - med
+    }
     tmp <- data.frame(x = x_trans(x), y = y_trans(med))
     res$med <- tmp[complete.cases(tmp), ]
   }
@@ -390,8 +525,9 @@ get_growth_band_data <- function(x, x_var = "agedays", y_var = "htcm",
 
 get_z_band_data <- function(x, z) {
   x <- range(x, na.rm = TRUE)
-  if (length(unique(x)) == 1)
+  if (length(unique(x)) == 1) {
     x <- x + c(-1, 1)
+  }
 
   if (any(z > 0)) {
     warning("ignoring 'z' values that are greater than 0")
@@ -399,7 +535,7 @@ get_z_band_data <- function(x, z) {
   }
 
   res <- list()
-  res$z <- lapply(z, function (zz) {
+  res$z <- lapply(z, function(zz) {
     val1 <- rep(zz, 2)
     val2 <- rep(-zz, 2)
     data.frame(x = c(x, rev(x)), y = c(val1, rev(val2)))

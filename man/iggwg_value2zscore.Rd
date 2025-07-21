@@ -10,11 +10,14 @@ iggwg_value2zscore(gagedays, val, bmi = NULL)
 iggwg_value2centile(gagedays, val, bmi = NULL)
 }
 \arguments{
-\item{gagedays}{gestational age(s) in days at which gestational weight gain was measured (must be same length as \code{val})}
+\item{gagedays}{gestational age(s) in days at which gestational weight gain
+was measured (must be same length as \code{val})}
 
-\item{val}{value(s) of the gestational weight gain (kg gained since pregnancy) measurement(s) to convert}
+\item{val}{value(s) of the gestational weight gain (kg gained since
+pregnancy) measurement(s) to convert}
 
-\item{bmi}{optional value(s) of mother's pre-pregnancy BMI (kg / m^2) to check validity of GWG standard}
+\item{bmi}{optional value(s) of mother's pre-pregnancy BMI (kg / m^2) to
+check validity of GWG standard}
 }
 \description{
 Convert mother's gestational weight gain (GWG) measurements to INTERGROWTH z-scores/centiles
@@ -25,7 +28,9 @@ iggwg_value2zscore(17 * 7, 2)
 iggwg_value2centile(17 * 7, 2)
 }
 \references{
-Gestational weight gain standards based on women enrolled in the Fetal Growth Longitudinal Study of the INTERGROWTH-21st Project: a prospective longitudinal cohort study
+Gestational weight gain standards based on women enrolled in the
+Fetal Growth Longitudinal Study of the INTERGROWTH-21st Project: a
+prospective longitudinal cohort study.
 Ismail, Leila Cheikh et al.
 BMJ 2016;352:i555
 }

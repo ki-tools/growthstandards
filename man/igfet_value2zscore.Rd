@@ -32,7 +32,9 @@ Convert fetal ultrasound measurements to INTERGROWTH z-scores/centiles (generic)
 igfet_hccm2centile(100, 11)
 }
 \references{
-International standards for fetal growth based on serial ultrasound measurements: the Fetal Growth Longitudinal Study of the INTERGROWTH-21st Project
+International standards for fetal growth based on serial
+ultrasound measurements: the Fetal Growth Longitudinal Study of the
+INTERGROWTH-21st Project.
 Papageorghiou, Aris T et al.
 The Lancet, Volume 384, Issue 9946, 869-879
 }

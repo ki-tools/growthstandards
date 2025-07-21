@@ -70,6 +70,6 @@ who_centile2tsftmm(agedays, p = 50, sex = "Female")
 Convert WHO z-scores/centiles to anthro measurements
 }
 \examples{
-cpp$haz <- who_value2zscore(x = agedays,  y = lencm, sex = sex, data = cpp)
+cpp$haz <- who_value2zscore(x = agedays, y = lencm, sex = sex, data = cpp)
 htcm <- who_zscore2htcm(cpp$agedays, cpp$haz, cpp$sex)
 }

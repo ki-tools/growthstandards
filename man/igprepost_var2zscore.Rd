@@ -39,7 +39,8 @@ Convert postnatal growth measurements for preterm infants to INTERGROWTH z-score
 igprepost_lencm2zscore(64 * 7, 64.68, sex = "Female")
 }
 \references{
-Postnatal growth standards for preterm infants: the Preterm Postnatal Follow-up Study of the INTERGROWTH-21st Project.
+Postnatal growth standards for preterm infants: the Preterm
+Postnatal Follow-up Study of the INTERGROWTH-21st Project.
 Villar J, Giuliani F, Bhutta ZA, et al.
 Lancet Glob Health 2015; 3: e681–91.
 }

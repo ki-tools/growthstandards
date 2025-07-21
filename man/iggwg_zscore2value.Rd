@@ -14,7 +14,8 @@ iggwg_centile2value(gagedays, p = 50, bmi = NULL)
 
 \item{z}{z-score(s) to convert}
 
-\item{bmi}{optional value(s) of mother's pre-pregnancy BMI (kg / m^2) to check validity of GWG standard}
+\item{bmi}{optional value(s) of mother's pre-pregnancy BMI (kg / m^2) to
+check validity of GWG standard}
 
 \item{p}{centile(s) to convert (must be between 0 and 100)}
 }
@@ -26,7 +27,9 @@ Convert INTERGROWTH z-scores/centiles to gestational weight gains (GWG)
 iggwg_centile2value(40 * 7, 50)
 }
 \references{
-Gestational weight gain standards based on women enrolled in the Fetal Growth Longitudinal Study of the INTERGROWTH-21st Project: a prospective longitudinal cohort study
+Gestational weight gain standards based on women enrolled in the
+Fetal Growth Longitudinal Study of the INTERGROWTH-21st Project: a
+prospective longitudinal cohort study.
 Ismail, Leila Cheikh et al.
 BMJ 2016;352:i555
 }

@@ -2,7 +2,8 @@
 % Please edit documentation in R/standard_igprepost.R
 \name{igprepost_centile2value}
 \alias{igprepost_centile2value}
-\title{Convert postnatal growth measurements for preterm infants to INTERGROWTH z-scores/centiles (generic)}
+\title{Convert postnatal growth measurements for preterm infants to INTERGROWTH
+z-scores/centiles (generic)}
 \usage{
 igprepost_centile2value(pmagedays, p = 50, var = "lencm", sex = "Female")
 }
@@ -16,14 +17,16 @@ igprepost_centile2value(pmagedays, p = 50, var = "lencm", sex = "Female")
 \item{sex}{"Male" or "Female"}
 }
 \description{
-Convert postnatal growth measurements for preterm infants to INTERGROWTH z-scores/centiles (generic)
+Convert postnatal growth measurements for preterm infants to INTERGROWTH
+z-scores/centiles (generic)
 }
 \examples{
 # get median wtkg of Females from 27 to 64 weeks postmenstrual age
 igprepost_centile2value(27:64 * 7, 50, var = "wtkg", sex = "Female")
 }
 \references{
-Postnatal growth standards for preterm infants: the Preterm Postnatal Follow-up Study of the INTERGROWTH-21st Project.
+Postnatal growth standards for preterm infants: the Preterm
+Postnatal Follow-up Study of the INTERGROWTH-21st Project.
 Villar J, Giuliani F, Bhutta ZA, et al.
 Lancet Glob Health 2015; 3: e681–91.
 }

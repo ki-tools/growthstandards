@@ -26,11 +26,14 @@ who_zscore2value(
 \arguments{
 \item{x}{vector specifying the values of x over which to provide the centiles for y}
 
-\item{p}{centile or vector of centiles at which to compute values (a number between 0 and 100 - 50 is median)}
+\item{p}{centile or vector of centiles at which to compute values (a number
+between 0 and 100 - 50 is median)}
 
 \item{x_var}{x variable name (typically "agedays") - see details}
 
-\item{y_var}{y variable name (typically "htcm" or "wtkg") that specifies which variable of values should be returned for the specified value of q - see details}
+\item{y_var}{y variable name (typically "htcm" or "wtkg") that specifies
+which variable of values should be returned for the specified value of q -
+see details}
 
 \item{sex}{"Male" or "Female"}
 
@@ -39,10 +42,12 @@ who_zscore2value(
 \item{z}{z-score or vector of z-scores at which to compute values}
 }
 \description{
-Get values of a specified measurement for a given WHO centile/z-score and growth standard pair (e.g. length vs. age) and sex over a specified grid
+Get values of a specified measurement for a given WHO centile/z-score and
+growth standard pair (e.g. length vs. age) and sex over a specified grid
 }
 \details{
-for all supported pairings of \code{y_var} and \code{x_var} , type \code{names(who_coefs)}
+for all supported pairings of \code{y_var} and \code{x_var} , type
+\code{names(who_coefs)}
 }
 \examples{
 # median height vs. age for females
@@ -51,12 +56,19 @@ med <- who_centile2value(x)
 plot(x, med, xlab = "age in days", ylab = "median female height (cm)")
 
 # 99th percentile of weight vs. age for males from age 0 to 1461 days
-dat <- data.frame(x = rep(seq(0, 1461, length = 100), 2),
-  sex = rep(c("Male", "Female"), each = 100))
+dat <- data.frame(
+  x = rep(seq(0, 1461, length = 100), 2),
+  sex = rep(c("Male", "Female"), each = 100)
+)
 dat$p99 <- who_centile2value(x, p = 99, y_var = "wtkg", sex = sex, data = dat)
-lattice::xyplot(kg2lb(p99) ~ days2years(x), groups = sex, data = dat,
+lattice::xyplot(
+  kg2lb(p99) ~ days2years(x),
+  groups = sex,
+  data = dat,
   ylab = "99th percentile weight (pounds) for males",
-  xlab = "age (years)", auto.key = TRUE)
+  xlab = "age (years)",
+  auto.key = TRUE
+)
 }
 \seealso{
 \code{\link{who_value2centile}}, \code{\link{who_value2zscore}}
